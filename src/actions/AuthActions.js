@@ -36,11 +36,7 @@ function recievedError() {
   }
 }
 
-function changeLogOutStatus(){
-  return {
-    type : CHANGE_LOG_OUT_STATUS
-  }
-}
+
 
 export function logIn(email , password) {
 
@@ -55,8 +51,6 @@ export function logIn(email , password) {
             .then((response) => {
                 AsyncStorage.setItem('id', response.data.id);
               dispatch(loggedIn(response));
-              dispatch(changeLogOutStatus());
-
             })
             .catch((error) => {
               if (error.response) {

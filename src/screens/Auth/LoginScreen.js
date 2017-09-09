@@ -23,12 +23,12 @@ class LoginForm extends Component {
             onResetPassword={this.onResetPassword.bind(this)}
           />
 
-          <View style={styles.responseContainer}>
-            {this.props.loading ? <ActivityIndicator />: <View></View>}
-            {this.props.error ? <Text>Couldn't logIn</Text> : <View></View>}
-            {this.props.unauthorized? <Text>UnAuthorized</Text> : <View></View>}
-            {this.props.sessionID ? Actions.Main({user: this.props.sessionID}) : <View></View>}
-          </View>
+          <View >
+          {this.props.loading ? <ActivityIndicator />: <View></View>}
+          {this.props.error ? <Text>Couldn't logIn</Text> : <View></View>}
+          {this.props.unauthorized? <Text>UnAuthorized</Text> : <View></View>}
+          {this.props.sessionID ? Actions.Main({user: this.props.sessionID}) : <View></View>}
+        </View>
         </View>
     );
   }
@@ -36,13 +36,10 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container:{
-      flex:1,
-
+      flex: 1,
+      flexDirection: 'column'
     },
-    responseContainer: {
-      flexDirection: 'column',
 
-    }
 });
 const mapStateToProps = ({ auth }) => {
   const {  spinner, user, unauthorized, error, sessionID } = auth;

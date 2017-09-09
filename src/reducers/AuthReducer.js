@@ -1,6 +1,6 @@
-import {IS_LOGGING_IN , IS_LOGGED_IN , LOGGED_OUT , UNAUTHORIZED , RECIEVED_ERROR } from '../actions/types';
+import {IS_LOGGING_IN , IS_LOGGED_IN , UNAUTHORIZED , RECIEVED_ERROR } from '../actions/types';
 
-import {REHYDRATE} from 'redux-persist/constants';
+
 
 const INITIAL_STATE = { user : null , sessionID : null , spinner : false , unauthorized:false , error : false };
 
@@ -14,13 +14,7 @@ export default function (state = INITIAL_STATE , action) {
     case UNAUTHORIZED:
       return {...state , spinner : false , unauthorized : true}
     case RECIEVED_ERROR:
-      return {...state , spinner : false , error : true}
-    case LOGGED_OUT:
-      return {...state , sessionID : null , user : null}
-    case REHYDRATE:
-      var incoming = action.payload.AuthReducer
-      if (incoming) return {...state, sessionID:action.payload.AuthReducer.sessionID , user:action.payload.AuthReducer.user}
-        return state
+      return {...state , spinner : false , error : true, user: null}
     default:
       return state;
   }

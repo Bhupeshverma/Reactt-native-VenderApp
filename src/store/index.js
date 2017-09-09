@@ -3,8 +3,7 @@ import reducers from '../reducers';
 import ReduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'remote-redux-devtools';
-import localForage from 'localforage'
-import {persistStore , autoRehydrate} from 'redux-persist';
+// import  reactNativeDebuggerOpen from "react-native-debugger-open"
 
 const store = createStore(
   reducers,
@@ -13,6 +12,5 @@ const store = createStore(
       applyMiddleware( ReduxPromise, thunk)
 )
 )
-persistStore(store , {storage: localForage}).purge()
 
 export default store;
