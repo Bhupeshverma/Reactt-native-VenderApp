@@ -33,6 +33,9 @@ class DetailScreen extends Component {
           title="Click to scan Product id"
           color="#841584"
         />
+        <Card>
+
+        </Card>
         <Text>{this.props.id}</Text>
         <Text>Size 34</Text>
         <Text>{filterItem[0].size_34}</Text>

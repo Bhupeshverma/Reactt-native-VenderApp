@@ -27,6 +27,63 @@ function recievedProductsError() {
   }
 }
 
+function decreaseMissingCount(productID) {
+  return (dispatch , getState) => {
+    var {products} = getState().productReducer ;
+     return products.missing_item.forEach((item , index)=>{
+       var formattedID = productID.slice(0,5);
+       var size = productID.slice(5,7);
+       if (formattedID === item.product_id) {
+         if (size === '34' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '35' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '36' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '37' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '38' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '39' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '40' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '41' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+         if (size === '42' && item.size_34 !== 0) {
+           item.size_34 -= 1 ;
+         }else {
+           item.size_34 = 0
+         }
+       }
+     })
+  }
+}
+
 export function fetchProducts( ) {
  return (dispatch , getState) => {
 
