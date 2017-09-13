@@ -47,7 +47,7 @@ export function logIn(email , password) {
 
     dispatch(isLoggingIn());
 
-    return axios.post('http://crm.streetstylestore.com/webservice/login.php',data)
+    return axios.post('http://192.168.100.13/crm/webservice/login.php',data)
             .then((response) => {
                 AsyncStorage.setItem('id', response.data.id);
               dispatch(loggedIn(response));

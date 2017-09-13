@@ -2,7 +2,6 @@ import axios from 'axios';
 import {AsyncStorage} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
-
   FETCH_PRODUCTS,
   FETCHED_PRODUCTS,
   ERROR_RECIEVING_PRODUCTS
@@ -26,72 +25,24 @@ function recievedProductsError() {
     type : ERROR_RECIEVING_PRODUCTS
   }
 }
-
-function decreaseMissingCount(productID) {
-  return (dispatch , getState) => {
-    var {products} = getState().productReducer ;
-     return products.missing_item.forEach((item , index)=>{
-       var formattedID = productID.slice(0,5);
-       var size = productID.slice(5,7);
-       if (formattedID === item.product_id) {
-         if (size === '34' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '35' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '36' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '37' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '38' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '39' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '40' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '41' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-         if (size === '42' && item.size_34 !== 0) {
-           item.size_34 -= 1 ;
-         }else {
-           item.size_34 = 0
-         }
-       }
-     })
-  }
-}
-
 export function fetchProducts( ) {
  return (dispatch , getState) => {
 
    dispatch(isFetchingProducts());
-   console.log('The request started!');
-    return axios.get(`https://shielded-depths-33593.herokuapp.com/`)
+
+   const {sessionID} = getState().auth
+   const {user : {name_value_list : {user_id : {value}}} } = getState().auth;
+
+
+   const data =  {
+"session": `${sessionID}`,
+"user_id": `${value}`
+}
+
+   console.log(data);
+    return axios.post(`http://192.168.100.13/crm/webservice/get_missing_product_item.php`, data)
    .then((response) => {
-     console.log(response);
+     console.log(response.data)
      dispatch(recievedProducts(response));
    })
    .catch((error) => {
@@ -101,8 +52,10 @@ export function fetchProducts( ) {
        }
      }
      else if (error.request) {
+       console.log(error)
        dispatch(recievedProductsError());
      } else {
+       console.log(error)
        dispatch(recievedProductsError());
      }
    })

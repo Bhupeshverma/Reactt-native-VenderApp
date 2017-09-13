@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import {View, Text, AsyncStorage, StyleSheet, TextInput, Button, Alert, ScrollView, ActivityIndicator} from 'react-native';
+import React, { Component } from 'react'
+import {View, Text, AsyncStorage, StyleSheet, TextInput, Alert, ScrollView, ActivityIndicator} from 'react-native';
 import LoginScreen from './Auth/login'
-import {SearchBar} from 'react-native-elements';
+import {SearchBar, Button} from 'react-native-elements';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 import { BarCodeScanner, Permissions } from 'expo';
 import data from '../../data'
 import {Actions} from 'react-native-router-flux'
 import { connect } from 'react-redux';
-import { fetchProducts } from '../actions';
+import { fetchProducts,fetchData,  Startscan, recievedData } from '../actions';
 import {Link, Route, withRouter} from 'react-router-native'
-class MainScreen extends Component {
+import FlipCard from 'react-native-flip-card'
 
+
+class MainScreen extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -20,18 +22,12 @@ class MainScreen extends Component {
     }
   }
 async componentDidMount(){
-
   const { status } = await Permissions.askAsync(Permissions.CAMERA);
   this.setState({hasCameraPermission: status === 'granted'});
-  this.props.fetchProducts()
+   this.props.fetchProducts()
+  this.props.fetchData()
   console.log("hello")
 }
-  // async componentWillMount() {
-  //
-  //   const { status } = await Permissions.askAsync(Permissions.CAMERA);
-  //   this.setState({hasCameraPermission: status === 'granted'});
-  // }
-
   filterSearch(text){
     var count= this.state.count + 1;
     console.log(count)
@@ -63,61 +59,96 @@ async componentDidMount(){
     }
   }
   _handleBarCodeRead = (data) => {
-    var count= this.state.count + 1;
-    console.log(count)
-    this.setState({
-      text: data.data,
-      count: count
-    })
-
+      console.log(data.data)
+      this.props.recievedData(data.data)
   }
 
+
+  onPressScan(){
+    this.props.Startscan()
+  }
   handleProduct(){
-    return this.props.products.missing_item.map((item)=>{
+    const {missing_item} =this.props.products
+    const dataFilter = missing_item.filter((item)=>{
+      if(this.props.dataWithBarcode == item.product_id){
+        return item
+      }
+    })
+    if(this.props.dataWithBarcode){
+      return dataFilter.map((item, index)=>{
         return (
           <Card style={{flexDirection: 'column'}} key={item.product_id}>
-            <Card style={{flexDirection: 'row', justifyContent: 'space-around', height: 200}}>
+            <Card style={{ justifyContent: 'space-around'}}>
               <Card style={styles.CardContainer}>
-                <CardImage source={{uri: 'http://placehold.it/480x270'}} />
-              </Card>
-              <Card style={styles.CardContainer}>
-                <Card>
+                <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                  <CardContent text="Product ID"/>
+                  <CardContent text={item.product_id}/>
+                </Card>
+                <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                   <CardContent text="Missing Count " />
                   <CardContent text= {item.total} />
                 </Card>
-                <Card>
+                <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                   <CardContent text="Scan count " />
                   <CardContent text= {this.state.count}/>
                 </Card>
-
               </Card>
-
-
             </Card>
-
             <CardAction seperator={true} inColumn={false}>
-
-
               <CardButton
-                onPress={()=>{
-                  Actions.Details({id: item.product_id})
-                }}
-                  title="Click to view details"
-                  color='blue'
-                />
-
+                onPress={() => {Actions.Details({product: item})}}
+                title="Click to view details"
+                color='blue'
+              />
             </CardAction>
 
 
           </Card>
         )
-    })
+      })
+    }
+    return missing_item.map((item)=>{
+       return (
+         <Card style={{flexDirection: 'column'}} key={item.product_id}>
+           <Card style={{justifyContent: 'space-around'}}>
+
+             <Card style={styles.CardContainer}>
+               <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                 <CardContent text="Product ID"/>
+                 <CardContent text={item.product_id}/>
+               </Card>
+               <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                 <CardContent text="Missing Count " />
+                 <CardContent text= {item.total} />
+               </Card>
+               <Card style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                 <CardContent text="Scan count " />
+                 <CardContent text= {this.state.count}/>
+               </Card>
+
+             </Card>
+
+
+           </Card>
+
+           <CardAction seperator={true} inColumn={false}>
+
+
+             <CardButton
+               onPress={() => {Actions.Details({product: item})}}
+               title="Click to view details"
+               color='blue'
+             />
+
+           </CardAction>
+
+
+         </Card>
+       )
+   })
   }
-
   render() {
-
     return (
-
             <View style={styles.container}>
               <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                 <TextInput
@@ -134,61 +165,46 @@ async componentDidMount(){
                   style={{width: 50, height: 10, padding: 8}}
                 />
               </View>
-              <View style={{flexDirection: 'row', justifyContent: 'space-around', height: 200}}>
-
-
-                {/* <CardImage source={{uri: 'http://placehold.it/480x270'}} />
-                    </Card>
-                    <Card style={styles.CardContainer}>
-                    <Card>
-                    <CardContent text="Total Missing Count " />
-                    <CardContent text= "50"/>
-                    </Card>
-                    <Card>
-                    <CardContent text="Scan count " />
-                    <CardContent text= {this.state.count}/>
-                </Card> */}
-
-                {this.handleOrder()}
-
+              <View style={{height: 200}}>
+                {this.props.barcodeState ? this.handleOrder()
+                :
+                <Button
+                  onPress={this.onPressScan.bind(this)}
+                  large
+                  iconRight
+                  icon={{name: 'code'}}
+                title='Click To Scan' />}
               </View>
-              <View style={{flexDirection: 'row', justifyContent: 'space-around', height: 200}}>
+              <View style={{flexDirection: 'column'}}>
                 {this.props.spinner ? <ActivityIndicator size="large"/>:<View></View>}
                 {this.props.error ? <Text style={styles.signupLinkText}> Couldn't fetch products  !</Text>: <View></View>}
-                {this.props.products? <ScrollView >
+                {this.props.products?<ScrollView >
                   {this.handleProduct()}
                 </ScrollView> : <View></View>}
-
-
               </View>
             </View>
           )
-
-
-
 }}
-
-const mapStateToProps = ({ productReducer }) => {
-  const {  spinner,products,error } = productReducer;
-
-  return { spinner,products,error};
-};
-
+function  mapStateToProps(state){
+  return {
+     spinner: state.productReducer.spinner,
+     products: state.productReducer.products,
+     error: state.productReducer.error,
+     barcodeState: state.barcodeReducer.barcodeState,
+     dataWithBarcode: state.barcodeReducer.dataWithBarcode
+   }
+}
 export default connect(mapStateToProps, {
- fetchProducts
+ fetchProducts, fetchData, Startscan, recievedData
 })(MainScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:'column',
     backgroundColor: '#f2f2f2'
-
   },
   CardContainer: {
 
-    width: 150,
-    height: 100,
     marginTop:10
-  }
-
+  },
 })
