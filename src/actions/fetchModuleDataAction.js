@@ -1,10 +1,9 @@
 import axios from 'axios';
-import {AsyncStorage} from 'react-native';
-import { Actions } from 'react-native-router-flux';
+
 import {
   FETCH_DATA,
   FETCHED_DATA,
-  ERROR_RECIEVING_DATA
+  ERROR_RECIEVING_DATA,
 } from './types';
 
 function isFetchingData() {
@@ -48,7 +47,7 @@ export function fetchData( ) {
 }
 
    console.log(data);
-    return axios.post(`http://192.168.100.13/crm/webservice/getDataRelatedModule.php`, data)
+    return axios.post(`http://crm-dev.streetstylestore.com/webservice/getDataRelatedModule.php`, data)
    .then((response) => {
      console.log(response.data)
      dispatch(recievedData(response));

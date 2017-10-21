@@ -9,7 +9,8 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { logIn } from '../../actions';
@@ -28,8 +29,12 @@ class LoginScreen extends Component {
     super(props)
     this.state={
       email:'',
-      Password: ''
+      Password: '',
+      behavior: 'padding'
     }
+  }
+  componentDidMount(){
+
   }
 
   _onPressButton(){
@@ -50,16 +55,19 @@ class LoginScreen extends Component {
   render() {
 
     return (
+
       <View style={styles.container}>
         <Image source={background} style={styles.background} resizeMode="cover">
           <View style={styles.markWrap}>
             <Image source={mark} style={styles.mark} resizeMode="contain" />
           </View>
+
           <View style={styles.wrapper}>
             <View style={styles.inputWrap}>
               <View style={styles.iconWrap}>
                 <Image source={personIcon} style={styles.icon} resizeMode="contain" />
               </View>
+
               <TextInput
                 placeholder="Username"
                 placeholderTextColor="#FFF"
@@ -92,6 +100,7 @@ class LoginScreen extends Component {
               </View>
             </TouchableOpacity>
           </View>
+
           <View style={styles.container}>
             <View style={styles.signupWrap}>
 
@@ -99,12 +108,14 @@ class LoginScreen extends Component {
                 {this.props.spinner ? <ActivityIndicator size="large"/>:<View></View>}
                 {this.props.error ? <Text style={styles.signupLinkText}> Couldn't log in !</Text>: <View></View>}
                 {this.props.unauthorized ? <Text style={styles.signupLinkText}> UnAuthorized</Text>:<View></View>}
-                {this.props.user ? <View>{this.handleUser()}</View> : <View></View>}
+                {this.props.sessionID ? <View>{this.handleUser()}</View> : <View/>}
+
               </TouchableOpacity>
             </View>
           </View>
         </Image>
       </View>
+
     );
   }
 }

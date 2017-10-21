@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "20.0.0"
+    "name": "VendorsApp",
+    "icon": "./venders.png",
+    "version": "2.0.0",
+    "sdkVersion": "20.0.0",
+    "ios": {
+      "bundleIdentifier": "com.streetstylestore.VendorsApp"
+    },
+    "android": {
+      "package": "com.streetstylestore.VendorsApp"
+    }
+
   }
 }

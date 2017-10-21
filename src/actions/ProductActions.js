@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import {
   FETCH_PRODUCTS,
   FETCHED_PRODUCTS,
-  ERROR_RECIEVING_PRODUCTS
+  ERROR_RECIEVING_PRODUCTS,
 } from './types';
 
 function isFetchingProducts() {
@@ -36,13 +36,14 @@ export function fetchProducts( ) {
 
    const data =  {
 "session": `${sessionID}`,
-"user_id": `${value}`
+"user_id": `${value}`,
+       "vender_type": "Shoes"
 }
 
    console.log(data);
-    return axios.post(`http://192.168.100.13/crm/webservice/get_missing_product_item.php`, data)
+    return axios.post(`http://crm-dev.streetstylestore.com/webservice/get_missing_product_item.php`, data)
    .then((response) => {
-     console.log(response.data)
+     console.log(response.status)
      dispatch(recievedProducts(response));
    })
    .catch((error) => {

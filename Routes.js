@@ -1,23 +1,39 @@
 import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Stack, Scene, Router, Actions, Overlay, Lightbox, Reducer} from 'react-native-router-flux';
 import LoginScreen from './src/screens/Auth/login';
 import MainScreen from './src/screens/MainScreen';
 import DetailScreen from './src/screens/DetailScreen';
-const RouterComponent = () => {
-  return (
-    <Router >
+import LogoutComponent from './src/screens/Auth/logout'
+import {connect} from "react-redux";
+import { Constants } from 'expo';
 
-      <Scene key="root" hideNavBar>
-        <Scene key="auth" >
-          <Scene key="login" component={LoginScreen} hideNavBar   />
-        </Scene>
-        <Scene key="Main" >
-          <Scene key="Orders" component={MainScreen}/>
-          <Scene key="Details" component={DetailScreen}/>
-        </Scene>
-      </Scene>
+
+const reducerCreate = params => (state, action) => Reducer(params)(state, action);
+
+const RouterComponent = ({needSignIn}) => {
+  return (
+    <Router  createReducer={reducerCreate}  navigationBarStyle={{ backgroundColor: '#f5f4f4' }} sceneStyle={{paddingTop: 10}}>
+<Lightbox>
+      <Stack key="root" hideNavBar >
+
+        <Stack key="auth" hideNavBar initial={needSignIn}>
+          <Scene key="login" component={LoginScreen} hideNavBar  />
+        </Stack>
+        <Stack key="Main" initial={!needSignIn} title="VenderApp" rightTitle="Logout" onRight={()=>Actions.Logout()} >
+              <Scene key="Orders" component={MainScreen} />
+              <Scene key="Details" component={DetailScreen} />
+        </Stack>
+        </Stack>
+<Scene key="Logout" component={LogoutComponent}/>
+</Lightbox>
     </Router>
   );
 };
 
-export default RouterComponent;
+function mapStateToProps(state) {
+	return {
+		needSignIn: !state.auth.sessionID
+	}
+}
+
+export default connect(mapStateToProps)(RouterComponent);
