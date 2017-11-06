@@ -1,0 +1,26 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/components/RichMedia.js';
+exports.default = RichMedia;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _html = require('../html');
+
+function RichMedia(_ref) {
+  var body = _ref.body;
+
+  console.warn('RichMedia is deprecated and will be removed in next versions.');
+  return _react2.default.createElement(_html.Html, { body: body, __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    }
+  });
+}
+
+RichMedia.propTypes = {
+  body: _react2.default.PropTypes.string.isRequired
+};

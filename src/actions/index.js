@@ -5,3 +5,5 @@ export * from './SynProducts';
 export * from './LogoutActions';
 export * from './SaveDataActions';
 export * from './ClearActionData';
+export * from './SyncDataFormat';
+export * from './ClearDataFormatAction';

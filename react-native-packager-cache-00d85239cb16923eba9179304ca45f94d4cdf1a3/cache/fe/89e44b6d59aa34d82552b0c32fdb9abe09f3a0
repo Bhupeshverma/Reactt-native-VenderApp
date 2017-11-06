@@ -1,0 +1,17 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ClearProducts = ClearProducts;
+
+var _types = require('./types');
+
+function clearData() {
+  return {
+    type: _types.CLEAR_SAVED_PRODUCTS
+  };
+}
+function ClearProducts() {
+  return function (dispatch, getState) {
+    dispatch(clearData());
+  };
+}

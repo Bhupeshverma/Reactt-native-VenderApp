@@ -1,0 +1,221 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.customizeRenderElement = exports.renderChildren = exports.renderChildElements = exports.mapElementProps = exports.combineMappers = exports.hasBlockElement = exports.isBlockElement = exports.ElementPropTypes = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _ui = require('@shoutem/ui');
+
+var _theme = require('@shoutem/theme');
+
+var _HtmlParser = require('./services/HtmlParser');
+
+var _ElementRegistry = require('./services/ElementRegistry');
+
+var defaultElementSettings = {
+  display: _ElementRegistry.Display.BLOCK
+};
+
+var Html = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(Html, _Component);
+  babelHelpers.createClass(Html, null, [{
+    key: 'registerElement',
+    value: function registerElement(elementTag, component) {
+      var settings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      var elementSettings = _lodash2.default.assign({}, defaultElementSettings, settings);
+
+      (0, _ElementRegistry.registerElement)(elementTag, babelHelpers.extends({}, elementSettings, { component: component }));
+    }
+  }, {
+    key: 'getElement',
+    value: function getElement(tag) {
+      return (0, _ElementRegistry.getElement)({ tag: tag });
+    }
+  }]);
+
+  function Html(props, context) {
+    babelHelpers.classCallCheck(this, Html);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (Html.__proto__ || Object.getPrototypeOf(Html)).call(this, props, context));
+
+    _this.renderElement = _this.renderElement.bind(_this);
+    _this.state = {
+      htmlTree: null
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(Html, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _reactNative.InteractionManager.runAfterInteractions(function () {
+        _this2.updateHtmlTree();
+      });
+    }
+  }, {
+    key: 'updateHtmlTree',
+    value: function updateHtmlTree() {
+      var body = this.props.body;
+
+
+      if (body) {
+        var htmlTree = (0, _HtmlParser.parseHtml)(body);
+        this.setState({ htmlTree: htmlTree });
+      }
+    }
+  }, {
+    key: 'getElementStyle',
+    value: function getElementStyle(_ref) {
+      var tag = _ref.tag;
+      var style = this.props.style;
+
+      return _lodash2.default.get(style, tag, {});
+    }
+  }, {
+    key: 'renderElement',
+    value: function renderElement(element) {
+      var elementStyle = this.getElementStyle(element);
+      var renderedElement = void 0;
+
+      if (this.props.renderElement) {
+        renderedElement = this.props.renderElement(element, elementStyle, this.renderElement);
+      }
+
+      if (_lodash2.default.isUndefined(renderedElement)) {
+        var ElementComponent = (0, _ElementRegistry.getElementProperty)(element, 'component');
+
+        if (!ElementComponent) {
+          console.log('Can not find component for element: ', element.tag);
+          return null;
+        }
+
+        renderedElement = _react2.default.createElement(ElementComponent, {
+          element: element,
+          style: elementStyle,
+          renderElement: this.renderElement
+        });
+      }
+
+      return renderedElement;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          style = _props.style,
+          body = _props.body;
+      var htmlTree = this.state.htmlTree;
+
+
+      if (!body) {
+        return null;
+      }
+
+      if (!htmlTree) {
+        return _react2.default.createElement(
+          _ui.View,
+          { styleName: 'md-gutter' },
+          _react2.default.createElement(_ui.Spinner, { styleName: 'sm-gutter' })
+        );
+      }
+
+      var htmlRootElement = htmlTree.getRootNode();
+
+      return _react2.default.createElement(
+        _ui.View,
+        { style: style.container },
+        this.renderElement(htmlRootElement)
+      );
+    }
+  }]);
+  return Html;
+}(_react.Component), _class.propTypes = {
+  body: _react2.default.PropTypes.string.isRequired,
+  renderElement: _react2.default.PropTypes.func,
+  style: _react2.default.PropTypes.object
+}, _temp);
+var ElementPropTypes = exports.ElementPropTypes = {
+  childElements: _react2.default.PropTypes.array,
+  renderElement: _react2.default.PropTypes.func,
+  inlineStyle: _react2.default.PropTypes.string,
+  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node])
+};
+
+exports.default = (0, _theme.connectStyle)('shoutem.ui.Html')(Html);
+var isBlockElement = exports.isBlockElement = function isBlockElement(element) {
+  return (0, _ElementRegistry.getElementDisplay)(element, 'display') === _ElementRegistry.Display.BLOCK;
+};
+
+var hasBlockElement = exports.hasBlockElement = function hasBlockElement(elements) {
+  return _lodash2.default.some(elements, isBlockElement);
+};
+
+var combineMappers = exports.combineMappers = function combineMappers() {
+  for (var _len = arguments.length, mapFunctions = Array(_len), _key = 0; _key < _len; _key++) {
+    mapFunctions[_key] = arguments[_key];
+  }
+
+  return function (WrappedComponent) {
+    return function (props) {
+      var customizedProps = _lodash2.default.reduce(mapFunctions, function (result, mapFunction) {
+        return babelHelpers.extends({}, result, mapFunction(props));
+      }, babelHelpers.extends({}, props));
+
+      return _react2.default.createElement(WrappedComponent, customizedProps);
+    };
+  };
+};
+
+var mapElementProps = exports.mapElementProps = function mapElementProps(_ref2) {
+  var element = _ref2.element,
+      style = _ref2.style;
+  var childElements = element.childElements,
+      attributes = element.attributes,
+      tag = element.tag;
+
+  return babelHelpers.extends({}, attributes, {
+    style: style,
+    childElements: childElements,
+    htmlInlineStyle: attributes.style,
+    elementTag: tag
+  });
+};
+
+var renderChildElements = exports.renderChildElements = function renderChildElements(childElements, renderElement) {
+  return _react2.default.Children.toArray(childElements.map(renderElement));
+};
+
+var renderChildren = exports.renderChildren = function renderChildren(_ref3) {
+  var element = _ref3.element,
+      renderElement = _ref3.renderElement;
+  var childElements = element.childElements;
+
+  return {
+    children: renderChildElements(childElements, renderElement)
+  };
+};
+
+var customizeRenderElement = exports.customizeRenderElement = function customizeRenderElement(customizer, renderElement) {
+  return function (element) {
+    var renderedElement = customizer(element);
+    if (renderedElement) {
+      return renderedElement;
+    }
+
+    return renderElement(element);
+  };
+};

@@ -1,0 +1,37 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createIcon = exports.Icon = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/components/Icon/index.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _createIcon = require('./createIcon');
+
+var _createIcon2 = babelHelpers.interopRequireDefault(_createIcon);
+
+var RubiconIcon = (0, _createIcon2.default)('rubicon-icon-font');
+
+var icons = {
+  Default: null,
+  Fallback: RubiconIcon
+};
+
+function Icon(props) {
+  var DefaultIcon = icons.Default || icons.Fallback;
+  return _react2.default.createElement(DefaultIcon, babelHelpers.extends({}, props, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    }
+  }));
+}
+
+Icon.setIconFont = function (fontFamily) {
+  icons.Default = (0, _createIcon2.default)(fontFamily);
+};
+
+exports.Icon = Icon;
+exports.createIcon = _createIcon2.default;

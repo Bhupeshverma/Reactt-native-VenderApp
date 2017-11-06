@@ -1,0 +1,40 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/html/elements/list/Li.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../../components/View');
+
+var _Html = require('../../Html');
+
+var _Inline = require('../Inline');
+
+function Li(_ref) {
+  var element = _ref.element,
+      renderElement = _ref.renderElement,
+      style = _ref.style;
+  var childElements = element.childElements,
+      key = element.attributes.key;
+
+  return _react2.default.createElement(_Inline.Inline, {
+    style: style,
+    key: key,
+    childElements: childElements,
+    renderElement: renderElement,
+    block: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    }
+  });
+}
+
+Li.propTypes = babelHelpers.extends({}, _Html.ElementPropTypes, {
+  prefix: _react2.default.PropTypes.element
+});
+
+exports.default = Li;

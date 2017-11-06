@@ -1,0 +1,12 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Examples = require('./Examples');
+
+Object.defineProperty(exports, 'Examples', {
+  enumerable: true,
+  get: function get() {
+    return _Examples.Examples;
+  }
+});

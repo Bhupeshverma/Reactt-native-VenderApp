@@ -1,0 +1,152 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NavigationBar = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/components/NavigationBar/NavigationBar.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _tinycolor = require('tinycolor2');
+
+var _tinycolor2 = babelHelpers.interopRequireDefault(_tinycolor);
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var _composeChildren = require('./composeChildren');
+
+var _composeChildren2 = babelHelpers.interopRequireDefault(_composeChildren);
+
+function getBackgroundColor(style) {
+  var styleWithBg = _lodash2.default.find(style, function (styleDef) {
+    return styleDef.backgroundColor && styleDef.backgroundColor !== 'transparent';
+  });
+
+  return styleWithBg && styleWithBg.backgroundColor || 'transparent';
+}
+
+function setStatusBarStyle(backgroundColor) {
+  function chooseBarStyle(bgColor) {
+    return (0, _tinycolor2.default)(bgColor).isDark() ? 'light-content' : 'default';
+  }
+
+  function setStyle(bgColor) {
+    if (_reactNative.Platform.OS === 'android') {
+      _reactNative.StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)');
+    } else {
+      var barStyle = chooseBarStyle(bgColor);
+      _reactNative.StatusBar.setBarStyle(barStyle);
+    }
+  }
+
+  if (backgroundColor && backgroundColor._parent instanceof _reactNative.Animated.Value) {
+    backgroundColor._parent.addListener(function (animation) {
+      setStyle(backgroundColor._interpolation(animation.value));
+    });
+    setStyle(backgroundColor._interpolation(0));
+  } else {
+    setStyle(backgroundColor);
+  }
+}
+
+var NavigationBar = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(NavigationBar, _Component);
+
+  function NavigationBar() {
+    babelHelpers.classCallCheck(this, NavigationBar);
+    return babelHelpers.possibleConstructorReturn(this, (NavigationBar.__proto__ || Object.getPrototypeOf(NavigationBar)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(NavigationBar, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          leftComponent = _props.leftComponent,
+          rightComponent = _props.rightComponent,
+          centerComponent = _props.centerComponent,
+          style = _props.style,
+          id = _props.id;
+
+
+      var backgroundColor = getBackgroundColor(style);
+      setStatusBarStyle(backgroundColor);
+
+      return _react2.default.createElement(
+        _reactNative.Animated.View,
+        { style: style.container, key: id, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 82
+          }
+        },
+        _react2.default.createElement(_reactNative.StatusBar, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 83
+          }
+        }),
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: style.componentsContainer, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 84
+            }
+          },
+          _react2.default.createElement(
+            _reactNative.View,
+            { style: style.leftComponent, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 85
+              }
+            },
+            leftComponent
+          ),
+          _react2.default.createElement(
+            _reactNative.View,
+            { style: style.centerComponent, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 86
+              }
+            },
+            centerComponent
+          ),
+          _react2.default.createElement(
+            _reactNative.View,
+            { style: style.rightComponent, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 87
+              }
+            },
+            rightComponent
+          )
+        )
+      );
+    }
+  }]);
+  return NavigationBar;
+}(_react.Component), _class.propTypes = {
+  leftComponent: _react2.default.PropTypes.node,
+  centerComponent: _react2.default.PropTypes.node,
+  rightComponent: _react2.default.PropTypes.node,
+  style: _react2.default.PropTypes.object,
+  id: _react2.default.PropTypes.string
+}, _class.defaultProps = {
+  id: 'default'
+}, _temp);
+
+
+var AnimatedNavigationBar = (0, _animation.connectAnimation)((0, _composeChildren2.default)(NavigationBar));
+var StyledNavigationBar = (0, _theme.connectStyle)('shoutem.ui.NavigationBar')(AnimatedNavigationBar);
+
+exports.NavigationBar = StyledNavigationBar;

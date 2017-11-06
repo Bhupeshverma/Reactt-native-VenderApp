@@ -1,0 +1,211 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ImageGalleryOverlay = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/components/ImageGalleryOverlay.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var _index = require('./../index');
+
+var DESCRIPTION_LENGTH_TRIM_LIMIT = 90;
+
+var ImageGalleryOverlay = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(ImageGalleryOverlay, _Component);
+
+  function ImageGalleryOverlay(props) {
+    babelHelpers.classCallCheck(this, ImageGalleryOverlay);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (ImageGalleryOverlay.__proto__ || Object.getPrototypeOf(ImageGalleryOverlay)).call(this, props));
+
+    _this.collapseDescription = _this.collapseDescription.bind(_this);
+    _this.expandDescription = _this.expandDescription.bind(_this);
+    _this.onDescriptionScroll = _this.onDescriptionScroll.bind(_this);
+
+    _this.state = {
+      isDescriptionCollapsed: true
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(ImageGalleryOverlay, [{
+    key: 'onDescriptionScroll',
+    value: function onDescriptionScroll(event) {
+      var isDescriptionCollapsed = this.state.isDescriptionCollapsed;
+
+      var offsetY = event.nativeEvent.contentOffset.y;
+
+      if (isDescriptionCollapsed && offsetY > 0) {
+        this.expandDescription();
+      } else if (!isDescriptionCollapsed && offsetY < 0) {
+        this.collapseDescription();
+      }
+    }
+  }, {
+    key: 'collapseDescription',
+    value: function collapseDescription() {
+      this.setState({ isDescriptionCollapsed: true });
+    }
+  }, {
+    key: 'expandDescription',
+    value: function expandDescription() {
+      this.setState({ isDescriptionCollapsed: false });
+    }
+  }, {
+    key: 'renderTitle',
+    value: function renderTitle(title) {
+      var style = this.props.style;
+
+
+      if (!title) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        _index.View,
+        { style: style.title.container, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 72
+          }
+        },
+        _react2.default.createElement(
+          _index.Subtitle,
+          { style: style.title.text, numberOfLines: 2, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          },
+          title
+        )
+      );
+    }
+  }, {
+    key: 'renderDescription',
+    value: function renderDescription(description) {
+      var style = this.props.style;
+
+      var collapsed = this.state.isDescriptionCollapsed;
+
+      if (!description) {
+        return null;
+      }
+
+      var descriptionIcon = _react2.default.createElement(_index.Icon, { name: (collapsed ? 'up' : 'down') + '-arrow', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 86
+        }
+      });
+
+      var descriptionText = _react2.default.createElement(
+        _index.Caption,
+        {
+          style: style.description.text,
+          numberOfLines: collapsed ? 2 : null,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 89
+          }
+        },
+        description
+      );
+
+      return _react2.default.createElement(
+        _index.View,
+        {
+          styleName: collapsed ? 'collapsed' : 'expanded',
+          style: style.description.container,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 98
+          }
+        },
+        _react2.default.createElement(
+          _index.TouchableOpacity,
+          {
+            onPress: collapsed ? this.expandDescription : this.collapseDescription,
+            hitSlop: {
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 102
+            }
+          },
+          description.length >= DESCRIPTION_LENGTH_TRIM_LIMIT ? descriptionIcon : null
+        ),
+        _react2.default.createElement(
+          _reactNative.ScrollView,
+          {
+            style: style.description.scroll,
+            onScroll: this.onDescriptionScroll,
+            scrollEventThrottle: 1000,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 113
+            }
+          },
+          descriptionText
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          title = _props.title,
+          description = _props.description,
+          style = _props.style;
+
+
+      if (!title && !description) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        _index.View,
+        { style: style.container, pointerEvents: 'box-none', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 132
+          }
+        },
+        this.renderTitle(title),
+        this.renderDescription(description)
+      );
+    }
+  }]);
+  return ImageGalleryOverlay;
+}(_react.Component), _class.propTypes = {
+  title: _react2.default.PropTypes.string,
+  description: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object
+}, _temp);
+
+
+var AnimatedOverlay = (0, _animation.connectAnimation)(ImageGalleryOverlay);
+var StyledOverlay = (0, _theme.connectStyle)('shoutem.ui.ImageGalleryOverlay', {
+  container: {},
+  title: {
+    container: {},
+    text: {}
+  },
+  description: {
+    container: {},
+    scroll: {},
+    text: {}
+  }
+})(AnimatedOverlay);
+exports.ImageGalleryOverlay = StyledOverlay;

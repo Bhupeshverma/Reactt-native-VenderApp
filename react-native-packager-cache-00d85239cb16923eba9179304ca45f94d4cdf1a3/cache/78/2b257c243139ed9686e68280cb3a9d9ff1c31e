@@ -1,0 +1,80 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/html/elements/Text.js';
+exports.isText = isText;
+exports.removeWhiteSpace = removeWhiteSpace;
+exports.decodeHtmlEntities = decodeHtmlEntities;
+exports.TextElement = TextElement;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _htmlEntities = require('html-entities');
+
+var _Html = require('../Html');
+
+var html = new _htmlEntities.AllHtmlEntities();
+
+function isWhiteSpaceWrappedWithText(element) {
+  return _lodash2.default.size(element.childElements) === 1 && isWhiteSpaceString(element.childElements[0]);
+}
+
+function isWhiteSpaceString(element) {
+  return _lodash2.default.isString(element) && element.trim().length === 0;
+}
+
+function isWhiteSpace(element) {
+  return isWhiteSpaceString(element) || isWhiteSpaceWrappedWithText(element);
+}
+
+function isText(element) {
+  var elementTag = _lodash2.default.get(element, 'tag');
+  return _lodash2.default.isString(element) || elementTag === 'text';
+}
+
+function removeWhiteSpace(childElements) {
+  return childElements.filter(function (child) {
+    return !isWhiteSpace(child);
+  });
+}
+
+function decodeHtmlEntities(childElements) {
+  return _lodash2.default.map(childElements, function (element) {
+    return _lodash2.default.isString(element) ? html.decode(element) : element;
+  });
+}
+
+function TextElement(props) {
+  var textualChildElements = decodeHtmlEntities(removeWhiteSpace(props.childElements));
+
+  if (textualChildElements.length === 0) {
+    return _react2.default.createElement(_reactNative.Text, { style: { height: 0 }, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      }
+    });
+  }
+
+  return _react2.default.createElement(
+    _reactNative.Text,
+    babelHelpers.extends({}, props, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      }
+    }),
+    textualChildElements
+  );
+}
+
+TextElement.propTypes = babelHelpers.extends({}, _Html.ElementPropTypes);
+
+exports.default = (0, _Html.combineMappers)(_Html.mapElementProps)(TextElement);

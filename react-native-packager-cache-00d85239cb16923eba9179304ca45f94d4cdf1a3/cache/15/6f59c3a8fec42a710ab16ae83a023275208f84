@@ -1,0 +1,56 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _utils = require('./utils');
+
+var Touchable = function Touchable(_ref) {
+  var onPress = _ref.onPress,
+      style = _ref.style,
+      children = _ref.children;
+
+  if (_utils.IS_ANDROID && !_utils.IS_LT_LOLLIPOP) {
+    return _react2.default.createElement(
+      _reactNative.TouchableNativeFeedback,
+      {
+        background: _reactNative.TouchableNativeFeedback.SelectableBackground(),
+        onPress: onPress
+      },
+      _react2.default.createElement(
+        _reactNative.View,
+        {
+          style: style
+        },
+        children
+      )
+    );
+  } else {
+    return _react2.default.createElement(
+      _reactNative.TouchableOpacity,
+      {
+        onPress: onPress,
+        style: style
+      },
+      children
+    );
+  }
+};
+
+Touchable.propTypes = {
+  onPress: _react.PropTypes.func.isRequired,
+  style: _reactNative.View.propTypes.style,
+  children: _react.PropTypes.node.isRequired
+};
+
+Touchable.defaultProps = {
+  onPress: _utils.noop,
+  style: {}
+};
+
+exports.default = Touchable;

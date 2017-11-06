@@ -1,0 +1,1 @@
+["d2b3481f7053d09899e1429534b3c1d6971b9fe2","36d9d8b87dc1b2215dc62f812a675580f81aa26e",["@expo/vector-icons"],[93],{"version":3,"sources":["/home/ziddi/Desktop/venders/node_modules/expo/src/Icon.js"],"names":[],"mappings":";;;;AAAA","sourcesContent":["import Icon from '@expo/vector-icons';\nexport default Icon;\n"]}]

@@ -1,0 +1,480 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/react-native-view-transformer/library/transform/ViewTransformer.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var _reactNativeGestureResponder = require('react-native-gesture-responder');
+
+var _reactNativeScroller = require('react-native-scroller');
+
+var _reactNativeScroller2 = babelHelpers.interopRequireDefault(_reactNativeScroller);
+
+var _TransformUtils = require('./TransformUtils');
+
+var ViewTransformer = (_temp = _class = function (_React$Component) {
+  babelHelpers.inherits(ViewTransformer, _React$Component);
+
+  function ViewTransformer(props) {
+    babelHelpers.classCallCheck(this, ViewTransformer);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (ViewTransformer.__proto__ || Object.getPrototypeOf(ViewTransformer)).call(this, props));
+
+    _this.state = {
+      scale: 1,
+      translateX: 0,
+      translateY: 0,
+
+      animator: new _reactNative.Animated.Value(0),
+
+      width: 0,
+      height: 0,
+      pageX: 0,
+      pageY: 0
+    };
+    _this._viewPortRect = new _TransformUtils.Rect();
+
+    _this.cancelAnimation = _this.cancelAnimation.bind(_this);
+    _this.contentRect = _this.contentRect.bind(_this);
+    _this.transformedContentRect = _this.transformedContentRect.bind(_this);
+    _this.animate = _this.animate.bind(_this);
+
+    _this.scroller = new _reactNativeScroller2.default(true, function (dx, dy, scroller) {
+      if (dx === 0 && dy === 0 && scroller.isFinished()) {
+        _this.animateBounce();
+        return;
+      }
+
+      _this.updateTransform({
+        translateX: _this.state.translateX + dx / _this.state.scale,
+        translateY: _this.state.translateY + dy / _this.state.scale
+      });
+    });
+    return _this;
+  }
+
+  babelHelpers.createClass(ViewTransformer, [{
+    key: 'viewPortRect',
+    value: function viewPortRect() {
+      this._viewPortRect.set(0, 0, this.state.width, this.state.height);
+      return this._viewPortRect;
+    }
+  }, {
+    key: 'contentRect',
+    value: function contentRect() {
+      var rect = this.viewPortRect().copy();
+      if (this.props.contentAspectRatio && this.props.contentAspectRatio > 0) {
+        rect = (0, _TransformUtils.fitCenterRect)(this.props.contentAspectRatio, rect);
+      }
+      return rect;
+    }
+  }, {
+    key: 'transformedContentRect',
+    value: function transformedContentRect() {
+      var rect = (0, _TransformUtils.transformedRect)(this.viewPortRect(), this.currentTransform());
+      if (this.props.contentAspectRatio && this.props.contentAspectRatio > 0) {
+        rect = (0, _TransformUtils.fitCenterRect)(this.props.contentAspectRatio, rect);
+      }
+      return rect;
+    }
+  }, {
+    key: 'currentTransform',
+    value: function currentTransform() {
+      return new _TransformUtils.Transform(this.state.scale, this.state.translateX, this.state.translateY);
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      this.gestureResponder = (0, _reactNativeGestureResponder.createResponder)({
+        onStartShouldSetResponder: function onStartShouldSetResponder(evt, gestureState) {
+          return true;
+        },
+        onMoveShouldSetResponderCapture: function onMoveShouldSetResponderCapture(evt, gestureState) {
+          return true;
+        },
+
+        onResponderMove: this.onResponderMove.bind(this),
+        onResponderGrant: this.onResponderGrant.bind(this),
+        onResponderRelease: this.onResponderRelease.bind(this),
+        onResponderTerminate: this.onResponderRelease.bind(this),
+        onResponderTerminationRequest: function onResponderTerminationRequest(evt, gestureState) {
+          return false;
+        },
+        onResponderSingleTapConfirmed: function onResponderSingleTapConfirmed(evt, gestureState) {
+          _this2.props.onSingleTapConfirmed && _this2.props.onSingleTapConfirmed();
+        }
+      });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      this.props.onViewTransformed && this.props.onViewTransformed({
+        scale: this.state.scale,
+        translateX: this.state.translateX,
+        translateY: this.state.translateY
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.cancelAnimation();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var gestureResponder = this.gestureResponder;
+      if (!this.props.enableTransform) {
+        gestureResponder = {};
+      }
+
+      return _react2.default.createElement(
+        _reactNative.View,
+        babelHelpers.extends({}, this.props, gestureResponder, {
+          ref: 'innerViewRef',
+          onLayout: this.onLayout.bind(this), __source: {
+            fileName: _jsxFileName,
+            lineNumber: 117
+          }
+        }),
+        _react2.default.createElement(
+          _reactNative.View,
+          {
+            style: {
+              flex: 1,
+              transform: [{ scale: this.state.scale }, { translateX: this.state.translateX }, { translateY: this.state.translateY }]
+            }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 122
+            }
+          },
+          this.props.children
+        )
+      );
+    }
+  }, {
+    key: 'onLayout',
+    value: function onLayout(e) {
+      var _e$nativeEvent$layout = e.nativeEvent.layout,
+          width = _e$nativeEvent$layout.width,
+          height = _e$nativeEvent$layout.height;
+
+      if (width !== this.state.width || height !== this.state.height) {
+        this.setState({ width: width, height: height });
+      }
+      this.measureLayout();
+
+      this.props.onLayout && this.props.onLayout(e);
+    }
+  }, {
+    key: 'measureLayout',
+    value: function measureLayout() {
+      var _this3 = this;
+
+      var handle = _reactNative2.default.findNodeHandle(this.refs['innerViewRef']);
+      _reactNative.NativeModules.UIManager.measure(handle, function (x, y, width, height, pageX, pageY) {
+        if (typeof pageX === 'number' && typeof pageY === 'number') {
+          if (_this3.state.pageX !== pageX || _this3.state.pageY !== pageY) {
+            _this3.setState({
+              pageX: pageX,
+              pageY: pageY
+            });
+          }
+        }
+      }.bind(this));
+    }
+  }, {
+    key: 'onResponderGrant',
+    value: function onResponderGrant(evt, gestureState) {
+      this.props.onTransformStart && this.props.onTransformStart();
+      this.setState({ responderGranted: true });
+      this.measureLayout();
+    }
+  }, {
+    key: 'onResponderMove',
+    value: function onResponderMove(evt, gestureState) {
+      this.cancelAnimation();
+
+      var dx = gestureState.moveX - gestureState.previousMoveX;
+      var dy = gestureState.moveY - gestureState.previousMoveY;
+      if (this.props.enableResistance) {
+        var d = this.applyResistance(dx, dy);
+        dx = d.dx;
+        dy = d.dy;
+      }
+
+      if (!this.props.enableTranslate) {
+        dx = dy = 0;
+      }
+
+      var transform = {};
+      if (gestureState.previousPinch && gestureState.pinch && this.props.enableScale) {
+        var scaleBy = gestureState.pinch / gestureState.previousPinch;
+        var pivotX = gestureState.moveX - this.state.pageX;
+        var pivotY = gestureState.moveY - this.state.pageY;
+
+        var rect = (0, _TransformUtils.transformedRect)((0, _TransformUtils.transformedRect)(this.contentRect(), this.currentTransform()), new _TransformUtils.Transform(scaleBy, dx, dy, {
+          x: pivotX,
+          y: pivotY
+        }));
+        transform = (0, _TransformUtils.getTransform)(this.contentRect(), rect);
+      } else {
+        if (Math.abs(dx) > 2 * Math.abs(dy)) {
+          dy = 0;
+        } else if (Math.abs(dy) > 2 * Math.abs(dx)) {
+          dx = 0;
+        }
+        transform.translateX = this.state.translateX + dx / this.state.scale;
+        transform.translateY = this.state.translateY + dy / this.state.scale;
+      }
+
+      this.updateTransform(transform);
+      return true;
+    }
+  }, {
+    key: 'onResponderRelease',
+    value: function onResponderRelease(evt, gestureState) {
+      var handled = this.props.onTransformGestureReleased && this.props.onTransformGestureReleased({
+        scale: this.state.scale,
+        translateX: this.state.translateX,
+        translateY: this.state.translateY
+      });
+      if (handled) {
+        return;
+      }
+
+      if (gestureState.doubleTapUp) {
+        if (!this.props.enableScale) {
+          this.animateBounce();
+          return;
+        }
+        var pivotX = 0,
+            pivotY = 0;
+        if (gestureState.dx || gestureState.dy) {
+          pivotX = gestureState.moveX - this.state.pageX;
+          pivotY = gestureState.moveY - this.state.pageY;
+        } else {
+          pivotX = gestureState.x0 - this.state.pageX;
+          pivotY = gestureState.y0 - this.state.pageY;
+        }
+
+        this.performDoubleTapUp(pivotX, pivotY);
+      } else {
+        if (this.props.enableTranslate) {
+          this.performFling(gestureState.vx, gestureState.vy);
+        } else {
+          this.animateBounce();
+        }
+      }
+    }
+  }, {
+    key: 'performFling',
+    value: function performFling(vx, vy) {
+      var startX = 0;
+      var startY = 0;
+      var maxX = void 0,
+          minX = void 0,
+          maxY = void 0,
+          minY = void 0;
+      var availablePanDistance = (0, _TransformUtils.availableTranslateSpace)(this.transformedContentRect(), this.viewPortRect());
+      if (vx > 0) {
+        minX = 0;
+        if (availablePanDistance.left > 0) {
+          maxX = availablePanDistance.left + this.props.maxOverScrollDistance;
+        } else {
+          maxX = 0;
+        }
+      } else {
+        maxX = 0;
+        if (availablePanDistance.right > 0) {
+          minX = -availablePanDistance.right - this.props.maxOverScrollDistance;
+        } else {
+          minX = 0;
+        }
+      }
+      if (vy > 0) {
+        minY = 0;
+        if (availablePanDistance.top > 0) {
+          maxY = availablePanDistance.top + this.props.maxOverScrollDistance;
+        } else {
+          maxY = 0;
+        }
+      } else {
+        maxY = 0;
+        if (availablePanDistance.bottom > 0) {
+          minY = -availablePanDistance.bottom - this.props.maxOverScrollDistance;
+        } else {
+          minY = 0;
+        }
+      }
+
+      vx *= 1000;
+      vy *= 1000;
+      if (Math.abs(vx) > 2 * Math.abs(vy)) {
+        vy = 0;
+      } else if (Math.abs(vy) > 2 * Math.abs(vx)) {
+        vx = 0;
+      }
+
+      this.scroller.fling(startX, startY, vx, vy, minX, maxX, minY, maxY);
+    }
+  }, {
+    key: 'performDoubleTapUp',
+    value: function performDoubleTapUp(pivotX, pivotY) {
+      console.log('performDoubleTapUp...pivot=' + pivotX + ', ' + pivotY);
+      var curScale = this.state.scale;
+      var scaleBy = void 0;
+      if (curScale > (1 + this.props.maxScale) / 2) {
+        scaleBy = 1 / curScale;
+      } else {
+        scaleBy = this.props.maxScale / curScale;
+      }
+
+      var rect = (0, _TransformUtils.transformedRect)(this.transformedContentRect(), new _TransformUtils.Transform(scaleBy, 0, 0, {
+        x: pivotX,
+        y: pivotY
+      }));
+      rect = (0, _TransformUtils.transformedRect)(rect, new _TransformUtils.Transform(1, this.viewPortRect().centerX() - pivotX, this.viewPortRect().centerY() - pivotY));
+      rect = (0, _TransformUtils.alignedRect)(rect, this.viewPortRect());
+
+      this.animate(rect);
+    }
+  }, {
+    key: 'applyResistance',
+    value: function applyResistance(dx, dy) {
+      var availablePanDistance = (0, _TransformUtils.availableTranslateSpace)(this.transformedContentRect(), this.viewPortRect());
+
+      if (dx > 0 && availablePanDistance.left < 0 || dx < 0 && availablePanDistance.right < 0) {
+        dx /= 3;
+      }
+      if (dy > 0 && availablePanDistance.top < 0 || dy < 0 && availablePanDistance.bottom < 0) {
+        dy /= 3;
+      }
+      return {
+        dx: dx, dy: dy
+      };
+    }
+  }, {
+    key: 'cancelAnimation',
+    value: function cancelAnimation() {
+      this.state.animator.stopAnimation();
+    }
+  }, {
+    key: 'animate',
+    value: function animate(targetRect, durationInMillis) {
+      var _this4 = this;
+
+      var duration = 200;
+      if (durationInMillis) {
+        duration = durationInMillis;
+      }
+
+      var fromRect = this.transformedContentRect();
+      if (fromRect.equals(targetRect)) {
+        console.log('animate...equal rect, skip animation');
+        return;
+      }
+
+      this.state.animator.removeAllListeners();
+      this.state.animator.setValue(0);
+      this.state.animator.addListener(function (state) {
+        var progress = state.value;
+
+        var left = fromRect.left + (targetRect.left - fromRect.left) * progress;
+        var right = fromRect.right + (targetRect.right - fromRect.right) * progress;
+        var top = fromRect.top + (targetRect.top - fromRect.top) * progress;
+        var bottom = fromRect.bottom + (targetRect.bottom - fromRect.bottom) * progress;
+
+        var transform = (0, _TransformUtils.getTransform)(_this4.contentRect(), new _TransformUtils.Rect(left, top, right, bottom));
+        _this4.updateTransform(transform);
+      });
+
+      _reactNative.Animated.timing(this.state.animator, {
+        toValue: 1,
+        duration: duration,
+        easing: _reactNative.Easing.inOut(_reactNative.Easing.ease)
+      }).start();
+    }
+  }, {
+    key: 'animateBounce',
+    value: function animateBounce() {
+      var curScale = this.state.scale;
+      var minScale = 1;
+      var maxScale = this.props.maxScale;
+      var scaleBy = 1;
+      if (curScale > maxScale) {
+        scaleBy = maxScale / curScale;
+      } else if (curScale < minScale) {
+        scaleBy = minScale / curScale;
+      }
+
+      var rect = (0, _TransformUtils.transformedRect)(this.transformedContentRect(), new _TransformUtils.Transform(scaleBy, 0, 0, {
+        x: this.viewPortRect().centerX(),
+        y: this.viewPortRect().centerY()
+      }));
+      rect = (0, _TransformUtils.alignedRect)(rect, this.viewPortRect());
+      this.animate(rect);
+    }
+  }, {
+    key: 'updateTransform',
+    value: function updateTransform(transform) {
+      this.setState(transform);
+    }
+  }, {
+    key: 'forceUpdateTransform',
+    value: function forceUpdateTransform(transform) {
+      this.setState(transform);
+    }
+  }, {
+    key: 'getAvailableTranslateSpace',
+    value: function getAvailableTranslateSpace() {
+      return (0, _TransformUtils.availableTranslateSpace)(this.transformedContentRect(), this.viewPortRect());
+    }
+  }]);
+  return ViewTransformer;
+}(_react2.default.Component), _class.Rect = _TransformUtils.Rect, _class.getTransform = _TransformUtils.getTransform, _temp);
+exports.default = ViewTransformer;
+
+
+ViewTransformer.propTypes = {
+  enableTransform: _react2.default.PropTypes.bool,
+
+  enableScale: _react2.default.PropTypes.bool,
+
+  enableTranslate: _react2.default.PropTypes.bool,
+
+  maxOverScrollDistance: _react2.default.PropTypes.number,
+
+  maxScale: _react2.default.PropTypes.number,
+  contentAspectRatio: _react2.default.PropTypes.number,
+
+  enableResistance: _react2.default.PropTypes.bool,
+
+  onViewTransformed: _react2.default.PropTypes.func,
+
+  onTransformGestureReleased: _react2.default.PropTypes.func,
+
+  onSingleTapConfirmed: _react2.default.PropTypes.func
+};
+ViewTransformer.defaultProps = {
+  maxOverScrollDistance: 20,
+  enableScale: true,
+  enableTranslate: true,
+  enableTransform: true,
+  maxScale: 1,
+  enableResistance: false
+};

@@ -24,6 +24,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@shoutem/ui": "^0.21.3",
     "axios": "^0.16.2",
     "expo": "^20.0.0",
     "localforage": "^1.5.0",
@@ -35,10 +36,13 @@
     "react-native-dropdown": "0.0.6",
     "react-native-elements": "^0.16.0",
     "react-native-flip-card": "^3.5.1",
+    "react-native-hero": "^0.1.1",
     "react-native-loader": "^1.1.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-material-cards": "^1.0.5",
+    "react-native-material-dialog": "^0.5.4",
     "react-native-router-flux": "^4.0.0-beta.21",
+    "react-native-search-box": "0.0.13",
     "react-native-shimmer": "^0.3.2",
     "react-native-simple-login": "^1.1.0",
     "react-native-spinkit": "^1.1.1",

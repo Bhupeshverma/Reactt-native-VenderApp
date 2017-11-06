@@ -1,0 +1,181 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.InlineGallery = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/components/InlineGallery.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _theme = require('@shoutem/theme');
+
+var _View = require('./View');
+
+var _TouchableOpacity = require('./TouchableOpacity');
+
+var _Image = require('./Image');
+
+var _HorizontalPager = require('./HorizontalPager/HorizontalPager');
+
+var _LoadingIndicator = require('./LoadingIndicator');
+
+var InlineGallery = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(InlineGallery, _Component);
+
+  function InlineGallery(props) {
+    babelHelpers.classCallCheck(this, InlineGallery);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (InlineGallery.__proto__ || Object.getPrototypeOf(InlineGallery)).call(this, props));
+
+    _this.renderPage = _this.renderPage.bind(_this);
+    _this.onPress = _this.onPress.bind(_this);
+    _this.onIndexSelected = _this.onIndexSelected.bind(_this);
+    _this.state = {
+      selectedIndex: 0,
+      showNextPage: _this.props.showNextPage || false
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(InlineGallery, [{
+    key: 'onPress',
+    value: function onPress() {
+      var onPress = this.props.onPress;
+
+
+      return onPress && onPress();
+    }
+  }, {
+    key: 'onIndexSelected',
+    value: function onIndexSelected(newIndex) {
+      var selectedIndex = this.state.selectedIndex;
+      var onIndexSelected = this.props.onIndexSelected;
+
+
+      if (selectedIndex !== newIndex) {
+        this.setState({ selectedIndex: newIndex });
+        if (_lodash2.default.isFunction(onIndexSelected)) {
+          onIndexSelected(newIndex);
+        }
+      }
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(pageData, pageIndex) {
+      var _props = this.props,
+          style = _props.style,
+          onPress = _props.onPress;
+
+      var source = _lodash2.default.get(pageData, 'source.uri');
+
+      if (!source) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        _TouchableOpacity.TouchableOpacity,
+        {
+          onPress: this.onPress,
+          key: pageIndex,
+          styleName: 'flexible',
+          style: style.imageContainer,
+          disabled: !onPress,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 85
+          }
+        },
+        _react2.default.createElement(_Image.Image, {
+          source: { uri: source },
+          style: style.image,
+          styleName: 'flexible',
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 92
+          }
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          data = _props2.data,
+          selectedIndex = _props2.selectedIndex,
+          renderOverlay = _props2.renderOverlay,
+          renderPlaceholder = _props2.renderPlaceholder,
+          style = _props2.style;
+      var showNextPage = this.state.showNextPage;
+
+
+      return _react2.default.createElement(
+        _View.View,
+        {
+          renderToHardwareTextureAndroid: true,
+          style: style.container,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 106
+          }
+        },
+        _react2.default.createElement(_HorizontalPager.HorizontalPager, {
+          data: data,
+          onIndexSelected: this.onIndexSelected,
+          selectedIndex: selectedIndex,
+          renderPage: this.renderPage,
+          pageMargin: style.pager.pageMargin,
+          showNextPage: showNextPage,
+          renderOverlay: renderOverlay,
+          renderPlaceholder: renderPlaceholder,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 110
+          }
+        })
+      );
+    }
+  }]);
+  return InlineGallery;
+}(_react.Component), _class.propTypes = {
+  data: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+    source: _react2.default.PropTypes.shape({
+      uri: _react2.default.PropTypes.string
+    })
+  })).isRequired,
+
+  onPress: _react.PropTypes.func,
+
+  onIndexSelected: _react.PropTypes.func,
+
+  selectedIndex: _react.PropTypes.number,
+
+  style: _react.PropTypes.object,
+
+  showNextPage: _react.PropTypes.bool,
+
+  renderOverlay: _react.PropTypes.func,
+
+  renderPlaceholder: _react.PropTypes.func
+}, _class.defaultProps = {
+  renderPlaceholder: function renderPlaceholder() {
+    return _react2.default.createElement(_LoadingIndicator.LoadingIndicator, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      }
+    });
+  }
+}, _temp);
+
+
+var StyledInlineGallery = (0, _theme.connectStyle)('shoutem.ui.InlineGallery')(InlineGallery);
+
+exports.InlineGallery = StyledInlineGallery;

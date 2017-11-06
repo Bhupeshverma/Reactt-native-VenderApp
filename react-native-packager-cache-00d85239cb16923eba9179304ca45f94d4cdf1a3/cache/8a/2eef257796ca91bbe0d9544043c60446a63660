@@ -1,0 +1,27 @@
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+exports.default = function () {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
+        var action = arguments[1];
+
+
+        switch (action.type) {
+                case _types.SYNCING_PRODUCTS:
+                        return babelHelpers.extends({}, state, { spinner: true, error: false });
+                case _types.SYNCED_PRODUCTS:
+                        return babelHelpers.extends({}, state, { spinner: false, response: action.payload.data, error: false });
+                case _types.ERROR_SYNCING_PRODUCTS:
+                        return babelHelpers.extends({}, state, { spinner: false, error: true });
+
+                default:
+                        return state;
+        }
+};
+
+var _types = require('../actions/types');
+
+var _constants = require('redux-persist/constants');
+
+var INITIAL_STATE = { spinner: false, response: null, error: false };

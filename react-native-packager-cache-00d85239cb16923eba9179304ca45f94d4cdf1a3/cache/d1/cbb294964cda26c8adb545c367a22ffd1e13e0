@@ -1,0 +1,19 @@
+var _MaterialDialog = require('./src/MaterialDialog');
+
+var _MaterialDialog2 = babelHelpers.interopRequireDefault(_MaterialDialog);
+
+var _MultiPickerMaterialDialog = require('./src/MultiPickerMaterialDialog');
+
+var _MultiPickerMaterialDialog2 = babelHelpers.interopRequireDefault(_MultiPickerMaterialDialog);
+
+var _SinglePickerMaterialDialog = require('./src/SinglePickerMaterialDialog');
+
+var _SinglePickerMaterialDialog2 = babelHelpers.interopRequireDefault(_SinglePickerMaterialDialog);
+
+var Dialogs = {
+  MaterialDialog: _MaterialDialog2.default,
+  MultiPickerMaterialDialog: _MultiPickerMaterialDialog2.default,
+  SinglePickerMaterialDialog: _SinglePickerMaterialDialog2.default
+};
+
+module.exports = Dialogs;

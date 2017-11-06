@@ -1,0 +1,117 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.parseHtml = parseHtml;
+
+var _htmlparser = require('htmlparser2');
+
+var _htmlparser2 = babelHelpers.interopRequireDefault(_htmlparser);
+
+function decodeHtmlEntities(str) {
+  return str.replace(/&#([0-9]{1,3});/gi, function (match, numStr) {
+    var num = parseInt(numStr, 10);
+    return String.fromCharCode(num);
+  });
+}
+
+function createElementNode(tag) {
+  var attributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var childElements = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  var parent = arguments[3];
+
+  return {
+    tag: tag,
+    attributes: attributes,
+    childElements: childElements,
+    parent: parent
+  };
+}
+
+var htmlNewLineRegex = new RegExp('(>\\n)|(\\n<)|(\\n)', 'g');
+var newLineAfterClosingTagRegex = new RegExp('>\\n');
+var newLineBeforeOpeningTagRegex = new RegExp('\\n<');
+
+function stripNewLines(html) {
+  return html.replace(htmlNewLineRegex, function (match) {
+    if (newLineAfterClosingTagRegex.test(match)) {
+      return '>';
+    } else if (newLineBeforeOpeningTagRegex.test(match)) {
+      return '<';
+    }
+    return ' ';
+  }).trim();
+}
+
+var HtmlTree = function () {
+  function HtmlTree() {
+    var rootTag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'div';
+    babelHelpers.classCallCheck(this, HtmlTree);
+
+    this.rootNode = createElementNode(rootTag);
+    this.activeNode = this.rootNode;
+    this.openTag = this.openTag.bind(this);
+    this.appendText = this.appendText.bind(this);
+    this.closeTag = this.closeTag.bind(this);
+  }
+
+  babelHelpers.createClass(HtmlTree, [{
+    key: 'openTag',
+    value: function openTag(tag, attributes, childElements) {
+      var element = this.addChild(tag, attributes, childElements);
+      this.activeNode = element;
+    }
+  }, {
+    key: 'addChild',
+    value: function addChild(tag, attributes, childElements) {
+      var element = createElementNode(tag, attributes, childElements, this.activeNode);
+
+      this.activeNode.childElements.push(element);
+
+      return element;
+    }
+  }, {
+    key: 'appendText',
+    value: function appendText(text) {
+      var trimmedText = text.trim();
+      if (trimmedText.length === 0) {
+        return;
+      }
+      this.addChild('text', undefined, [decodeHtmlEntities(text)]);
+    }
+  }, {
+    key: 'getParent',
+    value: function getParent() {
+      return this.activeNode.parent;
+    }
+  }, {
+    key: 'closeTag',
+    value: function closeTag() {
+      this.activeNode = this.getParent();
+    }
+  }, {
+    key: 'getRootNode',
+    value: function getRootNode() {
+      return this.rootNode;
+    }
+  }]);
+  return HtmlTree;
+}();
+
+function parseHtml(html) {
+  var rootTag = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
+
+  var htmlTree = new HtmlTree(rootTag);
+
+  var parser = new _htmlparser2.default.Parser({
+    onopentag: htmlTree.openTag,
+    ontext: htmlTree.appendText,
+    onclosetag: htmlTree.closeTag
+  });
+
+  var strippedHtml = stripNewLines(html);
+
+  parser.write(strippedHtml);
+  parser.end();
+
+  return htmlTree;
+}

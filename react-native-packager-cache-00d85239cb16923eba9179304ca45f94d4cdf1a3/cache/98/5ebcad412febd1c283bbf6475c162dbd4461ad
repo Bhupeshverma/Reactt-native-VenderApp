@@ -1,0 +1,871 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/examples/components/NavigationBars.js';
+exports.NavigationBars = NavigationBars;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _View = require('../../components/View');
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+var window = _reactNative.Dimensions.get('window');
+
+function NavBarStageContainer(props) {
+  return _react2.default.createElement(_View.View, babelHelpers.extends({}, props, {
+    style: babelHelpers.extends({
+      width: window.width,
+      height: 70
+    }, props.style),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    }
+  }));
+}
+
+var navBarDropDownOptions = [{ name: 'All', value: 1 }, { name: 'Sport', value: 1 }, { name: 'World', value: 1 }, { name: 'Lifestyle', value: 1 }, { name: 'Food', value: 1 }, { name: 'Music', value: 1 }, { name: 'Movies', value: 1 }, { name: 'Tech', value: 1 }, { name: 'Fun', value: 1 }, { name: 'Fashion', value: 1 }];
+
+var navBarDropDownSelectedOption = navBarDropDownOptions[0];
+
+function NavigationBars() {
+  return _react2.default.createElement(
+    _View.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar / Solid', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 50
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 51
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 53
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 52
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar / Clear (Solid color)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 57
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        { style: { backgroundColor: '#1a70d5' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 58
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'clear',
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 61
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 59
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar / Clear (Image)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        }
+      },
+      _react2.default.createElement(
+        _index.Image,
+        {
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' },
+          style: {
+            width: window.width,
+            height: 70
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 66
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'clear',
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 75
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 73
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar/ Fade (Gradient overlay + Solid color)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 79
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        { style: { backgroundColor: '#1a70d5' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 80
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'fade clear',
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 83
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 81
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar/ Fade (Gradient overlay + Image)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 87
+        }
+      },
+      _react2.default.createElement(
+        _index.Image,
+        {
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' },
+          style: {
+            width: window.width,
+            height: 70
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 88
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'fade clear',
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 97
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 95
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _index.Heading,
+      { styleName: 'sm-gutter', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 101
+        }
+      },
+      'Navigation bar variations'
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar + Drawer', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 102
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 103
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 106
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'close', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 107
+              }
+            })
+          ),
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 110
+              }
+            },
+            'TITLE'
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 104
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar + Picker', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 114
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 115
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 118
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'sidebar', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 119
+              }
+            })
+          ),
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 122
+              }
+            },
+            'TITLE'
+          ),
+          rightComponent: _react2.default.createElement(_index.DropDownMenu, {
+            options: navBarDropDownOptions,
+            selectedOption: navBarDropDownSelectedOption,
+            titleProperty: 'name',
+            valueProperty: 'value',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 123
+            }
+          }),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 116
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar + Action', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 132
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 133
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 136
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'sidebar', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 137
+              }
+            })
+          ),
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 140
+              }
+            },
+            'TITLE'
+          ),
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            { styleName: 'clear', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 142
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 143
+                }
+              },
+              'List'
+            )
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 134
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar + Icon', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 149
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 150
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 153
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'sidebar', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 154
+              }
+            })
+          ),
+          centerComponent: _react2.default.createElement(
+            _index.Title,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 157
+              }
+            },
+            'TITLE'
+          ),
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 159
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'cart', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 160
+              }
+            })
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 151
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Sublevel) + Icon', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 166
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 167
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 170
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'back', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 171
+              }
+            })
+          ),
+          title: 'TITLE',
+          share: {
+            link: 'http://shoutem.github.io',
+            text: 'This is the best',
+            title: 'Super cool UI Toolkit'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 168
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Sublevel) + Action (no border)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 183
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 184
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'no-border',
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 188
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'back', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 189
+              }
+            })
+          ),
+          title: 'TITLE',
+          share: {
+            link: 'http://shoutem.github.io',
+            text: 'This is the best',
+            title: 'Super cool UI Toolkit'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 185
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Sublevel) + Action', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 201
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 202
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 205
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'back', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 206
+              }
+            })
+          ),
+          title: 'TITLE',
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            { styleName: 'clear', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 211
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 212
+                }
+              },
+              'Report'
+            )
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 203
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Modal) + Icon', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 218
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 219
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 222
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'close', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 223
+              }
+            })
+          ),
+          title: 'TITLE',
+          share: {
+            link: 'http://shoutem.github.io',
+            text: 'This is the best',
+            title: 'Super cool UI Toolkit'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 220
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Modal) + Action', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 235
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 236
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 239
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'close', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 240
+              }
+            })
+          ),
+          title: 'TITLE',
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            { styleName: 'clear', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 245
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 246
+                }
+              },
+              'Post'
+            )
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 237
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Modal) + Action 2', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 252
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 253
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 256
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 257
+                }
+              },
+              'Cancel'
+            )
+          ),
+          title: 'TITLE',
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 262
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 263
+                }
+              },
+              'Done'
+            )
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 254
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar (Modal) + Action 2 (disabled)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 269
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 270
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 273
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 274
+                }
+              },
+              'Cancel'
+            )
+          ),
+          title: 'TITLE',
+          rightComponent: _react2.default.createElement(
+            _index.Button,
+            { styleName: 'muted', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 279
+              }
+            },
+            _react2.default.createElement(
+              _index.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 280
+                }
+              },
+              'Done'
+            )
+          ),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 271
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Navbar / On primary color / back + share', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 286
+        }
+      },
+      _react2.default.createElement(
+        NavBarStageContainer,
+        { style: { backgroundColor: '#1a70d5' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 287
+          }
+        },
+        _react2.default.createElement(_index.NavigationBar, {
+          styleName: 'clear',
+          leftComponent: _react2.default.createElement(
+            _index.Button,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 291
+              }
+            },
+            _react2.default.createElement(_index.Icon, { name: 'back', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 292
+              }
+            })
+          ),
+          title: 'TITLE',
+          share: {
+            link: 'http://shoutem.github.io',
+            text: 'This is the best',
+            title: 'Super cool UI Toolkit'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 288
+          }
+        })
+      )
+    )
+  );
+}

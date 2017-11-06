@@ -4,7 +4,7 @@ import {
     ERROR_SYNCING_PRODUCTS
 } from '../actions/types';
 import {REHYDRATE} from 'redux-persist/constants'
-const INITIAL_STATE = { spinner : false , products : null , error : false }
+const INITIAL_STATE = { spinner : false , response : null , error : false }
 
 export default function (state=INITIAL_STATE , action) {
 
@@ -12,9 +12,9 @@ export default function (state=INITIAL_STATE , action) {
         case SYNCING_PRODUCTS:
                 return { ...state , spinner : true , error: false};
         case SYNCED_PRODUCTS:
-                return { ...state , spinner : false , products : action.payload.data, error: false}
+                return { ...state , spinner : false , response : action.payload.data, error: false}
         case ERROR_SYNCING_PRODUCTS:
-                return { ...state , spinner : false , error : true, products: null }
+                return { ...state , spinner : false , error : true}
 
         default:
             return state;

@@ -1,0 +1,91 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/react-native-material-cards/CardImage.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var CardImage = function (_Component) {
+  babelHelpers.inherits(CardImage, _Component);
+
+  function CardImage(props) {
+    babelHelpers.classCallCheck(this, CardImage);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (CardImage.__proto__ || Object.getPrototypeOf(CardImage)).call(this, props));
+
+    _this.state = {
+      calc_height: 0
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(CardImage, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var newStyle = this.props.style || {};
+      return _react2.default.createElement(
+        _reactNative.View,
+        { style: [styles.cardImage, newStyle], onLayout: function onLayout(e) {
+            _this2.setState({ calc_height: e.nativeEvent.layout.width * 9 / 16 });
+          }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 19
+          }
+        },
+        _react2.default.createElement(
+          _reactNative.Image,
+          { source: this.props.source, resizeMode: 'stretch', resizeMethod: 'resize', style: [styles.imageContainer, { height: this.state.calc_height }], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 20
+            }
+          },
+          this.props.title !== undefined && _react2.default.createElement(
+            _reactNative.Text,
+            { style: styles.imageTitleText, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 22
+              }
+            },
+            this.props.title
+          )
+        )
+      );
+    }
+  }]);
+  return CardImage;
+}(_react.Component);
+
+exports.default = CardImage;
+
+
+var styles = _reactNative.StyleSheet.create({
+  cardImage: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'grey',
+    alignSelf: 'stretch',
+    marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingRight: 16,
+    paddingLeft: 16,
+    paddingBottom: 16,
+    paddingTop: 16,
+    justifyContent: 'flex-end'
+  },
+  imageTitleText: {
+    fontSize: 24,
+    color: 'rgba(255 ,255 ,255 , 0.87)'
+  }
+});

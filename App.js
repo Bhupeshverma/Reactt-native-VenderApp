@@ -9,19 +9,10 @@ import LoginScreen from './src/screens/Auth/login';
 export default class App extends Component {
 
   render() {
-
     return (
-
       <Provider store={store}>
-        {/* <NativeRouter>
-          <View>
-            <Route exact path='/' component={LoginScreen}/>
-            <Route  path='/home' component={Home}/>
-
-          </View>
-        </NativeRouter> */}
         <Router />
           </Provider>
-          );
-          }
-          }
+      );
+    }
+  }

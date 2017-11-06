@@ -1,0 +1,1 @@
+["2beaca42ce457efac8105aaa9961b43c0af2c20a","32c465f517c2bab876bea36243b741b8c2521011",["./Touchable"],[91],{"version":3,"sources":["/home/ziddi/Desktop/venders/node_modules/react-native-material-cards/src/index.js"],"names":["default"],"mappings":";;;;;;;;;0DAASA,O","sourcesContent":["export { default as Touchable } from './Touchable';\n"]}]

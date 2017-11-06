@@ -1,0 +1,44 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.HeroHeader = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('./View');
+
+var _DriverShape = require('../drivers/DriverShape');
+
+var HeroHeader = exports.HeroHeader = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(HeroHeader, _Component);
+
+  function HeroHeader() {
+    babelHelpers.classCallCheck(this, HeroHeader);
+    return babelHelpers.possibleConstructorReturn(this, (HeroHeader.__proto__ || Object.getPrototypeOf(HeroHeader)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(HeroHeader, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          driver = _props.driver,
+          children = _props.children;
+
+
+      return _react2.default.createElement(
+        _View.View,
+        { animationName: 'hero', driver: driver },
+        children
+      );
+    }
+  }]);
+  return HeroHeader;
+}(_react.Component), _class.propTypes = {
+  driver: _DriverShape.DriverShape.isRequired,
+
+  children: _react2.default.PropTypes.node
+}, _temp);

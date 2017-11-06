@@ -1,0 +1,47 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Display = undefined;
+exports.registerElement = registerElement;
+exports.getElement = getElement;
+exports.getElementProperty = getElementProperty;
+exports.getElementDisplay = getElementDisplay;
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var ElementRegistry = {};
+
+var Display = exports.Display = {
+  INLINE: 1,
+  BLOCK: 2
+};
+
+function registerElement(elementTag, elementClass) {
+  ElementRegistry[elementTag] = elementClass;
+}
+
+function getElement(element) {
+  var tag = element.tag;
+
+  return ElementRegistry[tag];
+}
+
+function getElementProperty(element, property) {
+  return _lodash2.default.get(getElement(element), property);
+}
+
+function getElementDisplay(element) {
+  var elementClass = getElement(element);
+  if (!elementClass) {
+    return;
+  }
+
+  var display = elementClass.display;
+  if (!display) {
+    console.warn('Element ' + element.tag + ' doesn\'t have defined "display" attribute.');
+  }
+
+  return _lodash2.default.isFunction(display) ? display(element) : display;
+}

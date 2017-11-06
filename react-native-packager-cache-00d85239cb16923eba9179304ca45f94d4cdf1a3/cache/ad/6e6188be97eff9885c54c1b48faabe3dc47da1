@@ -1,0 +1,125 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Images = Images;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../components/View');
+
+var _Stage = require('./Stage');
+
+var _Image = require('../../components/Image');
+
+function Images() {
+  return _react2.default.createElement(
+    _View.View,
+    { styleName: 'vertical collapsed' },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "List image thumbnail (65x65)\n(small)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'small',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "List video thumbnail (145x92)\n(medium)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'medium',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Card image thumbnail (180x85)\n(medium-wide)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'medium-wide',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Avatar thumbnail (25x25)\n(small-avatar)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'small-avatar',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Avatar image (145x145)\n(medium-avatar)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'medium-avatar',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "List medium image (145x145)\n(medium-square)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'medium-square',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Up next article image (375x130)\n(large-ultra-wide)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large-ultra-wide',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "List large thumbnail (375x200)\n(large-banner)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large-banner',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Featured image (365x345)\n(featured)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'featured',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Detail large photo (375x518)\n(large-portrait)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large-portrait',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Detail medium photo (375x280)\n(large)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Detail wide photo (375x238)\n(large-wide)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large-wide',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: "Detail square photo (375x375)\n(large-square)" },
+      _react2.default.createElement(_Image.Image, {
+        styleName: 'large-square',
+        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' }
+      })
+    )
+  );
+}

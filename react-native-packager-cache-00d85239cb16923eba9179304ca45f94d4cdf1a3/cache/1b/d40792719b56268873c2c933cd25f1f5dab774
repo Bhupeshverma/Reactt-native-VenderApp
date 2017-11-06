@@ -1,0 +1,11 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ViewTransformer = require('./transform/ViewTransformer');
+
+var _ViewTransformer2 = babelHelpers.interopRequireDefault(_ViewTransformer);
+
+exports.default = _ViewTransformer2.default;

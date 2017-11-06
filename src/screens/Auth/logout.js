@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Logout} from '../../actions';
 import { connect } from 'react-redux';
-import {Actions} from 'react-native-router-flux'
+import {Actions, ActionConst} from 'react-native-router-flux'
 import {View ,Alert, Text, ActivityIndicator} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -26,7 +26,7 @@ class LogoutComponent extends Component{
                     'Error Logging Out',
                     'could not log out !!'
                 ) :null}
-                {this.props.loggedOut? Actions.auth() :null }
+                {this.props.loggedOut? Actions.Main({type: ActionConst.RESET}) :null }
             </View>
         )
     }

@@ -1,0 +1,394 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/examples/components/Buttons.js';
+exports.Buttons = Buttons;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+function Buttons() {
+  return _react2.default.createElement(
+    _index.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Text only / Light', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 15
+          }
+        },
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 16
+            }
+          },
+          'CHECK IN HERE'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Text only / Dark', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        { styleName: 'secondary', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 21
+          }
+        },
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 22
+            }
+          },
+          'CHECK IN HERE'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Icon + Text / Light', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 26
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 27
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'add-event', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 29
+            }
+          },
+          'ADD TO CALENDAR'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Icon + Text / Dark', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 33
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        { styleName: 'secondary', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 34
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'add-event', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 35
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 36
+            }
+          },
+          'ADD TO CALENDAR'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Fixed size', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 40
+        }
+      },
+      _react2.default.createElement(
+        _index.View,
+        { styleName: 'horizontal flexible', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 41
+          }
+        },
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'confirmation', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 42
+            }
+          },
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 43
+              }
+            },
+            'REMOVE'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'confirmation secondary', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 46
+            }
+          },
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 47
+              }
+            },
+            'UPDATE'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Full width', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        { styleName: 'full-width', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 53
+          }
+        },
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 54
+            }
+          },
+          'SEE ALL COMMENTS'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Navbar', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 58
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        { styleName: 'textual', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 59
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'add-to-favorites-on', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 60
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Vertical / Icon + Text', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64
+        }
+      },
+      _react2.default.createElement(
+        _index.Button,
+        { styleName: 'stacked textual', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 65
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'tweet', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 66
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 67
+            }
+          },
+          'Text description'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Full width - Normal', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 71
+        }
+      },
+      _react2.default.createElement(
+        _index.View,
+        { styleName: 'horizontal flexible', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 72
+          }
+        },
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'full-width muted', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'add-to-favorites-on', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 74
+            }
+          }),
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 75
+              }
+            },
+            'LIKE'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'full-width muted', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 77
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'comment', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 78
+            }
+          }),
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 79
+              }
+            },
+            'COMMENT'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Button / Full width - Active (Feed)', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 84
+        }
+      },
+      _react2.default.createElement(
+        _index.View,
+        { styleName: 'horizontal flexible', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 85
+          }
+        },
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'full-width', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 86
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'add-to-favorites-on', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 87
+            }
+          }),
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 88
+              }
+            },
+            'LIKE'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'full-width', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 90
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'comment', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 91
+            }
+          }),
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 92
+              }
+            },
+            'COMMENT'
+          )
+        )
+      )
+    )
+  );
+}

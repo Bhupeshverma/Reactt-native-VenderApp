@@ -1,0 +1,49 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.distance = distance;
+exports.maxDistance = maxDistance;
+exports.pinchDistance = pinchDistance;
+function distance(touchTrackA, touchTrackB, ofCurrent) {
+  var xa = void 0,
+      ya = void 0,
+      xb = void 0,
+      yb = void 0;
+  if (ofCurrent) {
+    xa = touchTrackA.currentPageX;
+    ya = touchTrackA.currentPageY;
+    xb = touchTrackB.currentPageX;
+    yb = touchTrackB.currentPageY;
+  } else {
+    xa = touchTrackA.previousPageX;
+    ya = touchTrackA.previousPageY;
+    xb = touchTrackB.previousPageX;
+    yb = touchTrackB.previousPageY;
+  }
+  return Math.sqrt(Math.pow(xa - xb, 2) + Math.pow(ya - yb, 2));
+}
+
+function maxDistance(touchBank, ofCurrent) {
+  var max = 0;
+  for (var i = 0; i < touchBank.length - 1; i++) {
+    for (var j = i + 1; j < touchBank.length; j++) {
+      var d = distance(touchBank[i], touchBank[j], ofCurrent);
+      if (d > max) {
+        max = d;
+      }
+    }
+  }
+  return max;
+}
+
+function pinchDistance(touchHistory, touchesChangedAfter, ofCurrent) {
+  var touchBank = touchHistory.touchBank;
+  if (touchHistory.numberActiveTouches > 1) {
+    var filteredTouchBank = touchBank.filter(function (touchTrack) {
+      return touchTrack && touchTrack.currentTimeStamp >= touchesChangedAfter;
+    });
+    return maxDistance(filteredTouchBank, ofCurrent);
+  }
+}

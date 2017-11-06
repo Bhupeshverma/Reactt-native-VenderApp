@@ -1,0 +1,76 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _src = require('./src');
+
+var CardButton = function (_Component) {
+  babelHelpers.inherits(CardButton, _Component);
+
+  function CardButton() {
+    babelHelpers.classCallCheck(this, CardButton);
+    return babelHelpers.possibleConstructorReturn(this, (CardButton.__proto__ || Object.getPrototypeOf(CardButton)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(CardButton, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var newStyle = this.props.style || {};
+      var directionStyle = this.props.inColumn === true ? styles.CardButtonInColumn : styles.CardButtonInRow;
+      return _react2.default.createElement(
+        _src.Touchable,
+        { style: [directionStyle, newStyle], onPress: function onPress() {
+            _this2.props.onPress();
+          } },
+        _react2.default.createElement(
+          _reactNative.Text,
+          { style: this.props.color !== undefined ? [styles.buttonText, { color: this.props.color }] : styles.buttonText },
+          this.props.title.toUpperCase()
+        )
+      );
+    }
+  }]);
+  return CardButton;
+}(_react.Component);
+
+exports.default = CardButton;
+
+
+var styles = _reactNative.StyleSheet.create({
+  CardButtonInRow: {
+    height: 36,
+    marginLeft: 8,
+    marginTop: 8,
+    marginBottom: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 2
+  },
+  CardButtonInColumn: {
+    height: 36,
+    marginLeft: 8,
+    marginTop: 8,
+    marginBottom: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    borderRadius: 2
+  },
+  buttonText: {
+    fontWeight: '600',
+    fontSize: 14,
+    color: 'orange'
+  }
+});

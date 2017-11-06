@@ -1,0 +1,128 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/examples/components/Dividers.js';
+exports.Dividers = Dividers;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../components/View');
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+function Dividers() {
+  return _react2.default.createElement(
+    _View.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Divider', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13
+        }
+      },
+      _react2.default.createElement(_index.Divider, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14
+        }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Line divider', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17
+        }
+      },
+      _react2.default.createElement(_index.Divider, { styleName: 'line', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Section divider', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21
+        }
+      },
+      _react2.default.createElement(_index.Divider, { styleName: 'section-header', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 22
+        }
+      })
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Section divider + label', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25
+        }
+      },
+      _react2.default.createElement(
+        _index.Divider,
+        { styleName: 'section-header', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          }
+        },
+        _react2.default.createElement(
+          _index.Caption,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 27
+            }
+          },
+          'INFORMATION'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Section divider + label + caption', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31
+        }
+      },
+      _react2.default.createElement(
+        _index.Divider,
+        { styleName: 'section-header', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 32
+          }
+        },
+        _react2.default.createElement(
+          _index.Caption,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 33
+            }
+          },
+          'PRODUCT NAME'
+        ),
+        _react2.default.createElement(
+          _index.Caption,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 34
+            }
+          },
+          'PRICE'
+        )
+      )
+    )
+  );
+}

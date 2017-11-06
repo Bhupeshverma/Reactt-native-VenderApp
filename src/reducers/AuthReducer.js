@@ -15,10 +15,10 @@ export default function (state = INITIAL_STATE , action) {
       return {...state , spinner : false , unauthorized : true}
     case RECIEVED_ERROR:
       return {...state , spinner : false , error : true, user: null}
-      case LOGGED_OUT:
+    case LOGGED_OUT:
           return {...state , sessionID : null , user : null}
-    //  case REHYDRATE:
-    //      return action.payload.auth || []
+    case REHYDRATE:
+          return action.payload.auth || []
     default:
       return state;
   }

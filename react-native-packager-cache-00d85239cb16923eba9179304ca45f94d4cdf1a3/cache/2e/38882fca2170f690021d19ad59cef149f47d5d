@@ -1,0 +1,64 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ScrollDriver = undefined;
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _DriverBase2 = require('./DriverBase');
+
+var ScrollDriver = exports.ScrollDriver = function (_DriverBase) {
+  babelHelpers.inherits(ScrollDriver, _DriverBase);
+
+  function ScrollDriver() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { useNativeDriver: false, nativeScrollEventThrottle: 20 };
+    babelHelpers.classCallCheck(this, ScrollDriver);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (ScrollDriver.__proto__ || Object.getPrototypeOf(ScrollDriver)).call(this));
+
+    if (options.useNativeDriver) {
+      _this.nativeValue = new _reactNative.Animated.Value(0);
+
+      _this.nativeValue.addListener(_lodash2.default.debounce(function (_ref) {
+        var value = _ref.value;
+
+        _this.value.setValue(value);
+      }), options.nativeScrollEventThrottle);
+    }
+
+    _this.primaryValue = _this.nativeValue || _this.value;
+
+    _this.onScrollViewLayout = _this.onScrollViewLayout.bind(_this);
+    _this.scrollViewProps = {
+      onScroll: _reactNative.Animated.event([{ nativeEvent: { contentOffset: { y: _this.primaryValue } } }], { useNativeDriver: options.useNativeDriver }),
+      scrollEventThrottle: 1,
+      onLayout: _this.onScrollViewLayout
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(ScrollDriver, [{
+    key: 'onScrollViewLayout',
+    value: function onScrollViewLayout(event) {
+      this.layout = event.nativeEvent.layout;
+    }
+  }, {
+    key: 'interpolate',
+    value: function interpolate(config) {
+      var value = this.value;
+      if (config.useNativeDriver && this.nativeValue) {
+        value = this.nativeValue;
+      }
+
+      var interpolationConfig = babelHelpers.extends({}, config);
+      delete interpolationConfig.useNativeDriver;
+
+      return value.interpolate(interpolationConfig);
+    }
+  }]);
+  return ScrollDriver;
+}(_DriverBase2.DriverBase);

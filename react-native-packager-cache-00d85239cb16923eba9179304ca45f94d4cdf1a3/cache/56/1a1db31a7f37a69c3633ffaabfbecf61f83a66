@@ -1,0 +1,111 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _Image = require('../../components/Image');
+
+var _Lightbox = require('../../components/Lightbox');
+
+var HtmlImage = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(HtmlImage, _Component);
+
+  function HtmlImage(props) {
+    babelHelpers.classCallCheck(this, HtmlImage);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (HtmlImage.__proto__ || Object.getPrototypeOf(HtmlImage)).call(this, props));
+
+    _this.state = {
+      width: null,
+      height: null
+    };
+
+    _this.imageSizeLoaded = _this.imageSizeLoaded.bind(_this);
+    _reactNative.Image.getSize(props.source.uri, _this.imageSizeLoaded, _this.imageSizeLoadFailed);
+    return _this;
+  }
+
+  babelHelpers.createClass(HtmlImage, [{
+    key: 'imageSizeLoaded',
+    value: function imageSizeLoaded(width, height) {
+      this.setState({ width: width, height: height });
+    }
+  }, {
+    key: 'imageSizeLoadFailed',
+    value: function imageSizeLoadFailed() {
+      console.log('Could not load image size for image: ', this.props.source.uri);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          style = _props.style,
+          allowUpscale = _props.allowUpscale;
+      var _state = this.state,
+          width = _state.width,
+          height = _state.height;
+
+
+      if (!style) {
+        console.warn('Invalid Html image style. Html image requires style.width.');
+        return null;
+      }
+
+      if (!height || !width) {
+        return null;
+      }
+
+      var imageWidth = allowUpscale && style.width ? style.width : _lodash2.default.min([width, style.width]);
+
+      var imageHeight = style.height || imageWidth / width * height;
+      var _props2 = this.props,
+          source = _props2.source,
+          lightbox = _props2.lightbox;
+
+
+      if (_lodash2.default.isEmpty(children) && lightbox) {
+        return _react2.default.createElement(
+          _Lightbox.Lightbox,
+          {
+            activeProps: { styleName: 'preview wrapper' },
+            styleName: 'wrapper'
+          },
+          _react2.default.createElement(_Image.Image, babelHelpers.extends({}, this.props, {
+            source: babelHelpers.extends({ width: imageWidth, height: imageHeight }, source)
+          }))
+        );
+      }
+
+      return _react2.default.createElement(
+        _Image.Image,
+        babelHelpers.extends({}, this.props, {
+          source: babelHelpers.extends({ width: imageWidth, height: imageHeight }, source)
+        }),
+        children
+      );
+    }
+  }]);
+  return HtmlImage;
+}(_react.Component), _class.propTypes = babelHelpers.extends({}, _reactNative.Image.propTypes, {
+  lightbox: _react2.default.PropTypes.bool,
+  allowUpscale: _react2.default.PropTypes.bool
+}), _class.defaultProps = {
+  lightbox: true,
+  allowUpscale: false
+}, _temp);
+exports.default = HtmlImage;

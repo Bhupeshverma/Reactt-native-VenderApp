@@ -1,0 +1,61 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/html/elements/list/Ol.js';
+exports.Ol = Ol;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../../components/View');
+
+var _Text = require('../../../components/Text');
+
+var _renderItems = require('./helpers/renderItems');
+
+var _renderItems2 = babelHelpers.interopRequireDefault(_renderItems);
+
+var _pickLiChildElements = require('./helpers/pickLiChildElements');
+
+var _pickLiChildElements2 = babelHelpers.interopRequireDefault(_pickLiChildElements);
+
+var _Html = require('../../Html');
+
+var _Li = require('./Li');
+
+var _Li2 = babelHelpers.interopRequireDefault(_Li);
+
+function createNumberElement(element, index) {
+  return {
+    tag: 'number',
+    attributes: {
+      index: index
+    }
+  };
+}
+
+function Ol(_ref) {
+  var style = _ref.style,
+      childElements = _ref.childElements,
+      type = _ref.type,
+      renderElement = _ref.renderElement;
+
+  var liItems = (0, _pickLiChildElements2.default)(childElements);
+  return _react2.default.createElement(
+    _View.View,
+    { style: style.container, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 22
+      }
+    },
+    (0, _renderItems2.default)(liItems, renderElement, createNumberElement)
+  );
+}
+
+Ol.propTypes = babelHelpers.extends({}, _Html.ElementPropTypes, {
+  style: _react2.default.PropTypes.object,
+  type: _react2.default.PropTypes.string
+});
+
+exports.default = (0, _Html.combineMappers)(_Html.mapElementProps)(Ol);

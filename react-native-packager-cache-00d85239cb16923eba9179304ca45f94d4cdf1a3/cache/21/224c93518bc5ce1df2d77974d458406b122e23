@@ -1,0 +1,220 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/react-native-material-cards/Card.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var Card = function (_Component) {
+  babelHelpers.inherits(Card, _Component);
+
+  function Card(props) {
+    babelHelpers.classCallCheck(this, Card);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+
+    _this.state = {
+      calc_offset_height: 0
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(Card, [{
+    key: 'renderChildren',
+    value: function renderChildren() {
+      var _this2 = this;
+
+      var returnChildren = this.props.children;
+
+      if (returnChildren.length > 0 && returnChildren[0].type.name === "CardTitle") {
+        returnChildren = _react2.default.Children.map(returnChildren, function (child) {
+          if (child.type.name === "CardTitle") {
+            return _react2.default.cloneElement(child, {
+              style: babelHelpers.extends({}, child.props.style, { paddingTop: 24 })
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+
+      if (returnChildren.length > 0 && returnChildren[0].type.name === "CardImage") {
+        returnChildren = _react2.default.Children.map(returnChildren, function (child) {
+          if (child.type.name === "CardImage") {
+            return _react2.default.cloneElement(child, {
+              style: babelHelpers.extends({}, child.props.style, { borderTopLeftRadius: 2, borderTopRightRadius: 2 })
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+
+      if (returnChildren.length >= 2 && returnChildren.map(function (child) {
+        return child.type.name;
+      }).join("").includes("CardImageCardTitle")) {
+        returnChildren = _react2.default.Children.map(returnChildren, function (child) {
+          if (child.type.name === "CardImage") {
+            return _react2.default.cloneElement(child, {
+              style: babelHelpers.extends({}, child.props.style, { marginBottom: 0 })
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+
+      if (returnChildren.length >= 2 && returnChildren.map(function (child) {
+        return child.type.name;
+      }).join("").includes("CardImageCardAction")) {
+        returnChildren = _react2.default.Children.map(returnChildren, function (child) {
+          if (child.type.name === "CardImage") {
+            return _react2.default.cloneElement(child, {
+              style: babelHelpers.extends({}, child.props.style, { marginBottom: 0 })
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+
+      if (this.props.avatarSource !== undefined && (returnChildren.map(function (child) {
+        return child.type.name;
+      }).includes("CardTitle") || returnChildren.map(function (child) {
+        return child.type.name;
+      }).includes("CardContent"))) {
+        var title_index = returnChildren.map(function (child) {
+          return child.type.name;
+        }).indexOf("CardTitle");
+        var content_index = returnChildren.map(function (child) {
+          return child.type.name;
+        }).indexOf("CardContent");
+        var to_index = void 0;
+        if (title_index === -1) {
+          to_index = content_index;
+        } else if (content_index === -1) {
+          to_index = title_index;
+        } else {
+          to_index = title_index > content_index ? content_index : title_index;
+        }
+        returnChildren = _react2.default.Children.map(returnChildren, function (child, index) {
+          if (index === to_index) {
+            return _react2.default.cloneElement(child, {
+              avatarSource: _this2.props.avatarSource
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+
+      if (this.props.mediaSource !== undefined || this.props.isDark) {
+        returnChildren = _react2.default.Children.map(returnChildren, function (child) {
+          if (child.type.name === "CardContent" || child.type.name === "CardTitle" || child.type.name === "CardAction") {
+            return _react2.default.cloneElement(child, {
+              isDark: true
+            });
+          } else {
+            return child;
+          }
+        });
+      }
+      return returnChildren;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var newStyle = this.props.style || {};
+      if (this.props.mediaSource !== undefined) {
+        return _react2.default.createElement(
+          _reactNative.Image,
+          { borderRadius: 2, source: this.props.mediaSource, resizeMode: 'stretch', style: [styles.mediaContainer, styles.mediaCard, newStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 117
+            }
+          },
+          _react2.default.createElement(
+            _reactNative.View,
+            { style: [styles.mediaInsetContainer, { marginTop: this.state.calc_offset_height }], onLayout: function onLayout(e) {
+                _this3.setState({ calc_offset_height: e.nativeEvent.layout.width - e.nativeEvent.layout.height });
+              }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 118
+              }
+            },
+            this.renderChildren()
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          _reactNative.View,
+          { style: [styles.container, styles.card, newStyle], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 126
+            }
+          },
+          this.renderChildren()
+        );
+      }
+    }
+  }]);
+  return Card;
+}(_react.Component);
+
+exports.default = Card;
+
+
+var styles = _reactNative.StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#F5FCFF',
+    justifyContent: 'flex-start',
+    margin: 5
+  },
+  mediaContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    margin: 5
+  },
+  mediaInsetContainer: {
+    backgroundColor: "#00000070",
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end',
+    borderBottomLeftRadius: 2,
+    borderBottomRightRadius: 2
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 2,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3
+    }
+  },
+  mediaCard: {
+    borderRadius: 2,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 1,
+      width: 0.3
+    }
+  }
+});

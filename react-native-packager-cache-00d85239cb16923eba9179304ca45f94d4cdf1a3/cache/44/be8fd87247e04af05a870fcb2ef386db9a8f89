@@ -1,0 +1,15 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Divider = undefined;
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var AnimatedDivider = (0, _animation.connectAnimation)(_reactNative.View);
+var Divider = (0, _theme.connectStyle)('shoutem.ui.Divider')(AnimatedDivider);
+
+exports.Divider = Divider;

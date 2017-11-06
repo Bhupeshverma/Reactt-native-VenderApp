@@ -1,0 +1,12 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createResponder = undefined;
+
+var _createResponder = require('./createResponder');
+
+var _createResponder2 = babelHelpers.interopRequireDefault(_createResponder);
+
+exports.createResponder = _createResponder2.default;

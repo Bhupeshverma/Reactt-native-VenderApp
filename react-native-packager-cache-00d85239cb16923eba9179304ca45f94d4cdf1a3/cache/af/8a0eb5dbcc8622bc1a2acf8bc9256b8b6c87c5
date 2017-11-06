@@ -1,0 +1,27 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = require('redux');
+
+var _reducers = require('../reducers');
+
+var _reducers2 = babelHelpers.interopRequireDefault(_reducers);
+
+var _reduxPromise = require('redux-promise');
+
+var _reduxPromise2 = babelHelpers.interopRequireDefault(_reduxPromise);
+
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = babelHelpers.interopRequireDefault(_reduxThunk);
+
+var _reactNative = require('react-native');
+
+var _reduxPersist = require('redux-persist');
+
+var _remoteReduxDevtools = require('remote-redux-devtools');
+
+var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _remoteReduxDevtools.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default), (0, _reduxPersist.autoRehydrate)()));
+(0, _reduxPersist.persistStore)(store, { storage: _reactNative.AsyncStorage, whitelist: ['savedDataReducer', 'productReducer', 'auth'] });
+exports.default = store;

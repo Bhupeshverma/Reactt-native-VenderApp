@@ -1,0 +1,59 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.measure = undefined;
+
+var _reactNative = require('react-native');
+
+var _reactNative2 = babelHelpers.interopRequireDefault(_reactNative);
+
+var findNodeHandle = _reactNative2.default.findNodeHandle;
+
+var measure = exports.measure = function measure(Component) {
+  var measuredComponent = function (_Component) {
+    babelHelpers.inherits(measuredComponent, _Component);
+
+    function measuredComponent(props, context) {
+      babelHelpers.classCallCheck(this, measuredComponent);
+
+      var _this = babelHelpers.possibleConstructorReturn(this, (measuredComponent.__proto__ || Object.getPrototypeOf(measuredComponent)).call(this, props, context));
+
+      _this.measure = _this.measure.bind(_this);
+      _this.handleMeasure = _this.handleMeasure.bind(_this);
+      _this.state = babelHelpers.extends({}, babelHelpers.get(measuredComponent.prototype.__proto__ || Object.getPrototypeOf(measuredComponent.prototype), 'state', _this), {
+        layout: {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+          pageX: 0,
+          pageY: 0
+        }
+      });
+      return _this;
+    }
+
+    babelHelpers.createClass(measuredComponent, [{
+      key: 'handleMeasure',
+      value: function handleMeasure(x, y, width, height, pageX, pageY) {
+        this.setState({ layout: { x: x, y: y, height: height, width: width, pageX: pageX, pageY: pageY } });
+      }
+    }, {
+      key: 'measure',
+      value: function measure() {
+        _reactNative.UIManager.measure(findNodeHandle(this), this.handleMeasure);
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        requestAnimationFrame(this.measure);
+        if (typeof babelHelpers.get(measuredComponent.prototype.__proto__ || Object.getPrototypeOf(measuredComponent.prototype), 'componentDidMount', this) === 'function') {
+          babelHelpers.get(measuredComponent.prototype.__proto__ || Object.getPrototypeOf(measuredComponent.prototype), 'componentDidMount', this).call(this);
+        }
+      }
+    }]);
+    return measuredComponent;
+  }(Component);
+
+  return measuredComponent;
+};

@@ -1,0 +1,87 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+
+var PhotoView = (_temp = _class = function (_Component) {
+    babelHelpers.inherits(PhotoView, _Component);
+
+    function PhotoView() {
+        babelHelpers.classCallCheck(this, PhotoView);
+        return babelHelpers.possibleConstructorReturn(this, (PhotoView.__proto__ || Object.getPrototypeOf(PhotoView)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(PhotoView, [{
+        key: 'render',
+        value: function render() {
+            var source = resolveAssetSource(this.props.source);
+            var loadingIndicatorSource = resolveAssetSource(this.props.loadingIndicatorSource);
+
+            if (source && source.uri === '') {
+                console.warn('source.uri should not be an empty string');
+            }
+
+            if (this.props.src) {
+                console.warn('The <PhotoView> component requires a `source` property rather than `src`.');
+            }
+
+            if (source && source.uri) {
+                var _props = this.props,
+                    onLoadStart = _props.onLoadStart,
+                    onLoad = _props.onLoad,
+                    onLoadEnd = _props.onLoadEnd;
+
+
+                var nativeProps = babelHelpers.extends({}, this.props, {
+                    shouldNotifyLoadEvents: !!(onLoadStart || onLoad || onLoadEnd),
+                    src: source.uri,
+                    loadingIndicatorSrc: loadingIndicatorSource ? loadingIndicatorSource.uri : null
+                });
+
+                return _react2.default.createElement(PhotoViewAndroid, nativeProps);
+            }
+            return null;
+        }
+    }]);
+    return PhotoView;
+}(_react.Component), _class.propTypes = babelHelpers.extends({
+    source: _react.PropTypes.oneOfType([_react.PropTypes.shape({
+        uri: _react.PropTypes.string
+    }), _react.PropTypes.number]),
+    loadingIndicatorSource: _react.PropTypes.oneOfType([_react.PropTypes.shape({
+        uri: _react.PropTypes.string
+    }), _react.PropTypes.number]),
+    fadeDuration: _react.PropTypes.number,
+    minimumZoomScale: _react.PropTypes.number,
+    maximumZoomScale: _react.PropTypes.number,
+    scale: _react.PropTypes.number,
+    androidZoomTransitionDuration: _react.PropTypes.number,
+    androidScaleType: _react.PropTypes.oneOf(["center", "centerCrop", "centerInside", "fitCenter", "fitStart", "fitEnd", "fitXY", "matrix"]),
+    onLoadStart: _react.PropTypes.func,
+    onLoad: _react.PropTypes.func,
+    onLoadEnd: _react.PropTypes.func,
+    onTap: _react.PropTypes.func,
+    onViewTap: _react.PropTypes.func,
+    onScale: _react.PropTypes.func
+}, _reactNative.View.propTypes), _temp);
+exports.default = PhotoView;
+
+
+var cfg = {
+    nativeOnly: {
+        src: true,
+        loadingIndicatorSrc: true,
+        shouldNotifyLoadEvents: true
+    }
+};
+var PhotoViewAndroid = (0, _reactNative.requireNativeComponent)('PhotoViewAndroid', PhotoView, cfg);

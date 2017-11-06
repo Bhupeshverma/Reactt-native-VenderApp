@@ -1,0 +1,12 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _HorizontalPager = require('./HorizontalPager');
+
+Object.defineProperty(exports, 'HorizontalPager', {
+  enumerable: true,
+  get: function get() {
+    return _HorizontalPager.HorizontalPager;
+  }
+});

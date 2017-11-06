@@ -1,0 +1,133 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Headers = Headers;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+function Headers() {
+  return _react2.default.createElement(
+    _index.View,
+    { styleName: 'vertical collapsed' },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Article' },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric' },
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'sm-gutter-bottom' },
+          'MIKE PATTON TEAMING WITH JOHN KAADA FOR COLLAB ALBUM BACTERIA CULT'
+        ),
+        _react2.default.createElement(
+          _index.Caption,
+          null,
+          'Sophia Jackson        21 hours ago'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Shop item' },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric' },
+        _react2.default.createElement(
+          _index.Overlay,
+          { styleName: 'image-overlay' },
+          _react2.default.createElement(
+            _index.Heading,
+            null,
+            '-20%'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'md-gutter-top' },
+          'COOL BLACK AND WHITE STYLISH WATCHES'
+        ),
+        _react2.default.createElement(
+          _index.Subtitle,
+          { styleName: 'line-through sm-gutter-top' },
+          '$280.00'
+        ),
+        _react2.default.createElement(
+          _index.Heading,
+          null,
+          '$250.00'
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'secondary md-gutter-top' },
+          _react2.default.createElement(_index.Icon, { name: 'cart' }),
+          _react2.default.createElement(
+            _index.Text,
+            null,
+            'ADD TO BASKET'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Deals item' },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric' },
+        _react2.default.createElement(
+          _index.Title,
+          null,
+          'MIKE PATTON TEAMING WITH JOHN KAADA'
+        ),
+        _react2.default.createElement(
+          _index.Subtitle,
+          { styleName: 'line-through sm-gutter-top' },
+          '150.00'
+        ),
+        _react2.default.createElement(
+          _index.Heading,
+          null,
+          '99.99'
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'secondary md-gutter-top' },
+          _react2.default.createElement(
+            _index.Text,
+            null,
+            'CLAIM COUPON'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Products item' },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric' },
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'md-gutter-bottom' },
+          'SMOKED SALMON, CLASSIC CONDIMENTS, BRIOCHE'
+        ),
+        _react2.default.createElement(
+          _index.Overlay,
+          { styleName: 'image-overlay' },
+          _react2.default.createElement(
+            _index.Subtitle,
+            { styleName: 'sm-gutter-horizontal' },
+            '$18.30'
+          )
+        )
+      )
+    )
+  );
+}

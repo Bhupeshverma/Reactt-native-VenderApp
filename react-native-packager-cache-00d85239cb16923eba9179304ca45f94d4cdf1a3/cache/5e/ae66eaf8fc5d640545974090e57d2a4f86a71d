@@ -1,0 +1,180 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DropDownMenus = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/examples/components/DropDownMenus.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../components/View');
+
+var _Stage = require('./Stage');
+
+var _DropDownMenu = require('../../components/DropDownMenu');
+
+var _index = require('../../index');
+
+var options = [{
+  name: 'Lifestyle',
+  id: '7'
+}, {
+  name: 'Lifestyle',
+  id: '7'
+}, {
+  name: 'Food',
+  id: '8'
+}, {
+  name: 'Food',
+  id: '8'
+}, {
+  name: 'Nature',
+  id: '9'
+}];
+
+var emptyOption = { id: '', name: 'Select' };
+var optionsWithEmptyOption = [emptyOption].concat(options);
+
+var DropDownMenus = exports.DropDownMenus = function (_Component) {
+  babelHelpers.inherits(DropDownMenus, _Component);
+
+  function DropDownMenus() {
+    babelHelpers.classCallCheck(this, DropDownMenus);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (DropDownMenus.__proto__ || Object.getPrototypeOf(DropDownMenus)).call(this));
+
+    _this.state = {
+      selectedOption: options[0],
+      selectedOptionForFormGroupDropdown: emptyOption
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(DropDownMenus, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _state = this.state,
+          selectedOption = _state.selectedOption,
+          selectedOptionForFormGroupDropdown = _state.selectedOptionForFormGroupDropdown;
+
+
+      return _react2.default.createElement(
+        _View.View,
+        { styleName: 'vertical collapsed', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 52
+          }
+        },
+        _react2.default.createElement(
+          _Stage.Stage,
+          { title: 'Dropdown', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 53
+            }
+          },
+          _react2.default.createElement(_DropDownMenu.DropDownMenu, {
+            options: options,
+            selectedOption: selectedOption,
+            onOptionSelected: function onOptionSelected(option) {
+              return _this2.setState({ selectedOption: option });
+            },
+            titleProperty: "name",
+            valueProperty: "id",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 54
+            }
+          })
+        ),
+        _react2.default.createElement(
+          _Stage.Stage,
+          { title: 'Dropdown (horizontal)', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 62
+            }
+          },
+          _react2.default.createElement(_DropDownMenu.DropDownMenu, {
+            styleName: 'horizontal',
+            options: options,
+            selectedOption: selectedOption,
+            onOptionSelected: function onOptionSelected(option) {
+              return _this2.setState({ selectedOption: option });
+            },
+            titleProperty: "name",
+            valueProperty: "id",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 63
+            }
+          })
+        ),
+        _react2.default.createElement(
+          _Stage.Stage,
+          { title: 'Dropdown (large)', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 72
+            }
+          },
+          _react2.default.createElement(_DropDownMenu.DropDownMenu, {
+            styleName: 'large',
+            options: options,
+            selectedOption: selectedOption,
+            onOptionSelected: function onOptionSelected(option) {
+              return _this2.setState({ selectedOption: option });
+            },
+            titleProperty: "name",
+            valueProperty: "id",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          })
+        ),
+        _react2.default.createElement(
+          _Stage.Stage,
+          { title: 'Dropdown (inside a form group)', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 82
+            }
+          },
+          _react2.default.createElement(
+            _index.FormGroup,
+            { styleName: 'stretch', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 83
+              }
+            },
+            _react2.default.createElement(
+              _index.Caption,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 84
+                }
+              },
+              'CATEGORY'
+            ),
+            _react2.default.createElement(_DropDownMenu.DropDownMenu, {
+              styleName: selectedOptionForFormGroupDropdown.id ? '' : 'empty',
+              options: optionsWithEmptyOption,
+              selectedOption: selectedOptionForFormGroupDropdown,
+              onOptionSelected: function onOptionSelected(option) {
+                return _this2.setState({ selectedOptionForFormGroupDropdown: option });
+              },
+              titleProperty: "name",
+              valueProperty: "id",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 85
+              }
+            })
+          )
+        )
+      );
+    }
+  }]);
+  return DropDownMenus;
+}(_react.Component);

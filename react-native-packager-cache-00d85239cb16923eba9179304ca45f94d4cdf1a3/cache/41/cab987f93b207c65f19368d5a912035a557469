@@ -1,0 +1,27 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _constants.REHYDRATE:
+      return action.payload.savedDataReducer || [];
+    case _types.CLEAR_SYNC_PRODUCTS:
+      return [];
+    case _types.SAVED_SYNC_PRODUCTS:
+      return _lodash2.default.uniqBy([action.payload].concat(babelHelpers.toConsumableArray(state)), 'product_id');
+    default:
+      return state;
+  }
+};
+
+var _types = require('../actions/types');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _constants = require('redux-persist/constants');

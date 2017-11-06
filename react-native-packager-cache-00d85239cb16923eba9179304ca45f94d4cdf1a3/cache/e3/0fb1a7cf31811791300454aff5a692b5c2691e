@@ -1,0 +1,55 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TouchableNativeFeedback = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var TouchableNativeFeedback = (_temp = _class = function (_React$Component) {
+  babelHelpers.inherits(TouchableNativeFeedback, _React$Component);
+
+  function TouchableNativeFeedback() {
+    babelHelpers.classCallCheck(this, TouchableNativeFeedback);
+    return babelHelpers.possibleConstructorReturn(this, (TouchableNativeFeedback.__proto__ || Object.getPrototypeOf(TouchableNativeFeedback)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(TouchableNativeFeedback, [{
+    key: 'render',
+    value: function render() {
+      var props = this.props;
+
+      var style = babelHelpers.extends({}, props.style);
+      delete style.background;
+      delete style.useForeground;
+
+      return _react2.default.createElement(
+        _reactNative.TouchableNativeFeedback,
+        babelHelpers.extends({}, props, {
+          style: style,
+          background: props.style.background,
+          useForeground: props.style.useForeground
+        }),
+        props.children
+      );
+    }
+  }]);
+  return TouchableNativeFeedback;
+}(_react2.default.Component), _class.propTypes = babelHelpers.extends({}, _reactNative.TouchableNativeFeedback.propTypes, {
+  style: _react.PropTypes.shape({
+    background: _react.PropTypes.object,
+    useForeground: _react.PropTypes.bool
+  })
+}), _temp);
+
+
+var StyledTouchableNativeFeedback = (0, _theme.connectStyle)('shoutem.ui.TouchableNativeFeedback')(TouchableNativeFeedback);
+
+exports.TouchableNativeFeedback = StyledTouchableNativeFeedback;

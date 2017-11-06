@@ -1,0 +1,12 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.View = undefined;
+
+var _reactNative = require('react-native');
+
+var _connectAnimation = require('../components/connectAnimation');
+
+var _animations = require('./animations');
+
+var View = exports.View = (0, _connectAnimation.connectAnimation)(_reactNative.View, _animations.animations);

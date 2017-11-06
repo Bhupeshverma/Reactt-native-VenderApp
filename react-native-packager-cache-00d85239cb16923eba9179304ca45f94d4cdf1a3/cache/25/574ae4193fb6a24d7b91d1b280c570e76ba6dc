@@ -1,0 +1,202 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = babelHelpers.interopRequireDefault(_propTypes);
+
+var _reactNative = require('react-native');
+
+var _reactNativeRouterFlux = require('react-native-router-flux');
+
+var _reactNativeHero = require('react-native-hero');
+
+var _reactNativeHero2 = babelHelpers.interopRequireDefault(_reactNativeHero);
+
+var _expo = require('expo');
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../../actions');
+
+var _reactNativeElements = require('react-native-elements');
+
+var _Dimensions$get = _reactNative.Dimensions.get('window'),
+    height = _Dimensions$get.height,
+    width = _Dimensions$get.width;
+
+var box_count = 2;
+var box_height = height / box_count;
+var styles = _reactNative.StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  box: {
+    height: box_height
+  },
+  box1: {
+    flex: 3
+  },
+  box2: {
+    flex: 9,
+    backgroundColor: '#000'
+  },
+  someButtonStyle: {
+    backgroundColor: "transparent"
+  },
+  button: {
+    width: width,
+    backgroundColor: "#000",
+    paddingVertical: 20,
+    flexDirection: 'row'
+  },
+  buttonText: {
+    color: "#FFF",
+    fontSize: 20,
+    fontWeight: '300'
+  }
+
+});
+
+var DrawerContent = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(DrawerContent, _Component);
+
+  function DrawerContent() {
+    babelHelpers.classCallCheck(this, DrawerContent);
+    return babelHelpers.possibleConstructorReturn(this, (DrawerContent.__proto__ || Object.getPrototypeOf(DrawerContent)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(DrawerContent, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactNative.View,
+        { style: styles.container },
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: [styles.box, styles.box1] },
+          _react2.default.createElement(_reactNativeHero2.default, {
+            source: require('../../assets/Images/sssbackground.jpg'),
+            renderOverlay: function renderOverlay() {
+              return _react2.default.createElement(
+                _reactNative.View,
+                null,
+                _react2.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontSize: 40, fontWeight: "bold", color: "#fff", margin: 20 } },
+                  'Welcome To'
+                ),
+                _react2.default.createElement(
+                  _reactNative.Text,
+                  { style: { fontSize: 40, fontWeight: "bold", color: "#fff", marginLeft: 20 } },
+                  'SSS VendorsApp'
+                )
+              );
+            },
+            minHeight: 200,
+            colorOverlay: '#1bb4d8',
+            colorOpacity: 0.7
+          })
+        ),
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: [styles.box, styles.box2] },
+          _react2.default.createElement(
+            _reactNative.View,
+            null,
+            _react2.default.createElement(
+              _reactNative.View,
+              { style: { alignItems: 'flex-start' } },
+              _react2.default.createElement(
+                _reactNative.TouchableOpacity,
+                { activeOpacity: .5, onPress: function onPress() {
+                    _reactNativeRouterFlux.Actions.Home();
+                  } },
+                _react2.default.createElement(
+                  _reactNative.View,
+                  { style: styles.button },
+                  _react2.default.createElement(_reactNativeElements.Icon, {
+                    name: 'sc-telegram',
+                    type: 'evilicon',
+                    color: '#fff',
+                    size: 34
+                  }),
+                  _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.buttonText },
+                    'Home'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactNative.View,
+              { style: { alignItems: 'flex-start' } },
+              _react2.default.createElement(
+                _reactNative.TouchableOpacity,
+                { activeOpacity: .5, onPress: function onPress() {
+                    _reactNativeRouterFlux.Actions.Details();
+                  } },
+                _react2.default.createElement(
+                  _reactNative.View,
+                  { style: styles.button },
+                  _react2.default.createElement(_reactNativeElements.Icon, {
+                    name: 'sync',
+                    color: '#fff',
+                    size: 34
+                  }),
+                  _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.buttonText },
+                    'Sync With CRM'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactNative.View,
+              { style: { alignItems: 'flex-start' } },
+              _react2.default.createElement(
+                _reactNative.TouchableOpacity,
+                { activeOpacity: .5, onPress: function onPress() {
+                    _reactNativeRouterFlux.Actions.Logout();
+                  } },
+                _react2.default.createElement(
+                  _reactNative.View,
+                  { style: styles.button },
+                  _react2.default.createElement(_reactNativeElements.Icon, {
+                    name: 'logout',
+                    type: 'material-community',
+                    color: '#fff',
+                    size: 34
+                  }),
+                  _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: styles.buttonText },
+                    'Logout'
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return DrawerContent;
+}(_react.Component), _class.propTypes = {
+  name: _propTypes2.default.string,
+  sceneStyle: _reactNative.ViewPropTypes.style,
+  title: _propTypes2.default.string
+}, _class.contextTypes = {
+  drawer: _react2.default.PropTypes.object
+}, _temp);
+exports.default = DrawerContent;

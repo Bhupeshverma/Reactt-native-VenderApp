@@ -4,7 +4,7 @@ import {
     ERROR_RECIEVING_PRODUCTS,
 CHANGE_PRODUCT_STATUS
     } from '../actions/types';
-
+import {REHYDRATE} from "redux-persist/constants";
 const INITIAL_STATE = { spinner : false , products : null , error : false }
 
 export default function (state=INITIAL_STATE , action) {
@@ -15,9 +15,10 @@ export default function (state=INITIAL_STATE , action) {
       return { ...state , spinner : false , products : action.payload.data, error: false}
     case ERROR_RECIEVING_PRODUCTS:
       return { ...state , spinner : false , error : true, products: null }
-      case CHANGE_PRODUCT_STATUS:
+    case CHANGE_PRODUCT_STATUS:
           return {...state, products:null, error:false}
-
+    case REHYDRATE:
+          return action.payload.productReducer || []
 
     default:
       return state;

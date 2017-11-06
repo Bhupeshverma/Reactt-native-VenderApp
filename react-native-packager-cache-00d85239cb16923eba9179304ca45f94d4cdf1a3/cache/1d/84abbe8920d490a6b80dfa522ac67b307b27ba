@@ -1,0 +1,47 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _store = require('./src/store');
+
+var _store2 = babelHelpers.interopRequireDefault(_store);
+
+var _reactRedux = require('react-redux');
+
+var _Routes = require('./Routes');
+
+var _Routes2 = babelHelpers.interopRequireDefault(_Routes);
+
+var _login = require('./src/screens/Auth/login');
+
+var _login2 = babelHelpers.interopRequireDefault(_login);
+
+var App = function (_Component) {
+  babelHelpers.inherits(App, _Component);
+
+  function App() {
+    babelHelpers.classCallCheck(this, App);
+    return babelHelpers.possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(App, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: _store2.default },
+        _react2.default.createElement(_Routes2.default, null)
+      );
+    }
+  }]);
+  return App;
+}(_react.Component);
+
+exports.default = App;

@@ -1,0 +1,30 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/ui/html/elements/list/prefix/Number.js';
+
+exports.default = function (_ref) {
+  var element = _ref.element,
+      style = _ref.style;
+  var index = element.attributes.index;
+
+
+  return _react2.default.createElement(
+    _ui.Text,
+    { style: style, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 7
+      }
+    },
+    index,
+    '. '
+  );
+};
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _ui = require('@shoutem/ui');
+
+;

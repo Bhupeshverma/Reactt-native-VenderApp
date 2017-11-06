@@ -1,0 +1,65 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SlideOut = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/@shoutem/animation/src/animations/Slide/SlideOut.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Slide = require('./Slide');
+
+var _DriverShape = require('../../drivers/DriverShape');
+
+var SlideOut = exports.SlideOut = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(SlideOut, _Component);
+
+  function SlideOut() {
+    babelHelpers.classCallCheck(this, SlideOut);
+    return babelHelpers.possibleConstructorReturn(this, (SlideOut.__proto__ || Object.getPrototypeOf(SlideOut)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(SlideOut, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          driver = _props.driver,
+          children = _props.children,
+          _props$inputRange = _props.inputRange,
+          inputRange = _props$inputRange === undefined ? [0, 1] : _props$inputRange,
+          style = _props.style,
+          to = _props.to;
+
+
+      return _react2.default.createElement(
+        _Slide.Slide,
+        {
+          driver: driver,
+          animationName: 'slideOut',
+          inputRange: inputRange,
+          direction: to,
+          style: style,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          }
+        },
+        children
+      );
+    }
+  }]);
+  return SlideOut;
+}(_react.Component), _class.propTypes = {
+  driver: _DriverShape.DriverShape.isRequired,
+
+  children: _react2.default.PropTypes.node,
+
+  inputRange: _react2.default.PropTypes.array,
+
+  to: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object
+}, _temp);

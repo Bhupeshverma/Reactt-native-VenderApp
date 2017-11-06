@@ -1,0 +1,9 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _PhotoView = require('./PhotoView');
+
+var _PhotoView2 = babelHelpers.interopRequireDefault(_PhotoView);
+
+exports.default = _PhotoView2.default;

@@ -1,0 +1,62 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createVariations = createVariations;
+exports.createSharedStyle = createSharedStyle;
+exports.changeColorAlpha = changeColorAlpha;
+exports.inverseColorBrightnessForAmount = inverseColorBrightnessForAmount;
+exports.getSizeRelativeToReference = getSizeRelativeToReference;
+
+var _tinycolor = require('tinycolor2');
+
+var _tinycolor2 = babelHelpers.interopRequireDefault(_tinycolor);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var window = _reactNative.Dimensions.get('window');
+
+function capitalizeFirstLetter(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function createVariations(baseName, nameSuffixes, key, value) {
+  return _lodash2.default.reduce(nameSuffixes, function (result, variant) {
+    var variantName = variant ? baseName + '-' + variant : baseName;
+    var keyName = variant ? '' + key + capitalizeFirstLetter(variant) : key;
+
+    result[variantName] = babelHelpers.defineProperty({}, keyName, value);
+
+    return result;
+  }, {});
+}
+
+function createSharedStyle(componentNames) {
+  var sharedStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var customStyles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  return _lodash2.default.reduce(componentNames, function (result, componentName) {
+    result[componentName] = babelHelpers.extends({}, sharedStyle, customStyles[componentName]);
+
+    return result;
+  }, {});
+}
+
+function changeColorAlpha(color, newAlpha) {
+  return (0, _tinycolor2.default)(color).setAlpha(newAlpha).toRgbString();
+}
+
+function inverseColorBrightnessForAmount(colorValue, amount) {
+  var color = (0, _tinycolor2.default)(colorValue);
+  if (color.isLight()) {
+    return color.darken(amount).toString();
+  }
+  return color.lighten(amount).toString();
+}
+
+function getSizeRelativeToReference(dimension, originalRefVal, actualRefVal) {
+  return dimension / originalRefVal * actualRefVal;
+}

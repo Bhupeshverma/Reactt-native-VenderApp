@@ -1,0 +1,12 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Touchable = require('./Touchable');
+
+Object.defineProperty(exports, 'Touchable', {
+  enumerable: true,
+  get: function get() {
+    return babelHelpers.interopRequireDefault(_Touchable).default;
+  }
+});

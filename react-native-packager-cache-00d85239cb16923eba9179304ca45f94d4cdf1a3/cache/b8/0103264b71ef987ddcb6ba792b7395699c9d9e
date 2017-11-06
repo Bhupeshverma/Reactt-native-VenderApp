@@ -1,0 +1,102 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ShareButton = undefined;
+
+var _class, _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNativeShare = require('react-native-share');
+
+var _reactNativeShare2 = babelHelpers.interopRequireDefault(_reactNativeShare);
+
+var _theme = require('@shoutem/theme');
+
+var _Button = require('./Button');
+
+var _Icon = require('./Icon');
+
+var USER_CANCELLED_ERROR = 'User did not share';
+
+var _React$PropTypes = _react2.default.PropTypes,
+    func = _React$PropTypes.func,
+    string = _React$PropTypes.string;
+
+
+var showErrorMessage = function showErrorMessage(error) {
+  if (error.error === USER_CANCELLED_ERROR) {
+    return;
+  }
+
+  _reactNative.Alert.alert('Sharing error', error.error);
+};
+
+var ShareButton = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(ShareButton, _Component);
+
+  function ShareButton(props) {
+    babelHelpers.classCallCheck(this, ShareButton);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (ShareButton.__proto__ || Object.getPrototypeOf(ShareButton)).call(this, props));
+
+    _this.onShare = _this.onShare.bind(_this);
+    return _this;
+  }
+
+  babelHelpers.createClass(ShareButton, [{
+    key: 'onShare',
+    value: function onShare() {
+      var _props = this.props,
+          onError = _props.onError,
+          title = _props.title,
+          message = _props.message,
+          url = _props.url;
+
+
+      _reactNativeShare2.default.open({
+        title: title,
+        message: message,
+        url: url
+      }).catch(function (error) {
+        onError(error);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var animationName = this.props.animationName;
+
+
+      return _react2.default.createElement(
+        _Button.Button,
+        {
+          onPress: this.onShare
+        },
+        _react2.default.createElement(_Icon.Icon, { name: 'share', animationName: animationName })
+      );
+    }
+  }]);
+  return ShareButton;
+}(_react.Component), _class.propTypes = {
+  animationName: string,
+
+  message: string,
+
+  onError: func,
+
+  title: string,
+
+  url: string
+}, _class.defaultProps = {
+  onError: showErrorMessage
+}, _temp);
+
+
+var StyledShareButton = (0, _theme.connectStyle)('shoutem.ui.ShareButton', undefined, undefined, { virtual: true })(ShareButton);
+
+exports.ShareButton = StyledShareButton;

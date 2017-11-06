@@ -1,0 +1,215 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/venders/node_modules/react-native-material-dialog/src/MultiPickerMaterialDialog.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = babelHelpers.interopRequireDefault(_propTypes);
+
+var _reactNative = require('react-native');
+
+var _MaterialIcons = require('@expo/vector-icons/MaterialIcons');
+
+var _MaterialIcons2 = babelHelpers.interopRequireDefault(_MaterialIcons);
+
+var _MaterialDialog = require('./MaterialDialog');
+
+var _MaterialDialog2 = babelHelpers.interopRequireDefault(_MaterialDialog);
+
+var _colors = require('./colors');
+
+var _colors2 = babelHelpers.interopRequireDefault(_colors);
+
+var MultiPickerMaterialDialog = function (_Component) {
+  babelHelpers.inherits(MultiPickerMaterialDialog, _Component);
+
+  function MultiPickerMaterialDialog(props) {
+    babelHelpers.classCallCheck(this, MultiPickerMaterialDialog);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (MultiPickerMaterialDialog.__proto__ || Object.getPrototypeOf(MultiPickerMaterialDialog)).call(this, props));
+
+    _this.renderRow = function (row, sectionID, rowID) {
+      return _react2.default.createElement(
+        _reactNative.TouchableOpacity,
+        { key: row.value, onPress: function onPress() {
+            return _this.onRowPress(rowID);
+          }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 51
+          }
+        },
+        _react2.default.createElement(
+          _reactNative.View,
+          {
+            style: styles.rowContainer, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 52
+            }
+          },
+          _react2.default.createElement(
+            _reactNative.View,
+            { style: styles.iconContainer, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 54
+              }
+            },
+            _react2.default.createElement(_MaterialIcons2.default, {
+              name: row.selected ? 'check-box' : 'check-box-outline-blank',
+              color: _this.props.colorAccent,
+              size: 24, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 55
+              }
+            })
+          ),
+          _react2.default.createElement(
+            _reactNative.Text,
+            {
+              style: styles.rowText, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 62
+              }
+            },
+            row.label
+          )
+        )
+      );
+    };
+
+    var items = props.items,
+        selectedItems = props.selectedItems;
+
+    var rows = buildSelectedRows(items, selectedItems);
+
+    var dataSource = new _reactNative.ListView.DataSource({
+      rowHasChanged: function rowHasChanged(r1, r2) {
+        return r1.value !== r2.value || r1.selected !== r2.selected;
+      }
+    }).cloneWithRows(rows);
+
+    _this.state = {
+      dataSource: dataSource,
+      rows: rows
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(MultiPickerMaterialDialog, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var items = nextProps.items,
+          selectedItems = nextProps.selectedItems;
+
+      var rows = buildSelectedRows(items, selectedItems);
+      var dataSource = this.state.dataSource.cloneWithRows(rows);
+      this.setState({ dataSource: dataSource, rows: rows });
+    }
+  }, {
+    key: 'onRowPress',
+    value: function onRowPress(rowID) {
+      var rows = [].concat(babelHelpers.toConsumableArray(this.state.rows));
+      rows[rowID] = babelHelpers.extends({}, rows[rowID], {
+        selected: !rows[rowID].selected
+      });
+      var dataSource = this.state.dataSource.cloneWithRows(rows);
+      this.setState({ dataSource: dataSource, rows: rows });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        _MaterialDialog2.default,
+        {
+          title: this.props.title,
+          titleColor: this.props.titleColor,
+          colorAccent: this.props.colorAccent,
+          visible: this.props.visible,
+          okLabel: this.props.okLabel,
+          scrolled: this.props.scrolled,
+          onOk: function onOk() {
+            return _this2.props.onOk({
+              selectedItems: _this2.state.rows.filter(function (row) {
+                return row.selected;
+              })
+            });
+          },
+          cancelLabel: this.props.cancelLabel,
+          onCancel: this.props.onCancel, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 70
+          }
+        },
+        _react2.default.createElement(_reactNative.ListView, { dataSource: this.state.dataSource, renderRow: this.renderRow, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 85
+          }
+        })
+      );
+    }
+  }]);
+  return MultiPickerMaterialDialog;
+}(_react.Component);
+
+exports.default = MultiPickerMaterialDialog;
+
+
+function buildSelectedRows(items, selectedItems) {
+  var rows = items.map(function (item) {
+    return babelHelpers.extends({}, item, {
+      selected: selectedItems.some(function (i) {
+        return i.value === item.value;
+      })
+    });
+  });
+
+  return rows;
+}
+
+var styles = _reactNative.StyleSheet.create({
+  rowContainer: {
+    height: 56,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  iconContainer: {
+    marginRight: 16
+  },
+  rowText: {
+    fontFamily: _reactNative.Platform.OS === 'android' ? 'sans-serif' : 'System',
+    color: _colors2.default.androidPrimaryTextColor,
+    fontSize: 16
+  }
+});
+
+MultiPickerMaterialDialog.propTypes = {
+  visible: _propTypes2.default.bool.isRequired,
+  items: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
+  selectedItems: _propTypes2.default.arrayOf(_propTypes2.default.object),
+  title: _propTypes2.default.string,
+  titleColor: _propTypes2.default.string,
+  colorAccent: _propTypes2.default.string,
+  onCancel: _propTypes2.default.func.isRequired,
+  onOk: _propTypes2.default.func.isRequired,
+  cancelLabel: _propTypes2.default.string,
+  okLabel: _propTypes2.default.string,
+  scrolled: _propTypes2.default.bool
+};
+
+MultiPickerMaterialDialog.defaultProps = {
+  selectedItems: [],
+  titleColor: undefined,
+  colorAccent: _colors2.default.androidColorAccent,
+  cancelLabel: undefined,
+  okLabel: undefined,
+  scrolled: false
+};

@@ -1,0 +1,22 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (fontFamily) {
+  var componentStyleName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'shoutem.ui.Icon';
+
+  var config = (0, _createConfig2.default)(fontFamily);
+  var IconComponent = (0, _vectorIcons.createIconSetFromIcoMoon)(config);
+  var AnimatedIcon = (0, _animation.connectAnimation)(IconComponent);
+  return (0, _theme.connectStyle)(componentStyleName)(AnimatedIcon);
+};
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var _vectorIcons = require('@expo/vector-icons');
+
+var _createConfig = require('./createConfig');
+
+var _createConfig2 = babelHelpers.interopRequireDefault(_createConfig);
