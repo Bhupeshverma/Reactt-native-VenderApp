@@ -25,22 +25,22 @@ function recievedProductsError() {
     type : ERROR_RECIEVING_PRODUCTS
   }
 }
-export function fetchProducts( ) {
+export function fetchProducts() {
  return (dispatch , getState) => {
 
    dispatch(isFetchingProducts());
 
    const {sessionID} = getState().auth
    const {user : {name_value_list : {user_id : {value}}} } = getState().auth;
-
-
+   //const {data : {name_value_list: {vendor_type: {value}}}} =getState().fetchedReducer;
+   
    const data =  {
 "session": `${sessionID}`,
 "user_id": `${value}`,
-       "vender_type": "Shoes"
+"vender_type": "Shoes"
 }
 
-   console.log(data);
+   console.log("fetchProducts", data);
     return axios.post(`http://crm-dev.streetstylestore.com/webservice/get_missing_product_item.php`, data)
    .then((response) => {
      console.log(response.status)

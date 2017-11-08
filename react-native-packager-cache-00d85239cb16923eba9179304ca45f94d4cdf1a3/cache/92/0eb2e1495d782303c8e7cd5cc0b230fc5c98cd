@@ -61,7 +61,9 @@ var MainScreen = function (_Component) {
             name_value_list: [],
             barcodeArray: [],
             barcodeText: '',
-            fontLoaded: false
+            fontLoaded: false,
+            loading: false,
+            focus: true
         };
         _this.handleOrder = _this.handleOrder.bind(_this);
         _this.updateItem = _this.updateItem.bind(_this);
@@ -308,7 +310,8 @@ var MainScreen = function (_Component) {
                 size_39_c: 0,
                 size_40_c: 0,
                 size_41_c: 0,
-                size_42_c: 0
+                size_42_c: 0,
+                loading: false
             });
         }
     }, {
@@ -562,6 +565,22 @@ var MainScreen = function (_Component) {
             });
         }
     }, {
+        key: 'handleFocus',
+        value: function handleFocus() {
+            console.log("inside");
+            this.setState({ loading: true });
+        }
+    }, {
+        key: 'handleClearText',
+        value: function handleClearText() {
+            this.setState({ focus: true });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit() {
+            this.setState({ focus: true });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this5 = this;
@@ -579,26 +598,32 @@ var MainScreen = function (_Component) {
                             return _this5.filterSearch(text);
                         },
                         placeholder: 'Search Product ID Here...',
-                        autoFocus: false,
+                        onFocus: function onFocus() {
+                            return _this5.handleFocus();
+                        },
                         keyboardType: 'numeric',
                         value: this.state.text,
-                        showLoadingIcon: true,
+                        showLoadingIcon: this.state.loading,
                         containerStyle: { backgroundColor: "#db993d", width: width - 100 },
                         inputStyle: { backgroundColor: "#fff" }
                     }) : _react2.default.createElement(_reactNativeElements.SearchBar, {
                         lightTheme: true,
-                        onChange: function onChange() {
-                            return _this5.setState({ scanText: '' });
-                        },
+
                         onChangeText: function onChangeText(scanText) {
                             return _this5.updateScanText(scanText);
                         },
                         placeholder: 'Search Here...',
-                        autoFocus: true,
+                        autoFocus: this.state.focus,
                         onBlur: function onBlur() {
                             return _this5.setState({ scanText: '', focus: true });
                         },
                         value: this.state.scanText,
+                        onClearText: function onClearText() {
+                            return handleClearText();
+                        },
+                        onSubmit: function onSubmit() {
+                            return handleSubmit();
+                        },
                         containerStyle: { backgroundColor: "#db993d", width: width - 100 },
                         inputStyle: { backgroundColor: "#fff" }
                     }),

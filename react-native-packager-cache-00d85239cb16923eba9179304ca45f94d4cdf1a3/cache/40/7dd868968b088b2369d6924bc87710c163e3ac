@@ -46,7 +46,7 @@ function fetchProducts() {
       "vender_type": "Shoes"
     };
 
-    console.log(data);
+    console.log("fetchProducts", data);
     return _axios2.default.post('http://crm-dev.streetstylestore.com/webservice/get_missing_product_item.php', data).then(function (response) {
       console.log(response.status);
       dispatch(recievedProducts(response));

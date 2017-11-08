@@ -5,6 +5,7 @@ import { Card, CardContent, CardImage } from 'react-native-material-cards'
 import { connect } from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import { Font } from 'expo';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { fetchProducts,fetchData, batchDone, recievedData ,logIn, SavedProducts, SyncWithCrm} from '../actions';
 import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
 import {  Image ,Button, Row ,Subtitle,Caption, Heading, Title} from '@shoutem/ui';
@@ -45,13 +46,15 @@ class MainScreen extends Component {
       this.updateItem = this.updateItem.bind(this)
   }
  componentDidMount(){
-    if(!this.props.products){
+
+      if(!this.props.products){
         this.props.fetchData()
         this.props.fetchProducts()
+      }
     }
 
 
-}
+
     filterSearch(text) {
         this.setState({text})
         console.log(this.state.text)
@@ -80,6 +83,7 @@ class MainScreen extends Component {
 
         console.log(this.state.scanText)
         var dataText =scanText.split("-")
+        console.log(dataText);
         var formattedSize = dataText[0]
         console.log(formattedSize)
 
@@ -316,89 +320,219 @@ class MainScreen extends Component {
       })
 }
 
-    handleOrder(){
-       return this.state.newdata.map((item,index)=>{
-          return(
-            <View styleName="vertical" key={item.product_id}>
-              <Row>
-                 {item.product_image === null ?
-                   <Image
-                    styleName="medium rounded-corners"
-                    source={{ uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png'}}
-                  />:
-                  <Image
-                   styleName="medium rounded-corners"
-                   source={{ uri: item.product_image}}
-                 />}
-                <View styleName="vertical stretch space-between">
-                  <Subtitle>{item.name}</Subtitle>
-                  <View style={{flexDirection: 'row' ,justifyContent: 'space-around'}}>
-                    <Subtitle>{item.product_id}</Subtitle>
-                    <Subtitle>{item.total}</Subtitle>
-                  </View>
-                </View>
-              </Row>
-              <Row>
-                <Title>SIZES</Title>
-                <Title styleName="h-center">M-COUNT</Title>
-                <Title styleName="h-center">SCAN-COUNT</Title>
-              </Row>
-              <Row>
-                <Subtitle>Size_34</Subtitle>
-                <Subtitle styleName="h-center">{item.size_34}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_34_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_35</Subtitle>
-                <Subtitle styleName="h-center">{item.size_35}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_35_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_36</Subtitle>
-                <Subtitle styleName="h-center">{item.size_36}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_36_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_37</Subtitle>
-                <Subtitle styleName="h-center">{item.size_37}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_37_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_38</Subtitle>
-                <Subtitle styleName="h-center">{item.size_38}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_38_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_39</Subtitle>
-                <Subtitle styleName="h-center">{item.size_39}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_39_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_40</Subtitle>
-                <Subtitle styleName="h-center">{item.size_40}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_40_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_41</Subtitle>
-                <Subtitle styleName="h-center">{item.size_41}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_41_c}</Subtitle>
-              </Row>
-              <Row >
-                <Subtitle>Size_42</Subtitle>
-                <Subtitle styleName="h-center">{item.size_42}</Subtitle>
-                <Subtitle styleName="h-center">{this.state.size_42_c}</Subtitle>
-              </Row>
-              <Button
-                styleName="dark"
-                 style={{backgroundColor: "#000", height: 30}}
-                 onPress={()=>this.updateItem()}>
-                <Text style={{color: '#fff', fontWeight: '400'}} >DONE THE BATCH</Text>
-              </Button>
-          </View>
+handle34Minus(){
 
-          )
-      })
-    }
+  if(this.state.size_34_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_34_c: this.state.size_34_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_34+=1
+    })
+  }
+}
+handle35Minus(){
+  if(this.state.size_35_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_35_c: this.state.size_35_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_35+=1
+    })
+  }
+}
+handle36Minus(){
+  if(this.state.size_36_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_34_c: this.state.size_36_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_36+=1
+    })
+  }
+}
+handle37Minus(){
+  if(this.state.size_37_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_34_c: this.state.size_37_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_37+=1
+    })
+  }
+}
+handle38Minus(){
+  if(this.state.size_38_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_38_c: this.state.size_38_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_38+=1
+    })
+  }
+}
+handle39Minus(){
+  if(this.state.size_39_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_39_c: this.state.size_39_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_39+=1
+    })
+  }
+}
+handle40Minus(){
+  if(this.state.size_40_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_40_c: this.state.size_40_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_40+=1
+    })
+  }
+}
+handle41Minus(){
+  if(this.state.size_41_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_41_c: this.state.size_41_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_41+=1
+    })
+  }
+}
+handle42Minus(){
+  if(this.state.size_42_c === 0){
+    Alert.alert('Scan count is already 0')
+  }else{
+    this.setState({
+      size_34_c: this.state.size_42_c - 1
+    })
+    this.state.newdata.map((item,index)=>{
+          item.size_42+=1
+    })
+  }
+}
+    handleOrder(){
+        return this.state.newdata.map((item,index)=>{
+             return(
+               <View styleName="vertical" key={item.product_id}>
+                 <Row>
+                    {item.product_image === null ?
+                      <Image
+                       styleName="medium rounded-corners"
+                       source={{ uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png'}}
+                     />:
+                     <Image
+                      styleName="medium rounded-corners"
+                      source={{ uri: item.product_image}}
+                    />}
+                   <View styleName="vertical stretch space-between">
+                     <Subtitle>{item.name}</Subtitle>
+                     <View style={{flexDirection: 'row' ,justifyContent: 'space-around'}}>
+                       <Subtitle>{item.product_id}</Subtitle>
+                       <Subtitle>{item.total}</Subtitle>
+                     </View>
+                   </View>
+                 </Row>
+                 <Row>
+                   <Title>SIZES</Title>
+                   <Title styleName="h-center">M-COUNT</Title>
+                   <Title styleName="h-center">SCAN-COUNT</Title>
+                 </Row>
+                 <Row>
+                   <Subtitle>Size_34</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_34}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_34_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle34Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_35</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_35}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_35_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle35Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_36</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_36}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_36_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle36Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_37</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_37}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_37_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle37Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_38</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_38}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_38_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle38Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_39</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_39}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_39_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle39Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_40</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_40}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_40_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle40Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_41</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_41}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_41_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle41Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Row >
+                   <Subtitle>Size_42</Subtitle>
+                   <Subtitle styleName="h-center">{item.size_42}</Subtitle>
+                   <Subtitle styleName="h-center">{this.state.size_42_c}</Subtitle>
+                   <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle42Minus()}>
+                   </Icon.Button>
+                 </Row>
+                 <Button
+                   styleName="dark"
+                    style={{backgroundColor: "#000", height: 30}}
+                    onPress={()=>this.updateItem()}>
+                   <Text style={{color: '#fff', fontWeight: '400'}} >DONE THE BATCH</Text>
+                 </Button>
+             </View>
+
+             )
+
+       })
+      }
+
+
 handleFocus(){
   console.log("inside");
   this.setState({loading: true})
@@ -409,7 +543,11 @@ handleClearText(){
 handleSubmit(){
   this.setState({focus: true})
 }
-
+handleBackButton(){
+  this.setState({
+    search:1,
+  })
+}
   render() {
 
     return (
@@ -436,8 +574,8 @@ handleSubmit(){
             autoFocus={this.state.focus}
             onBlur={()=>this.setState({scanText: '', focus:true})}
             value={this.state.scanText}
-            onClearText={()=>handleClearText()}
-            onSubmit={()=>handleSubmit()}
+            onClearText={()=>this.handleClearText()}
+            onSubmit={()=>this.handleSubmit()}
             containerStyle={{backgroundColor: "#db993d", width: width-100}}
             inputStyle={{backgroundColor:"#fff"}}
           />}
@@ -447,16 +585,26 @@ handleSubmit(){
               <Text>CLEAR</Text>
             </Button>:
             <Button styleName="full-width"
-              onPress={()=>this.setState({search:1})} >
+              onPress={()=>this.setState({
+              size_34_c:0,
+              size_35_c:0,
+              size_36_c:0,
+              size_37_c:0,
+              size_38_c:0,
+              size_39_c:0,
+              size_40_c:0,
+              size_41_c:0,
+              size_42_c:0,
+              search: 1})} >
               <Text>BACK</Text>
             </Button>
                 }
             </View>
             <View style={[styles.box, styles.box1]}>
-
               {this.props.spinner ? <View style={styles.spinner}><DoubleBounce size={30} color="#1CAFF6" /></View>:<View></View>}
               {this.props.error ? <Text> Could not fetch products  !</Text>: <View></View>}
               {this.props.products?<ScrollView>{this.handleOrder()}</ScrollView>: <View></View>}
+
             </View>
         </View>
     )
@@ -465,7 +613,7 @@ function  mapStateToProps(state){
   return {
      spinner: state.productReducer.spinner,
      products: state.productReducer.products,
-     error: state.productReducer.error,
+     error: state.productReducer.error
    }
 }
 export default connect(mapStateToProps, {

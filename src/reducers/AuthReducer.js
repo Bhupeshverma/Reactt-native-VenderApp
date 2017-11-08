@@ -10,13 +10,13 @@ export default function (state = INITIAL_STATE , action) {
     case IS_LOGGING_IN:
       return {...state , spinner : true};
     case IS_LOGGED_IN:
-      return {...state , spinner : false , sessionID : action.payload.data.id , user : action.payload.data }
+      return {...state , spinner : false , sessionID : action.payload.data.id , user : action.payload.data, loggedOut: false }
     case UNAUTHORIZED:
       return {...state , spinner : false , unauthorized : true}
     case RECIEVED_ERROR:
       return {...state , spinner : false , error : true, user: null}
     case LOGGED_OUT:
-          return {...state , sessionID : null , user : null}
+          return {...state , sessionID : null , user : null, error: false, unauthorized: false}
     case REHYDRATE:
           return action.payload.auth || []
     default:

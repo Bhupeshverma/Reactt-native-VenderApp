@@ -13,6 +13,8 @@ exports.default = function () {
             return babelHelpers.extends({}, state, { spinner: false, loggedOut: true, error: false });
         case _types.LOGGING_OUT_ERROR:
             return babelHelpers.extends({}, state, { spinner: false, error: true });
+        case _types.CHANGE_LOG_OUT_STATUS:
+            return babelHelpers.extends({}, state, { loggedOut: false });
         default:
             return state;
     }

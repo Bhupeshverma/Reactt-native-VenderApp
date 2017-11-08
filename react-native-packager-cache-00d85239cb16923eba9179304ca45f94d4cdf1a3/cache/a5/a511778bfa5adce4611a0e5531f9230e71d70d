@@ -49,7 +49,7 @@ var LogoutComponent = function (_Component) {
                     _react2.default.createElement(_reactNativeLoadingSpinnerOverlay2.default, { visible: true, textContent: "Signing out...", textStyle: { color: '#FFF' } })
                 ) : null,
                 this.props.error ? _reactNative.Alert.alert('Error Logging Out', 'could not log out !!') : null,
-                this.props.loggedOut ? _reactNativeRouterFlux.Actions.popTo(sceneKey) : null
+                this.props.loggedOut ? _reactNativeRouterFlux.Actions.Main({ type: _reactNativeRouterFlux.ActionConst.RESET }) : null
             );
         }
     }]);

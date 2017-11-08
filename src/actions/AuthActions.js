@@ -6,7 +6,8 @@ import {
   IS_LOGGED_IN,
   IS_LOGGING_IN,
   UNAUTHORIZED,
-  RECIEVED_ERROR
+  RECIEVED_ERROR,
+  CHANGE_LOG_OUT_STATUS
 } from './types';
 
 
@@ -35,6 +36,11 @@ function recievedError() {
     type : RECIEVED_ERROR
   }
 }
+function changeLogOutStatus(){
+  return {
+    type : CHANGE_LOG_OUT_STATUS
+  }
+}
 
 
 
@@ -49,8 +55,8 @@ export function logIn(email , password) {
 
     return axios.post('http://crm-dev.streetstylestore.com/webservice/login.php',data)
             .then((response) => {
-
               dispatch(loggedIn(response));
+              dispatch(changeLogOutStatus());
             })
             .catch((error) => {
               if (error.response) {

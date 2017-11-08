@@ -15,5 +15,5 @@ const store = createStore(
        autoRehydrate()
 )
 )
- persistStore(store, {storage: AsyncStorage, whitelist: ['savedDataReducer','productReducer','auth']})
+ persistStore(store, {storage: AsyncStorage, whitelist: ['savedDataReducer','productReducer','auth']}).purge()
 export default store;
