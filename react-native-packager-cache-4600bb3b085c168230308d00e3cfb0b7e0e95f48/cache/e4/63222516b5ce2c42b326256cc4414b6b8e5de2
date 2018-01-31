@@ -1,0 +1,21 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");var
+Shape=_reactNative.ART.Shape,Path=_reactNative.ART.Path;var
+
+Circle=(_temp=_class=function(_Component){babelHelpers.inherits(Circle,_Component);function Circle(){babelHelpers.classCallCheck(this,Circle);return babelHelpers.possibleConstructorReturn(this,(Circle.__proto__||Object.getPrototypeOf(Circle)).apply(this,arguments));}babelHelpers.createClass(Circle,[{key:"render",value:function render()
+
+
+
+
+
+{var
+radius=this.props.radius;
+
+var path=Path().
+moveTo(0,-radius).
+arc(0,radius*2,radius).
+arc(0,radius*-2,radius).
+close();
+
+return _react2.default.createElement(Shape,babelHelpers.extends({},this.props,{d:path}));
+}}]);return Circle;}(_react.Component),_class.propTypes={radius:_react.PropTypes.number.isRequired,opacity:_react.PropTypes.number},_temp);exports.default=Circle;

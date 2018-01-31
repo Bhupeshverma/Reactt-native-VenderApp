@@ -96,7 +96,7 @@ class DrawerContent extends Component {
                     color='#fff'
                     size= {34}
                   />
-                <Text style={styles.buttonText} >Sync With CRM</Text>
+                <Text style={styles.buttonText} >VIEW SCANNED ID</Text>
               </View>
             </TouchableOpacity>
           </View>

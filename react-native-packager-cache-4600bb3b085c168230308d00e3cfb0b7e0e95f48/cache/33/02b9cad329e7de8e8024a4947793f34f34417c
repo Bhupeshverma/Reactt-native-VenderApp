@@ -1,0 +1,335 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.HorizontalPager=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+
+
+
+
+var _reactNative=require("react-native");
+
+
+
+
+
+var _lodash=require("lodash");var _lodash2=babelHelpers.interopRequireDefault(_lodash);
+
+var _theme=require("@shoutem/theme");
+
+var _index=require("../../index");
+
+
+
+var _Page=require("./Page");
+
+/**
+ * Renders a horizontal pager which renders pages by using
+ * the renderPage function with provided data.
+ *
+ * It can be used as a general wrapper component for any group
+ * of uniform components which require horizontal paging.
+ * It abstracts away React Native API inconsistencies between
+ * iOS and Android platforms and should be used instead of
+ * ScrollView and ViewPagerAndroid for this matter.
+ *
+ */var
+HorizontalPager=(_temp=_class=function(_Component){babelHelpers.inherits(HorizontalPager,_Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function HorizontalPager(props){babelHelpers.classCallCheck(this,HorizontalPager);var _this=babelHelpers.possibleConstructorReturn(this,(HorizontalPager.__proto__||Object.getPrototypeOf(HorizontalPager)).call(this,
+props));
+_this.state={
+width:0,
+height:0,
+selectedIndex:_this.props.selectedIndex,
+initialSelectedIndex:_this.props.selectedIndex,
+pageMargin:_this.props.pageMargin,
+showNextPage:_this.props.showNextPage,
+shouldRenderContent:false,
+scrolledToInitialIndex:false};
+
+_this.onHorizontalScroll=_this.onHorizontalScroll.bind(_this);
+_this.onLayoutContainer=_this.onLayoutContainer.bind(_this);
+_this.onScrollViewRef=_this.onScrollViewRef.bind(_this);return _this;
+}babelHelpers.createClass(HorizontalPager,[{key:"componentDidMount",value:function componentDidMount()
+
+{var _this2=this;
+_reactNative.InteractionManager.runAfterInteractions(function(){
+_reactNative.LayoutAnimation.easeInEaseOut();
+_this2.setState({shouldRenderContent:true});
+});
+}},{key:"componentWillReceiveProps",value:function componentWillReceiveProps(
+
+nextProps){var
+selectedIndex=this.state.selectedIndex;
+
+if(this.props.scrollEnabled&&!nextProps.scrollEnabled){
+this.scrollToPage(selectedIndex);
+}
+}},{key:"onLayoutContainer",value:function onLayoutContainer(
+
+event){var _this3=this;var _event$nativeEvent$la=
+event.nativeEvent.layout,width=_event$nativeEvent$la.width,height=_event$nativeEvent$la.height;var
+scrolledToInitialIndex=this.state.scrolledToInitialIndex;
+
+if(this.state.width===width&&this.state.height===height){
+return;
+}
+
+this.setState({width:width,height:height},function(){
+// By checking has the pager scrolled to initial index, we're avoiding weird issue
+// where pager would scroll back to initial index after swiping to other index
+if(!scrolledToInitialIndex){
+requestAnimationFrame(function(){return _this3.scrollToInitialPage();});
+}
+});
+}},{key:"onHorizontalScroll",value:function onHorizontalScroll(
+
+event){var
+selectedIndex=this.state.selectedIndex;var
+onIndexSelected=this.props.onIndexSelected;
+var contentOffset=event.nativeEvent.contentOffset;
+
+var newSelectedIndex=this.calculateIndex(contentOffset);
+if(selectedIndex===newSelectedIndex){
+// Nothing to do, we are already at the new index
+return;
+}
+
+// Handle the swipes between pages performed by the user
+if(selectedIndex!==newSelectedIndex){
+this.setState({
+selectedIndex:newSelectedIndex},
+function(){
+if(_lodash2.default.isFunction(onIndexSelected)){
+onIndexSelected(newSelectedIndex);
+}
+});
+}
+}},{key:"onScrollViewRef",value:function onScrollViewRef(
+
+scroller){
+this.scroller=scroller;
+}},{key:"calculateContainerWidth",value:function calculateContainerWidth()
+
+{var
+style=this.props.style;var _state=
+this.state,width=_state.width,pageMargin=_state.pageMargin,showNextPage=_state.showNextPage;
+// If `showNextPage` is `true` then container must have width narrower
+// By `nextPageInsetSize`, to allow rendering of small portion of next page
+// While keeping `pageMargin` intact between pages
+// If `showNextPage` is `false`, then `nextPageInsetSize` doesn't matter,
+// And we only use `pageMargin` for spacing between pages.
+return showNextPage?width-style.nextPageInsetSize:width+pageMargin;
+}},{key:"scrollToPage",value:function scrollToPage(
+
+page){var
+width=this.state.width;
+
+if(this.scroller&&width&&page){
+this.scroller.scrollTo({
+x:page*this.calculateContainerWidth(),
+animated:false});
+
+}
+}},{key:"scrollToInitialPage",value:function scrollToInitialPage()
+
+{var
+onIndexSelected=this.props.onIndexSelected;var
+initialSelectedIndex=this.state.initialSelectedIndex;
+
+this.scrollToPage(initialSelectedIndex);
+this.setState({
+selectedIndex:initialSelectedIndex,
+scrolledToInitialIndex:true},
+function(){
+if(_lodash2.default.isFunction(onIndexSelected)){
+onIndexSelected(initialSelectedIndex);
+}
+});
+}},{key:"calculateIndex",value:function calculateIndex(
+
+contentOffset){var _state2=
+this.state,width=_state2.width,selectedIndex=_state2.selectedIndex,pageMargin=_state2.pageMargin;var
+data=this.props.data;
+
+var newSelectedIndex=selectedIndex;
+
+if(contentOffset.x<=0){
+newSelectedIndex=0;
+}
+
+if(selectedIndex>=data.length-1){
+newSelectedIndex=data.length-1;
+}
+
+if(width&&contentOffset.x>0){
+newSelectedIndex=Math.round(contentOffset.x/(width+pageMargin));
+}
+return newSelectedIndex;
+}},{key:"shouldRenderPage",value:function shouldRenderPage(
+
+index){var _props=
+this.props,data=_props.data,surroundingPagesToLoad=_props.surroundingPagesToLoad;var
+selectedIndex=this.state.selectedIndex;
+
+// We are rendering max surroundingPagesToLoad around the current index
+var minPageIndex=selectedIndex<=surroundingPagesToLoad?
+0:selectedIndex-surroundingPagesToLoad;
+
+var maxPageIndex=selectedIndex>=data.length-surroundingPagesToLoad-1?
+data.length-1:selectedIndex+surroundingPagesToLoad;
+
+return index>=minPageIndex&&index<=maxPageIndex;
+}},{key:"renderPages",value:function renderPages()
+
+{var _this4=this;var _state3=
+this.state,width=_state3.width,height=_state3.height,pageMargin=_state3.pageMargin,showNextPage=_state3.showNextPage,selectedIndex=_state3.selectedIndex;var _props2=
+this.props,data=_props2.data,renderPage=_props2.renderPage,style=_props2.style;
+
+var pages=data.map(function(pageData,pageIndex){
+var lastPage=pageIndex===data.length-1;
+var containerWidth=_this4.calculateContainerWidth();
+var pageWidth=width;
+
+if(showNextPage&&!lastPage){
+// If `showNextPage` is `true` then one page must have width narrower
+// By pageMargin - nextPageInsetSize, to allow rendering of small portion of next page
+// While keeping pageMargin intact between pages
+pageWidth=width-pageMargin-style.nextPageInsetSize;
+}
+
+// Fixes where multiple pages appear at once on initial load (if surroundingPagesToLoad > 0)
+if(!containerWidth)return null;
+
+var isPageActive=selectedIndex===pageIndex;
+var pageContent=_this4.shouldRenderPage(pageIndex)&&
+_react2.default.createElement(_Page.Page,{
+isActive:isPageActive,
+width:pageWidth,
+style:style.page},
+
+renderPage(pageData,pageIndex,{width:width,height:height}));
+
+
+
+return(
+_react2.default.createElement(_index.View,{key:pageIndex,style:{width:containerWidth}},
+pageContent));
+
+
+});
+return pages;
+}},{key:"renderOverlay",value:function renderOverlay()
+
+{var _props3=
+this.props,renderOverlay=_props3.renderOverlay,data=_props3.data;var
+selectedIndex=this.state.selectedIndex;
+
+if(_lodash2.default.isFunction(renderOverlay)){
+return renderOverlay(data,selectedIndex);
+}
+
+return null;
+}},{key:"render",value:function render()
+
+{var _props4=
+this.props,bounces=_props4.bounces,scrollEnabled=_props4.scrollEnabled,style=_props4.style,renderPlaceholder=_props4.renderPlaceholder;var
+shouldRenderContent=this.state.shouldRenderContent;
+
+if(!shouldRenderContent){
+if(_lodash2.default.isFunction(renderPlaceholder)){
+return renderPlaceholder();
+}
+}
+
+return(
+_react2.default.createElement(_index.View,{
+style:style.container,
+onLayout:this.onLayoutContainer,
+virtual:true},
+
+_react2.default.createElement(_reactNative.ScrollView,{
+ref:this.onScrollViewRef,
+style:[style.scrollView,{width:this.calculateContainerWidth()}],
+horizontal:true,
+pagingEnabled:true,
+bounces:bounces,
+scrollsToTop:false,
+onScroll:this.onHorizontalScroll,
+scrollEventThrottle:200,
+removeClippedSubviews:false,
+automaticallyAdjustContentInsets:false,
+scrollEnabled:scrollEnabled,
+showsHorizontalScrollIndicator:false,
+showsVerticalScrollIndicator:false},
+
+this.renderPages()),
+
+_react2.default.createElement(_index.View,{styleName:"fill-parent",pointerEvents:"box-none"},
+this.renderOverlay())));
+
+
+
+}}]);return HorizontalPager;}(_react.Component),_class.propTypes={// Prop defining whether the Pager will bounce back
+// when user tries to swipe beyond end of content (iOS only)
+bounces:_react.PropTypes.bool,// Array containing objects (pages)
+data:_react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,// Callback function called when user swipes between pages (images)
+// Index of new (selected) page is passed to this callback
+onIndexSelected:_react.PropTypes.func,// Page margin, margin visible between pages, during swipe gesture.
+pageMargin:_react.PropTypes.number,// A function which renders a single page
+// renderPage(pageData, pageIndex)
+renderPage:_react.PropTypes.func,// Callback function that can be used to render overlay over pages
+// For example page indicators using `PageIndicators` component
+// renderOverlay(pageData, pageIndex, layout)
+renderOverlay:_react.PropTypes.func,// Callback function that can be used to define placeholder
+// that appears when content is loading
+renderPlaceholder:_react.PropTypes.func,// Initially selected page in gallery
+selectedIndex:_react.PropTypes.number,// Prop that forces enables or disables swiping
+scrollEnabled:_react.PropTypes.bool,// Style prop used to override default (theme) styling
+style:_react.PropTypes.object,// Prop that reduces page size by pageMargin, allowing 'sneak peak' of next page
+showNextPage:_react.PropTypes.bool,// Always render only central (currently loaded) page plus `surroundingPagesToLoad`
+// to the left and to the right. If currently rendered page is out of bounds,
+// empty `View` (with set dimensions for proper scrolling) will be rendered
+// Defaults to 2.
+surroundingPagesToLoad:_react.PropTypes.number},_class.defaultProps={pageMargin:0,selectedIndex:0,showNextPage:false,surroundingPagesToLoad:2},_temp);var StyledHorizontalPager=(0,_theme.connectStyle)('shoutem.ui.HorizontalPager')(HorizontalPager);exports.HorizontalPager=StyledHorizontalPager;

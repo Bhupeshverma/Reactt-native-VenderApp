@@ -1,0 +1,81 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.SlideIn=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _Slide=require("./Slide");
+var _DriverShape=require("../../drivers/DriverShape");
+
+/*
+ * SlideIn Component adds slide in effect to its children components.
+ * Connect it to driver and pass the input range to animate it.
+ * e.g.:
+ * ...
+ * const driver = new ScrollDriver();
+ *
+ * return (
+ *  <ScrollView
+ *    {...driver.scrollViewProps}
+ *  >
+ *    <SlideIn
+ *      driver={driver}
+ *      inputRange={[100,150]}
+ *      to="top right"
+ *    >
+ *      <Image />
+ *    </SlideIn>
+ *  </ScrollView>
+ * );
+ *
+ * ...
+ * Above code will create scroll dependent slide in of an Image to
+ * the top right corner of the screen between scroll position of 100 and 150
+ */var
+SlideIn=exports.SlideIn=(_temp=_class=function(_Component){babelHelpers.inherits(SlideIn,_Component);function SlideIn(){babelHelpers.classCallCheck(this,SlideIn);return babelHelpers.possibleConstructorReturn(this,(SlideIn.__proto__||Object.getPrototypeOf(SlideIn)).apply(this,arguments));}babelHelpers.createClass(SlideIn,[{key:"render",value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _props=
+
+
+
+
+
+
+this.props,driver=_props.driver,children=_props.children,_props$inputRange=_props.inputRange,inputRange=_props$inputRange===undefined?[0,1]:_props$inputRange,style=_props.style,from=_props.from;
+
+return(
+_react2.default.createElement(_Slide.Slide,{
+driver:driver,
+animationName:"slideIn",
+inputRange:inputRange,
+direction:from,
+style:style},
+
+children));
+
+
+}}]);return SlideIn;}(_react.Component),_class.propTypes={/**
+     * An instance of animation driver, usually ScrollDriver
+     */driver:_DriverShape.DriverShape.isRequired,/**
+     * Components to which an effect will be applied
+     */children:_react2.default.PropTypes.node,/**
+     * pair of [start, end] values from animation driver, how
+     * children would slide in
+     */inputRange:_react2.default.PropTypes.array,/**
+     * position from where wrapped components should slide in
+     */from:_react2.default.PropTypes.string,style:_react2.default.PropTypes.object},_temp);

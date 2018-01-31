@@ -1,0 +1,398 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ListView = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/ListView.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var _Spinner = require('./Spinner');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var scrollViewProps = _lodash2.default.keys(_reactNative.ScrollView.propTypes);
+
+var Status = {
+  LOADING: 'loading',
+  LOADING_NEXT: 'loadingNext',
+  REFRESHING: 'refreshing',
+  IDLE: 'idle'
+};
+
+var ListDataSource = function () {
+  function ListDataSource(config, getSectionId) {
+    babelHelpers.classCallCheck(this, ListDataSource);
+
+    this.getSectionId = getSectionId;
+    this.withSections = !!config.sectionHeaderHasChanged;
+    this.dataSource = new _reactNative.ListView.DataSource(config);
+  }
+
+  babelHelpers.createClass(ListDataSource, [{
+    key: 'groupItemsIntoSections',
+    value: function groupItemsIntoSections(data) {
+      var _this = this;
+
+      var prevSectionId = void 0;
+      return data.reduce(function (sections, item) {
+        var sectionId = _this.getSectionId(item);
+        if (prevSectionId !== sectionId) {
+          prevSectionId = sectionId;
+          sections.push([]);
+        }
+        var lastSectionIndex = sections.length - 1;
+        sections[lastSectionIndex].push(item);
+        return sections;
+      }, []);
+    }
+  }, {
+    key: 'clone',
+    value: function clone(data) {
+      if (this.withSections) {
+        return this.dataSource.cloneWithRowsAndSections(this.groupItemsIntoSections(data));
+      }
+      return this.dataSource.cloneWithRows(data);
+    }
+  }]);
+  return ListDataSource;
+}();
+
+var ListView = (_temp = _class = function (_React$Component) {
+  babelHelpers.inherits(ListView, _React$Component);
+
+  function ListView(props, context) {
+    babelHelpers.classCallCheck(this, ListView);
+
+    var _this2 = babelHelpers.possibleConstructorReturn(this, (ListView.__proto__ || Object.getPrototypeOf(ListView)).call(this, props, context));
+
+    _this2.handleListViewRef = _this2.handleListViewRef.bind(_this2);
+    _this2.renderFooter = _this2.renderFooter.bind(_this2);
+    _this2.autoHideHeader = _this2.autoHideHeader.bind(_this2);
+    _this2.onRefresh = _this2.onRefresh.bind(_this2);
+    _this2.renderRefreshControl = _this2.renderRefreshControl.bind(_this2);
+    _this2.listView = null;
+
+    _this2.listDataSource = new ListDataSource({
+      rowHasChanged: function rowHasChanged(r1, r2) {
+        return r1 !== r2;
+      },
+      sectionHeaderHasChanged: props.renderSectionHeader ? function (s1, s2) {
+        return s1 !== s2;
+      } : undefined,
+      getSectionHeaderData: function getSectionHeaderData(dataBlob, sectionId) {
+        return props.getSectionId(dataBlob[sectionId][0]);
+      }
+    }, props.getSectionId);
+
+    _this2.state = {
+      status: props.loading ? Status.LOADING : Status.IDLE,
+      dataSource: _this2.listDataSource.clone(props.data)
+    };
+    return _this2;
+  }
+
+  babelHelpers.createClass(ListView, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.data !== this.props.data) {
+        this.setState({ dataSource: this.listDataSource.clone(nextProps.data) });
+      }
+
+      if (nextProps.loading !== this.props.loading) {
+        this.setLoading(nextProps.loading);
+      }
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextProps.data !== this.props.data || nextProps.loading !== this.props.loading || nextState.status !== this.state.status;
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (_reactNative.Platform.OS === 'ios' && this.state.status !== Status.IDLE) {
+        _reactNative.StatusBar.setNetworkActivityIndicatorVisible(false);
+      }
+    }
+  }, {
+    key: 'onRefresh',
+    value: function onRefresh() {
+      this.setState({
+        status: Status.REFRESHING
+      });
+
+      if (this.props.onRefresh) {
+        this.props.onRefresh();
+      }
+    }
+  }, {
+    key: 'getPropsToPass',
+    value: function getPropsToPass() {
+      var props = this.props;
+      var mappedProps = babelHelpers.extends({}, props);
+
+      mappedProps.onEndReachedThreshold = 40;
+
+      mappedProps.enableEmptySections = true;
+
+      mappedProps.style = props.style.list;
+
+      mappedProps.contentContainerStyle = props.style.listContent;
+
+      mappedProps.renderHeader = this.createRenderHeader(props.renderHeader, props.autoHideHeader);
+      mappedProps.renderRow = props.renderRow;
+      mappedProps.renderFooter = this.renderFooter;
+      mappedProps.renderSectionHeader = props.renderSectionHeader;
+
+      mappedProps.onEndReached = this.createOnLoadMore();
+
+      mappedProps.dataSource = this.state.dataSource;
+
+      mappedProps.refreshControl = props.onRefresh && this.renderRefreshControl();
+
+      mappedProps.ref = this.handleListViewRef;
+
+      return mappedProps;
+    }
+  }, {
+    key: 'setLoading',
+    value: function setLoading(loading) {
+      if (loading) {
+        if (this.state.status !== Status.IDLE) {
+          return;
+        }
+
+        this.setState({
+          status: Status.LOADING
+        });
+      } else {
+        this.setState({
+          status: Status.IDLE
+        });
+      }
+    }
+  }, {
+    key: 'createOnLoadMore',
+    value: function createOnLoadMore() {
+      var _props = this.props,
+          onLoadMore = _props.onLoadMore,
+          data = _props.data;
+      var status = this.state.status;
+
+      if (onLoadMore) {
+        return _lodash2.default.throttle(function () {
+          if (!_lodash2.default.isEmpty(data) && status === Status.IDLE) {
+            onLoadMore();
+          }
+        }, 2000, { leading: true });
+      }
+    }
+  }, {
+    key: 'autoHideHeader',
+    value: function autoHideHeader(_ref) {
+      var height = _ref.nativeEvent.layout.height;
+
+      this.scrollListView({ y: height, animated: false });
+    }
+  }, {
+    key: 'createRenderHeader',
+    value: function createRenderHeader(renderHeader, autoHideHeader) {
+      if (!renderHeader) {
+        return;
+      }
+
+      var style = this.props.style;
+
+      var headerContainerProps = {
+        style: style.headerContainer
+      };
+
+      if (autoHideHeader) {
+        headerContainerProps.onLayout = this.autoHideHeader;
+      }
+
+      return function () {
+        return _react2.default.createElement(
+          _reactNative.View,
+          babelHelpers.extends({}, headerContainerProps, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 233
+            }
+          }),
+          renderHeader()
+        );
+      };
+    }
+  }, {
+    key: 'scrollListView',
+    value: function scrollListView(scrollOptions) {
+      this.listView.scrollTo(scrollOptions);
+    }
+  }, {
+    key: 'handleListViewRef',
+    value: function handleListViewRef(listView) {
+      if (!listView) {
+        return;
+      }
+
+      this.listView = listView;
+    }
+  }, {
+    key: 'renderFooter',
+    value: function renderFooter() {
+      var _props2 = this.props,
+          style = _props2.style,
+          renderFooter = _props2.renderFooter;
+      var status = this.state.status;
+
+      var spinner = void 0;
+
+      var showNetworkActivity = true;
+      switch (status) {
+        case Status.LOADING:
+          spinner = _react2.default.createElement(
+            _reactNative.View,
+            { style: style.loadMoreSpinner, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 261
+              }
+            },
+            _react2.default.createElement(_Spinner.Spinner, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 261
+              }
+            })
+          );
+          break;
+        case Status.LOADING_NEXT:
+          spinner = _react2.default.createElement(
+            _reactNative.View,
+            { style: style.loadMoreSpinner, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 264
+              }
+            },
+            _react2.default.createElement(_Spinner.Spinner, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 264
+              }
+            })
+          );
+          break;
+        case Status.REFRESHING:
+          spinner = null;
+          break;
+        default:
+          showNetworkActivity = false;
+          spinner = null;
+      }
+
+      if (_reactNative.Platform.OS === 'ios') {
+        _reactNative.StatusBar.setNetworkActivityIndicatorVisible(showNetworkActivity);
+      }
+
+      return _react2.default.createElement(
+        _reactNative.View,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 279
+          }
+        },
+        spinner,
+        renderFooter ? renderFooter() : null
+      );
+    }
+  }, {
+    key: 'renderRefreshControl',
+    value: function renderRefreshControl() {
+      var style = this.props.style;
+      var status = this.state.status;
+
+      var refreshControlStyle = babelHelpers.extends({}, style.refreshControl);
+      delete refreshControlStyle.tintColor;
+
+      return _react2.default.createElement(_reactNative.RefreshControl, {
+        onRefresh: this.onRefresh,
+        refreshing: status === Status.REFRESHING,
+        tintColor: style.refreshControl.tintColor,
+        style: refreshControlStyle,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 295
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_reactNative.ListView, babelHelpers.extends({}, this.getPropsToPass(), {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 305
+        }
+      }));
+    }
+  }]);
+  return ListView;
+}(_react2.default.Component), _class.propTypes = {
+  autoHideHeader: _react2.default.PropTypes.bool,
+  style: _react2.default.PropTypes.object,
+  data: _react2.default.PropTypes.array,
+  loading: _react2.default.PropTypes.bool,
+  onLoadMore: _react2.default.PropTypes.func,
+  onRefresh: _react2.default.PropTypes.func,
+  getSectionId: _react2.default.PropTypes.func,
+  renderRow: _react2.default.PropTypes.func,
+  renderHeader: _react2.default.PropTypes.func,
+  renderFooter: _react2.default.PropTypes.func,
+  renderSectionHeader: _react2.default.PropTypes.func,
+  scrollDriver: _react2.default.PropTypes.object
+}, _temp);
+
+
+var StyledListView = (0, _theme.connectStyle)('shoutem.ui.ListView', {
+  listContent: {
+    paddingBottom: 5
+  },
+  refreshControl: {
+    tintColor: '#ccc'
+  },
+  loadMoreSpinner: {
+    paddingVertical: 25
+  }
+})(ListView);
+
+function getRNListViewComponent(context) {
+  return _lodash2.default.get(context, 'wrappedInstance.listView');
+}
+
+StyledListView.prototype.scrollTo = function scrollTo(coordinates) {
+  var listView = getRNListViewComponent(this);
+  if (listView) {
+    listView.scrollTo(coordinates);
+  }
+};
+
+StyledListView.prototype.scrollToEnd = function scrollToEnd(animation) {
+  var listView = getRNListViewComponent(this);
+  if (listView) {
+    listView.scrollToEnd(animation);
+  }
+};
+
+exports.ListView = StyledListView;

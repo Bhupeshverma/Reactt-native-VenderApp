@@ -1,0 +1,41 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _actions=require("../../actions");
+var _reactRedux=require("react-redux");
+var _reactNativeRouterFlux=require("react-native-router-flux");
+var _reactNative=require("react-native");
+var _reactNativeLoadingSpinnerOverlay=require("react-native-loading-spinner-overlay");var _reactNativeLoadingSpinnerOverlay2=babelHelpers.interopRequireDefault(_reactNativeLoadingSpinnerOverlay);var
+
+LogoutComponent=function(_Component){babelHelpers.inherits(LogoutComponent,_Component);
+function LogoutComponent(props){babelHelpers.classCallCheck(this,LogoutComponent);var _this=babelHelpers.possibleConstructorReturn(this,(LogoutComponent.__proto__||Object.getPrototypeOf(LogoutComponent)).call(this,
+props));
+_this.state={
+visible:false};return _this;
+
+}babelHelpers.createClass(LogoutComponent,[{key:"componentDidMount",value:function componentDidMount()
+
+{
+this.props.Logout();
+}},{key:"render",value:function render()
+{
+return(
+_react2.default.createElement(_reactNative.View,null,
+this.props.spinner?_react2.default.createElement(_reactNative.View,{style:{flex:1}},
+_react2.default.createElement(_reactNativeLoadingSpinnerOverlay2.default,{visible:true,textContent:"Signing out...",textStyle:{color:'#FFF'}})):
+null,
+this.props.error?_reactNative.Alert.alert(
+'Error Logging Out',
+'could not log out !!'):
+null,
+this.props.loggedOut?_reactNativeRouterFlux.Actions.Main({type:_reactNativeRouterFlux.ActionConst.RESET}):null));
+
+
+}}]);return LogoutComponent;}(_react.Component);
+
+function mapStateToProps(state){
+return{
+spinner:state.LogOutReducer.spinner,
+error:state.LogOutReducer.error,
+loggedOut:state.LogOutReducer.loggedOut};
+
+}exports.default=
+(0,_reactRedux.connect)(mapStateToProps,{Logout:_actions.Logout})(LogoutComponent);

@@ -1,0 +1,58 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Page = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/HorizontalPager/Page.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _index = require('../../index');
+
+var Page = exports.Page = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(Page, _Component);
+
+  function Page() {
+    babelHelpers.classCallCheck(this, Page);
+    return babelHelpers.possibleConstructorReturn(this, (Page.__proto__ || Object.getPrototypeOf(Page)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(Page, [{
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps) {
+      return nextProps.isActive;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          width = _props.width,
+          style = _props.style,
+          children = _props.children;
+
+
+      return _react2.default.createElement(
+        _index.View,
+        {
+          virtual: true,
+          style: babelHelpers.extends({}, style, { width: width }),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          }
+        },
+        children
+      );
+    }
+  }]);
+  return Page;
+}(_react.Component), _class.propTypes = {
+  isActive: _react2.default.PropTypes.bool.isRequired,
+  width: _react2.default.PropTypes.number.isRequired,
+  style: _react2.default.PropTypes.object,
+  children: _react2.default.PropTypes.node
+}, _temp);

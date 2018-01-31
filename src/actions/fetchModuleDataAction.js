@@ -45,7 +45,7 @@ export function fetchData( ) {
     ],
     "link_name_to_fields_array":[]
 }
-    return axios.post(`http://crm-dev.streetstylestore.com/webservice/getDataRelatedModule.php`, data)
+    return axios.post(`http://crm.streetstylestore.com/webservice/getDataRelatedModule.php`, data)
    .then((response) => {
      console.log("fetchedData", response.data)
      dispatch(recievedData(response));

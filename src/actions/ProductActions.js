@@ -33,15 +33,15 @@ export function fetchProducts() {
    const {sessionID} = getState().auth
    const {user : {name_value_list : {user_id : {value}}} } = getState().auth;
    //const {data : {name_value_list: {vendor_type: {value}}}} =getState().fetchedReducer;
-   
+
    const data =  {
 "session": `${sessionID}`,
-"user_id": `${value}`,
-"vender_type": "Shoes"
+"user_id": `${value}`
+
 }
 
    console.log("fetchProducts", data);
-    return axios.post(`http://crm-dev.streetstylestore.com/webservice/get_missing_product_item.php`, data)
+    return axios.post(`http://crm.streetstylestore.com/webservice/get_missing_product_item.php`, data)
    .then((response) => {
      console.log(response.status)
      dispatch(recievedProducts(response));

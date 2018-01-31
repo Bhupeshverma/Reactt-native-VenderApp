@@ -40,8 +40,6 @@ function changefetchdatastatus() {
 }
 
 
-
-
 export function Logout() {
 
     return (dispatch , getState) => {
@@ -54,13 +52,14 @@ export function Logout() {
         console.log(data)
 
 
-        return axios.post(`http://crm-dev.streetstylestore.com/webservice/logout.php`,data)
+        return axios.post(`http://crm.streetstylestore.com/webservice/logout.php`,data)
             .then((response) => {
             console.log(response.status)
             if(response.status === 200){
                 dispatch(loggedOut(response));
                 dispatch(changefetchdatastatus())
                 dispatch(changeproductstatus())
+
             }
 
             })

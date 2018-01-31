@@ -1,0 +1,18 @@
+Object.defineProperty(exports,"__esModule",{value:true});
+
+var _reactNative=require("react-native");
+
+// On Android we pass the manifest in JSON form so this step is necessary
+var ExponentConstants=_reactNative.NativeModules.ExponentConstants;
+
+var manifest=void 0;
+if(ExponentConstants){
+manifest=ExponentConstants.manifest;
+if(typeof manifest==='string'){
+manifest=JSON.parse(manifest);
+}
+}exports.default=babelHelpers.extends({},
+
+
+ExponentConstants,{
+manifest:manifest});

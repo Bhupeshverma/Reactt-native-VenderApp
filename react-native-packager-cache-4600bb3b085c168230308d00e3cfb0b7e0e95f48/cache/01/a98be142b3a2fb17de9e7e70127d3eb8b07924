@@ -1,0 +1,45 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/html/elements/Img.js';
+exports.isImg = isImg;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _Html = require('../Html');
+
+var _Image = require('../components/Image');
+
+var _Image2 = babelHelpers.interopRequireDefault(_Image);
+
+function isImg(element) {
+  return _lodash2.default.get(element, 'tag') === 'img';
+}
+
+function Img(_ref) {
+  var src = _ref.src,
+      style = _ref.style,
+      lightbox = _ref.lightbox;
+
+  var source = { uri: src };
+
+  return _react2.default.createElement(_Image2.default, {
+    source: source,
+    style: style,
+    lightbox: lightbox,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    }
+  });
+}
+
+Img.propTypes = babelHelpers.extends({}, _Image2.default.propTypes, _Html.ElementPropTypes);
+
+exports.default = (0, _Html.combineMappers)(_Html.mapElementProps)(Img);

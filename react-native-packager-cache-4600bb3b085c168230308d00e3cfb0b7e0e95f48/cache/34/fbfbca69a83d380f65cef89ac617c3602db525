@@ -1,0 +1,77 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/src/screens/SyncScreen.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions');
+
+var _reactNativeRouterFlux = require('react-native-router-flux');
+
+var SyncScreen = function (_Component) {
+  babelHelpers.inherits(SyncScreen, _Component);
+
+  function SyncScreen(props) {
+    babelHelpers.classCallCheck(this, SyncScreen);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (SyncScreen.__proto__ || Object.getPrototypeOf(SyncScreen)).call(this, props));
+
+    _this.state = {
+      visible: true
+    };
+    return _this;
+  }
+
+  babelHelpers.createClass(SyncScreen, [{
+    key: 'handleSync',
+    value: function handleSync() {
+      this.props.ClearProducts();
+      _reactNativeRouterFlux.Actions.pop();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactNative.View,
+        { style: { flex: 1, justifyContent: 'center', alignItems: 'center' }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 21
+          }
+        },
+        this.props.response ? _react2.default.createElement(
+          _reactNative.View,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 22
+            }
+          },
+          this.handleSync()
+        ) : null,
+        this.props.spinner ? _react2.default.createElement(_reactNative.ActivityIndicator, { size: 'large', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 23
+          }
+        }) : null,
+        this.props.error ? _reactNative.ToastAndroid.show("ERROR IN SYNCING", _reactNative.ToastAndroid.SHORT) : null
+      );
+    }
+  }]);
+  return SyncScreen;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    spinner: state.syncReducer.spinner,
+    response: state.syncReducer.response,
+    error: state.syncReducer.error
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { ClearProducts: _actions.ClearProducts })(SyncScreen);

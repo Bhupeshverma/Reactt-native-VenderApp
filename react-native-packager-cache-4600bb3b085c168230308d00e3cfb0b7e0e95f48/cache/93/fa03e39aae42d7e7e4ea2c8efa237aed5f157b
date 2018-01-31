@@ -1,0 +1,85 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.Rotate=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _View=require("./View");
+var _DriverShape=require("../drivers/DriverShape");
+/*
+ * Rotate Component adds rotation effect to its children components.
+ * Connect it to driver and pass the input range to animate it.
+ * e.g.:
+ * ...
+ * const driver = new ScrollDriver();
+ *
+ * return (
+ *  <ScrollView
+ *    {...driver.scrollViewProps}
+ *  >
+ *    <Rotate
+ *      driver={driver}
+ *      inputRange={[100,150]}
+ *      angle="180deg"
+ *    >
+ *      <Image />
+ *    </Rotate>
+ *  </ScrollView>
+ * );
+ *
+ * ...
+ * Above code will create scroll dependent rotation of an Image by 180 degrees
+ */var
+Rotate=exports.Rotate=(_temp=_class=function(_Component){babelHelpers.inherits(Rotate,_Component);function Rotate(){babelHelpers.classCallCheck(this,Rotate);return babelHelpers.possibleConstructorReturn(this,(Rotate.__proto__||Object.getPrototypeOf(Rotate)).apply(this,arguments));}babelHelpers.createClass(Rotate,[{key:"render",value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _props=
+
+
+
+
+
+
+
+this.props,driver=_props.driver,children=_props.children,_props$inputRange=_props.inputRange,inputRange=_props$inputRange===undefined?[0,1]:_props$inputRange,_props$angle=_props.angle,angle=_props$angle===undefined?'360deg':_props$angle,axis=_props.axis,style=_props.style;
+
+return(
+_react2.default.createElement(_View.View,{
+driver:driver,
+animationName:"rotate",
+animationOptions:{inputRange:inputRange,angle:angle,axis:axis},
+style:style},
+
+children));
+
+
+}}]);return Rotate;}(_react.Component),_class.propTypes={/**
+     * An instance of animation driver, usually ScrollDriver
+     */driver:_DriverShape.DriverShape.isRequired,/**
+     * Components to which an effect will be applied
+     */children:_react2.default.PropTypes.node,/**
+     * pair of [start, end] values from animation driver, how
+     * children would rotate by an angle in axis
+     */inputRange:_react2.default.PropTypes.array,/**
+     * rotation angle e.g. "90deg"
+     */angle:_react2.default.PropTypes.string,/**
+     * axis of rotation(x, y, z), z is default
+     */axis:_react2.default.PropTypes.string,style:_react2.default.PropTypes.object},_temp);

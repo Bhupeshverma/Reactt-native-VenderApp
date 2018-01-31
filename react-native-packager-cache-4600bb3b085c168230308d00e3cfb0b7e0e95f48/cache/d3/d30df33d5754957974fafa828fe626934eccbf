@@ -1,0 +1,42 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _View=require("../../components/View");
+var _Video=require("../../components/Video");
+var _Image=require("../components/Image");var _Image2=babelHelpers.interopRequireDefault(_Image);
+var _Html=require("../Html");
+
+/**
+ * Transform a video to RN component with props.
+ */
+function Video(_ref){var src=_ref.src,thumbnailUrl=_ref.thumbnailUrl,style=_ref.style;
+// TODO - Find out if there is a better way to keep the video aspect ratio then with Image
+// A thumbnail is used to scale the video properly (because it holds the video aspect ratio)
+return(
+_react2.default.createElement(_Image2.default,{
+source:{uri:thumbnailUrl},
+style:style.container,
+allowUpscale:true},
+
+_react2.default.createElement(_View.View,{styleName:"fill-parent"},
+_react2.default.createElement(_Video.Video,{source:{uri:src},poster:thumbnailUrl}))));
+
+
+
+}
+
+Video.propTypes={
+src:_react2.default.PropTypes.string,
+thumbnail_url:_react2.default.PropTypes.string,
+style:_react2.default.PropTypes.object};
+
+
+Video.defaultProps={
+style:{
+container:{
+alignSelf:'stretch',
+justifyContent:'center',
+alignItems:'center'}}};exports.default=
+
+
+
+
+(0,_Html.combineMappers)(_Html.mapElementProps)(Video);

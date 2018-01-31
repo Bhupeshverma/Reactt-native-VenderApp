@@ -12,7 +12,7 @@ export default function (state=INITIAL_STATE , action) {
         case SYNCING_PRODUCTS:
                 return { ...state , spinner : true , error: false};
         case SYNCED_PRODUCTS:
-                return { ...state , spinner : false , response : action.payload.data, error: false}
+                return { ...state , spinner : false , response : action.payload.data, error: false }
         case ERROR_SYNCING_PRODUCTS:
                 return { ...state , spinner : false , error : true}
 

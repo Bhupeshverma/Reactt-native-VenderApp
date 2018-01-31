@@ -1,0 +1,54 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.TimingDriver=undefined;var _reactNative=require("react-native");
+
+
+
+
+var _DriverBase2=require("./DriverBase");
+
+/**
+ * Animation driver that creates animated value changed with time.
+ * Pass instance to any @shoutem/animation animation to run it
+ * e.g.:
+ * driver = new TimingDriver({
+ *   duration: 400 // 250 by default,
+ *   easing: Easing.inOut // Easing.cubic is passed by default
+ *   delay: 200 // 0 by default
+ * });
+ * return (
+ *   <FadeIn driver={driver}>
+ *     <Text>I'm fading in</Text>
+ *   </FadeIn>
+ * );
+ * ...
+ * Check
+ * http://facebook.github.io/react-native/releases/0.30/docs/animations.html#core-api
+ * for animation options
+ */var
+TimingDriver=exports.TimingDriver=function(_DriverBase){babelHelpers.inherits(TimingDriver,_DriverBase);
+function TimingDriver(options){babelHelpers.classCallCheck(this,TimingDriver);var _this=babelHelpers.possibleConstructorReturn(this,(TimingDriver.__proto__||Object.getPrototypeOf(TimingDriver)).call(this));
+
+
+_this.animationOptions=babelHelpers.extends({
+easing:_reactNative.Easing.cubic,
+duration:250},
+options);
+
+
+_this.runTimer=_this.runTimer.bind(_this);
+_this.toValue=_this.toValue.bind(_this);return _this;
+}babelHelpers.createClass(TimingDriver,[{key:"toValue",value:function toValue(
+
+endValue,onFinish){
+_reactNative.Animated.timing(
+this.value,babelHelpers.extends({
+
+toValue:endValue},
+this.animationOptions)).
+
+start(onFinish);
+}},{key:"runTimer",value:function runTimer(
+
+endValue,onFinish){
+console.warn('runTimer will be deprecated soon, use toValue instead.');
+this.toValue(endValue,onFinish);
+}}]);return TimingDriver;}(_DriverBase2.DriverBase);

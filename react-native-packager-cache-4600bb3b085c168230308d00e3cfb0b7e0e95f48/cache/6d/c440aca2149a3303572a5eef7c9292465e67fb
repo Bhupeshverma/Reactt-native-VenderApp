@@ -1,0 +1,294 @@
+var _propTypes=require("prop-types");var _propTypes2=babelHelpers.interopRequireDefault(_propTypes);
+var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+
+
+
+
+
+
+
+
+var _resolveAssetSource=require("react-native/Libraries/Image/resolveAssetSource");var _resolveAssetSource2=babelHelpers.interopRequireDefault(_resolveAssetSource);
+var _decorateMapComponent=require("./decorateMapComponent");var _decorateMapComponent2=babelHelpers.interopRequireDefault(_decorateMapComponent);
+
+
+
+
+var viewConfig={
+uiViewClassName:'AIR<provider>MapMarker',
+validAttributes:{
+coordinate:true}};
+
+
+
+var propTypes=babelHelpers.extends({},_reactNative.ViewPropTypes,{
+
+
+// TODO(lmr): get rid of these?
+identifier:_propTypes2.default.string,
+reuseIdentifier:_propTypes2.default.string,
+
+/**
+   * The title of the marker. This is only used if the <Marker /> component has no children that
+   * are an `<MapView.Callout />`, in which case the default callout behavior will be used, which
+   * will show both the `title` and the `description`, if provided.
+   */
+title:_propTypes2.default.string,
+
+/**
+   * The description of the marker. This is only used if the <Marker /> component has no children
+   * that are an `<MapView.Callout />`, in which case the default callout behavior will be used,
+   * which will show both the `title` and the `description`, if provided.
+   */
+description:_propTypes2.default.string,
+
+/**
+   * A custom image to be used as the marker's icon. Only local image resources are allowed to be
+   * used.
+   */
+image:_propTypes2.default.any,
+
+/**
+   * Opacity level of view/image based markers
+   */
+opacity:_propTypes2.default.number,
+
+/**
+   * If no custom marker view or custom image is provided, the platform default pin will be used,
+   * which can be customized by this color. Ignored if a custom marker is being used.
+   */
+pinColor:_propTypes2.default.string,
+
+/**
+   * The coordinate for the marker.
+   */
+coordinate:_propTypes2.default.shape({
+/**
+     * Coordinates for the anchor point of the marker.
+     */
+latitude:_propTypes2.default.number.isRequired,
+longitude:_propTypes2.default.number.isRequired}).
+isRequired,
+
+/**
+   * The offset (in points) at which to display the view.
+   *
+   * By default, the center point of an annotation view is placed at the coordinate point of the
+   * associated annotation. You can use this property to reposition the annotation view as
+   * needed. This x and y offset values are measured in points. Positive offset values move the
+   * annotation view down and to the right, while negative values move it up and to the left.
+   *
+   * For android, see the `anchor` prop.
+   *
+   * @platform ios
+   */
+centerOffset:_propTypes2.default.shape({
+/**
+     * Offset from the anchor point
+     */
+x:_propTypes2.default.number.isRequired,
+y:_propTypes2.default.number.isRequired}),
+
+
+/**
+   * The offset (in points) at which to place the callout bubble.
+   *
+   * This property determines the additional distance by which to move the callout bubble. When
+   * this property is set to (0, 0), the anchor point of the callout bubble is placed on the
+   * top-center point of the marker view’s frame. Specifying positive offset values moves the
+   * callout bubble down and to the right, while specifying negative values moves it up and to
+   * the left.
+   *
+   * For android, see the `calloutAnchor` prop.
+   *
+   * @platform ios
+   */
+calloutOffset:_propTypes2.default.shape({
+/**
+     * Offset to the callout
+     */
+x:_propTypes2.default.number.isRequired,
+y:_propTypes2.default.number.isRequired}),
+
+
+/**
+   * Sets the anchor point for the marker.
+   *
+   * The anchor specifies the point in the icon image that is anchored to the marker's position
+   * on the Earth's surface.
+   *
+   * The anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0], where (0, 0)
+   * is the top-left corner of the image, and (1, 1) is the bottom-right corner. The anchoring
+   * point in a W x H image is the nearest discrete grid point in a (W + 1) x (H + 1) grid,
+   * obtained by scaling the then rounding. For example, in a 4 x 2 image, the anchor point
+   * (0.7, 0.6) resolves to the grid point at (3, 1).
+   *
+   * For ios, see the `centerOffset` prop.
+   *
+   * @platform android
+   */
+anchor:_propTypes2.default.shape({
+/**
+     * Offset to the callout
+     */
+x:_propTypes2.default.number.isRequired,
+y:_propTypes2.default.number.isRequired}),
+
+
+/**
+   * Specifies the point in the marker image at which to anchor the callout when it is displayed.
+   * This is specified in the same coordinate system as the anchor. See the `andor` prop for more
+   * details.
+   *
+   * The default is the top middle of the image.
+   *
+   * For ios, see the `calloutOffset` prop.
+   *
+   * @platform android
+   */
+calloutAnchor:_propTypes2.default.shape({
+/**
+     * Offset to the callout
+     */
+x:_propTypes2.default.number.isRequired,
+y:_propTypes2.default.number.isRequired}),
+
+
+/**
+   * Sets whether this marker should be flat against the map true or a billboard facing the
+   * camera false.
+   *
+   * @platform android
+   */
+flat:_propTypes2.default.bool,
+
+draggable:_propTypes2.default.bool,
+
+/**
+   * Callback that is called when the user presses on the marker
+   */
+onPress:_propTypes2.default.func,
+
+/**
+   * Callback that is called when the user selects the marker, before the callout is shown.
+   *
+   * @platform ios
+   */
+onSelect:_propTypes2.default.func,
+
+/**
+   * Callback that is called when the marker is deselected, before the callout is hidden.
+   *
+   * @platform ios
+   */
+onDeselect:_propTypes2.default.func,
+
+/**
+   * Callback that is called when the user taps the callout view.
+   */
+onCalloutPress:_propTypes2.default.func,
+
+/**
+   * Callback that is called when the user initiates a drag on this marker (if it is draggable)
+   */
+onDragStart:_propTypes2.default.func,
+
+/**
+   * Callback called continuously as the marker is dragged
+   */
+onDrag:_propTypes2.default.func,
+
+/**
+   * Callback that is called when a drag on this marker finishes. This is usually the point you
+   * will want to setState on the marker's coordinate again
+   */
+onDragEnd:_propTypes2.default.func});
+
+
+var defaultProps={
+onPress:function onPress(){}};var
+
+
+MapMarker=function(_React$Component){babelHelpers.inherits(MapMarker,_React$Component);
+function MapMarker(props){babelHelpers.classCallCheck(this,MapMarker);var _this=babelHelpers.possibleConstructorReturn(this,(MapMarker.__proto__||Object.getPrototypeOf(MapMarker)).call(this,
+props));
+
+_this.showCallout=_this.showCallout.bind(_this);
+_this.hideCallout=_this.hideCallout.bind(_this);return _this;
+}babelHelpers.createClass(MapMarker,[{key:"setNativeProps",value:function setNativeProps(
+
+props){
+this.marker.setNativeProps(props);
+}},{key:"showCallout",value:function showCallout()
+
+{
+this._runCommand('showCallout',[]);
+}},{key:"hideCallout",value:function hideCallout()
+
+{
+this._runCommand('hideCallout',[]);
+}},{key:"_getHandle",value:function _getHandle()
+
+{
+return(0,_reactNative.findNodeHandle)(this.marker);
+}},{key:"_runCommand",value:function _runCommand(
+
+name,args){
+switch(_reactNative.Platform.OS){
+case'android':
+_reactNative.NativeModules.UIManager.dispatchViewManagerCommand(
+this._getHandle(),
+this.getUIManagerCommand(name),
+args);
+
+break;
+
+case'ios':
+this.getMapManagerCommand(name).apply(undefined,[this._getHandle()].concat(babelHelpers.toConsumableArray(args)));
+break;
+
+default:
+break;}
+
+}},{key:"render",value:function render()
+
+{var _this2=this;
+var image=void 0;
+if(this.props.image){
+image=(0,_resolveAssetSource2.default)(this.props.image)||{};
+image=image.uri;
+}
+
+var AIRMapMarker=this.getAirComponent();
+
+return(
+_react2.default.createElement(AIRMapMarker,babelHelpers.extends({
+ref:function ref(_ref){_this2.marker=_ref;}},
+this.props,{
+image:image,
+style:[styles.marker,this.props.style]})));
+
+
+}}]);return MapMarker;}(_react2.default.Component);
+
+
+MapMarker.propTypes=propTypes;
+MapMarker.defaultProps=defaultProps;
+MapMarker.viewConfig=viewConfig;
+
+var styles=_reactNative.StyleSheet.create({
+marker:{
+position:'absolute',
+backgroundColor:'transparent'}});
+
+
+
+MapMarker.Animated=_reactNative.Animated.createAnimatedComponent(MapMarker);
+
+module.exports=(0,_decorateMapComponent2.default)(MapMarker,{
+componentType:'Marker',
+providers:{
+google:{
+ios:_decorateMapComponent.SUPPORTED,
+android:_decorateMapComponent.USES_DEFAULT_IMPLEMENTATION}}});

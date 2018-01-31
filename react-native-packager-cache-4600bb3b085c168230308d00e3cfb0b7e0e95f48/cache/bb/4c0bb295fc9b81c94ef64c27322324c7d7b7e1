@@ -1,0 +1,903 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNativeElements = require('react-native-elements');
+
+var _reactRedux = require('react-redux');
+
+var _reactNativeRouterFlux = require('react-native-router-flux');
+
+var _expo = require('expo');
+
+var _FontAwesome = require('@expo/vector-icons/FontAwesome');
+
+var _FontAwesome2 = babelHelpers.interopRequireDefault(_FontAwesome);
+
+var _actions = require('../actions');
+
+var _reactNativeLoader = require('react-native-loader');
+
+var _ui = require('@shoutem/ui');
+
+var _Dimensions$get = _reactNative.Dimensions.get('window'),
+    height = _Dimensions$get.height,
+    width = _Dimensions$get.width;
+
+var box_count = 1;
+var box_height = height / box_count;
+
+var MainScreen = function (_Component) {
+  babelHelpers.inherits(MainScreen, _Component);
+
+  function MainScreen(props) {
+    babelHelpers.classCallCheck(this, MainScreen);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).call(this, props));
+
+    var ds = new _reactNative.ListView.DataSource({ rowHasChanged: function rowHasChanged(r1, r2) {
+        return r1 !== r2;
+      } });
+    _this.state = {
+      text: '',
+      count: 0,
+      newdata: [],
+      scanText: '',
+      search: 1,
+      completedTask: [],
+      size_34_c: 0,
+      size_35_c: 0,
+      size_36_c: 0,
+      size_37_c: 0,
+      size_38_c: 0,
+      size_39_c: 0,
+      size_40_c: 0,
+      size_41_c: 0,
+      size_42_c: 0,
+      name_value_list: [],
+      barcodeArray: [],
+      barcodeText: '',
+      fontLoaded: false,
+      loading: false,
+      focus: true
+    };
+    _this.handleOrder = _this.handleOrder.bind(_this);
+    _this.updateItem = _this.updateItem.bind(_this);
+    return _this;
+  }
+
+  babelHelpers.createClass(MainScreen, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
+      if (!this.props.products) {
+        this.props.fetchData();
+        this.props.fetchProducts();
+      }
+      _reactNative.BackHandler.addEventListener('hardwareBackPress', function () {
+
+        if (this.MainScreen()) {
+          this.exitApp();
+          return true;
+        }
+        return false;
+      });
+    }
+  }, {
+    key: 'filterSearch',
+    value: function filterSearch(text) {
+      this.setState({ text: text });
+      console.log(this.state.text);
+      var data = this.dataFilter(text, this.props.products.missing_item);
+      console.log("filteredData", data);
+      this.setState({ newdata: data });
+      this.setState({ barcodeText: text });
+      {
+        data.length == 0 ? this.setState({ search: 1 }) : this.setState({ search: 0 });
+      }
+    }
+  }, {
+    key: 'dataFilter',
+    value: function dataFilter(text, data) {
+      return data.filter(function (item) {
+        var itemData = item.product_id;
+        var textData = text;
+        if (itemData == textData) {
+          return item;
+        }
+      });
+    }
+  }, {
+    key: 'updateScanText',
+    value: function updateScanText(scanText) {
+      var _this2 = this;
+
+      this.setState({ scanText: scanText });
+      console.log(scanText);
+
+      console.log(this.state.scanText);
+      var dataText = scanText.substr(0, 2);
+      console.log("dataText", dataText);
+      var formattedSize = dataText;
+      console.log("formattedSize", formattedSize);
+
+      return this.state.newdata.forEach(function (item, index) {
+        if (formattedSize === '34' && item.size_34 != 0) {
+          item.size_34 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_34_c: _this2.state.size_34_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '34' && item.size_34 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 34');
+        }
+
+        if (formattedSize === '35' && item.size_35 != 0) {
+          item.size_35 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_35_c: _this2.state.size_35_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '35' && item.size_35 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 35');
+        }
+
+        if (formattedSize === '36' && item.size_36 != 0) {
+          item.size_36 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_36_c: _this2.state.size_36_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '36' && item.size_36 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 36');
+        }
+
+        if (formattedSize === '37' && item.size_37 != 0) {
+          item.size_37 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_37_c: _this2.state.size_37_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '37' && item.size_37 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 37');
+        }
+
+        if (formattedSize === '38' && item.size_38 != 0) {
+          item.size_38 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_38_c: _this2.state.size_38_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '38' && item.size_38 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 38');
+        }
+
+        if (formattedSize === '39' && item.size_39 != 0) {
+          item.size_39 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_39_c: _this2.state.size_39_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '39' && item.size_39 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 39');
+        }
+
+        if (formattedSize === '40' && item.size_40 != 0) {
+          item.size_40 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_40_c: _this2.state.size_40_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '40' && item.size_40 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 40');
+        }
+
+        if (formattedSize === '41' && item.size_41 != 0) {
+          item.size_41 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_41_c: _this2.state.size_41_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '41' && item.size_41 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 41');
+        }
+
+        if (formattedSize === '42' && item.size_42 != 0) {
+          item.size_42 -= 1;
+          item.total -= 1;
+          _this2.setState({
+            size_42_c: _this2.state.size_42_c + 1
+          });
+          _this2.state.barcodeArray.push(scanText);
+        }
+        if (formattedSize === '42' && item.size_42 == 0) {
+          _reactNative.Alert.alert('No more Item to Scan of Size 42');
+        }
+      });
+    }
+  }, {
+    key: 'updateItem',
+    value: function updateItem() {
+      var _this3 = this;
+
+      var dataArray, savedArray;
+      var total = this.state.size_34_c + this.state.size_35_c + this.state.size_36_c + this.state.size_37_c + this.state.size_38_c + this.state.size_39_c + this.state.size_40_c + this.state.size_41_c + this.state.size_42_c;
+      console.log("total_scan_count", total);
+      this.state.newdata.map(function (item, index) {
+        dataArray = [{
+          "name": item.name,
+          "product_id": item.product_id,
+          "product_image": item.product_image,
+          "size_34": _this3.state.size_34_c,
+          "size_35": _this3.state.size_35_c,
+          "size_36": _this3.state.size_36_c,
+          "size_37": _this3.state.size_37_c,
+          "size_38": _this3.state.size_38_c,
+          "size_39": _this3.state.size_39_c,
+          "size_40": _this3.state.size_40_c,
+          "size_41": _this3.state.size_41_c,
+          "size_42": _this3.state.size_42_c,
+          "total": total
+        }];
+      });
+
+      dataArray.map(function (item, index) {
+        savedArray = [{
+          "name": "id_product",
+          "value": item.product_id
+        }, {
+          "name": "name",
+          "value": item.name
+        }, {
+          "name": "size_34",
+          "value": String(_this3.state.size_34_c)
+        }, {
+          "name": "size_35_c",
+          "value": String(_this3.state.size_35_c)
+        }, {
+          "name": "size_36_c",
+          "value": String(_this3.state.size_36_c)
+        }, {
+          "name": "size_37_c",
+          "value": String(_this3.state.size_37_c)
+        }, {
+          "name": "size_38_c",
+          "value": String(_this3.state.size_38_c)
+        }, {
+          "name": "size_39_c",
+          "value": String(_this3.state.size_39_c)
+        }, {
+          "name": "size_40_c",
+          "value": String(_this3.state.size_40_c)
+        }, {
+          "name": "size_41_c",
+          "value": String(_this3.state.size_41_c)
+        }, {
+          "name": "size_42_c",
+          "value": String(_this3.state.size_42_c)
+        }, {
+          "name": "total_shoes_c",
+          "value": String(total)
+        }];
+      });
+
+      this.state.completedTask.push(dataArray);
+      this.state.name_value_list.push(savedArray);
+      console.log(savedArray);
+      console.log(this.state.completedTask);
+      console.log(this.state.name_value_list);
+      console.log(this.state.barcodeArray);
+      this.setState({ search: 1, text: '' });
+      this.filterSearch('');
+      this.props.SavedProducts(this.state.completedTask);
+      this.props.SyncWithCrm(this.state.name_value_list);
+      this.setState({
+        size_34_c: 0,
+        size_35_c: 0,
+        size_36_c: 0,
+        size_37_c: 0,
+        size_38_c: 0,
+        size_39_c: 0,
+        size_40_c: 0,
+        size_41_c: 0,
+        size_42_c: 0,
+        loading: false
+      });
+    }
+  }, {
+    key: 'handle34Minus',
+    value: function handle34Minus(total) {
+
+      if (this.state.size_34_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_34_c: this.state.size_34_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_34 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle35Minus',
+    value: function handle35Minus() {
+      if (this.state.size_35_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_35_c: this.state.size_35_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_35 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle36Minus',
+    value: function handle36Minus() {
+      if (this.state.size_36_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_34_c: this.state.size_36_c - 1
+
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_36 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle37Minus',
+    value: function handle37Minus() {
+      if (this.state.size_37_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_34_c: this.state.size_37_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_37 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle38Minus',
+    value: function handle38Minus() {
+      if (this.state.size_38_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_38_c: this.state.size_38_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_38 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle39Minus',
+    value: function handle39Minus() {
+      if (this.state.size_39_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_39_c: this.state.size_39_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_39 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle40Minus',
+    value: function handle40Minus() {
+      if (this.state.size_40_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_40_c: this.state.size_40_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_40 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle41Minus',
+    value: function handle41Minus() {
+      if (this.state.size_41_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_41_c: this.state.size_41_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_41 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handle42Minus',
+    value: function handle42Minus() {
+      if (this.state.size_42_c === 0) {
+        _reactNative.Alert.alert('Scan count is already 0');
+      } else {
+        this.setState({
+          size_34_c: this.state.size_42_c - 1
+        });
+        this.state.newdata.map(function (item, index) {
+          item.size_42 += 1;
+          item.total += 1;
+        });
+      }
+    }
+  }, {
+    key: 'handleOrder',
+    value: function handleOrder() {
+      var _this4 = this;
+
+      return this.state.newdata.map(function (item, index) {
+        return _react2.default.createElement(
+          _reactNative.View,
+          { styleName: 'vertical', key: item.product_id },
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            item.product_image === null ? _react2.default.createElement(_ui.Image, {
+              styleName: 'medium rounded-corners',
+              source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png' }
+            }) : _react2.default.createElement(_ui.Image, {
+              styleName: 'medium rounded-corners',
+              source: { uri: item.product_image }
+            }),
+            _react2.default.createElement(
+              _reactNative.View,
+              { styleName: 'vertical stretch space-between' },
+              _react2.default.createElement(
+                _ui.Subtitle,
+                null,
+                item.name
+              ),
+              _react2.default.createElement(
+                _reactNative.View,
+                { style: { flexDirection: 'row', justifyContent: 'space-around' } },
+                _react2.default.createElement(
+                  _ui.Subtitle,
+                  null,
+                  item.product_id
+                ),
+                _react2.default.createElement(
+                  _ui.Subtitle,
+                  null,
+                  item.total
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Title,
+              null,
+              'SIZES'
+            ),
+            _react2.default.createElement(
+              _ui.Title,
+              { styleName: 'h-center' },
+              'M-COUNT'
+            ),
+            _react2.default.createElement(
+              _ui.Title,
+              { styleName: 'h-center' },
+              'SCAN-COUNT'
+            )
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_34'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_34
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_34_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle34Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_35'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_35
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_35_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle35Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_36'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_36
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_36_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle36Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_37'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_37
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_37_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle37Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_38'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_38
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_38_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle38Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_39'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_39
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_39_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle39Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_40'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_40
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_40_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle40Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_41'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_41
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_41_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle41Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Row,
+            null,
+            _react2.default.createElement(
+              _ui.Subtitle,
+              null,
+              'Size_42'
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              item.size_42
+            ),
+            _react2.default.createElement(
+              _ui.Subtitle,
+              { styleName: 'h-center' },
+              _this4.state.size_42_c
+            ),
+            _react2.default.createElement(_FontAwesome2.default.Button, { name: 'minus', backgroundColor: '#fff', color: '#000', onPress: function onPress() {
+                return _this4.handle42Minus();
+              } })
+          ),
+          _react2.default.createElement(
+            _ui.Button,
+            {
+              styleName: 'dark',
+              style: { backgroundColor: "#000", height: 30 },
+              onPress: function onPress() {
+                return _this4.updateItem();
+              } },
+            _react2.default.createElement(
+              _reactNative.Text,
+              { style: { color: '#fff', fontWeight: '400' } },
+              'DONE THE BATCH'
+            )
+          )
+        );
+      });
+    }
+  }, {
+    key: 'handleFocus',
+    value: function handleFocus() {
+      console.log("inside");
+      this.setState({ loading: true });
+    }
+  }, {
+    key: 'handleClearText',
+    value: function handleClearText() {
+      this.setState({ focus: true });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit() {
+      this.setState({ focus: true });
+    }
+  }, {
+    key: 'handleBackButton',
+    value: function handleBackButton() {
+      this.setState({
+        search: 1
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      return _react2.default.createElement(
+        _reactNative.View,
+        { style: styles.container },
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: { flexDirection: 'row' } },
+          this.state.search == 1 ? _react2.default.createElement(_reactNativeElements.SearchBar, {
+            lightTheme: true,
+
+            onChangeText: function onChangeText(text) {
+              return _this5.filterSearch(text);
+            },
+            placeholder: 'Search Product ID Here...',
+            onFocus: function onFocus() {
+              return _this5.handleFocus();
+            },
+            keyboardType: 'numeric',
+            value: this.state.text,
+            showLoadingIcon: this.state.loading,
+            containerStyle: { backgroundColor: "#db993d", width: width - 100 },
+            inputStyle: { backgroundColor: "#fff" }
+          }) : _react2.default.createElement(_reactNativeElements.SearchBar, {
+            lightTheme: true,
+
+            onChangeText: function onChangeText(scanText) {
+              return _this5.updateScanText(scanText);
+            },
+            placeholder: 'Search Here...',
+            autoFocus: this.state.focus,
+            onBlur: function onBlur() {
+              return _this5.setState({ scanText: '', focus: true });
+            },
+            value: this.state.scanText,
+            onClearText: function onClearText() {
+              return _this5.handleClearText();
+            },
+            onSubmit: function onSubmit() {
+              return _this5.handleSubmit();
+            },
+            containerStyle: { backgroundColor: "#db993d", width: width - 100 },
+            inputStyle: { backgroundColor: "#fff" }
+          }),
+          this.state.search == 1 ? _react2.default.createElement(
+            _ui.Button,
+            { styleName: 'full-width',
+              onPress: function onPress() {
+                return _this5.setState({ text: '' });
+              } },
+            _react2.default.createElement(
+              _reactNative.Text,
+              null,
+              'CLEAR'
+            )
+          ) : _react2.default.createElement(
+            _ui.Button,
+            { styleName: 'full-width',
+              onPress: function onPress() {
+                return _this5.setState({
+                  size_34_c: 0,
+                  size_35_c: 0,
+                  size_36_c: 0,
+                  size_37_c: 0,
+                  size_38_c: 0,
+                  size_39_c: 0,
+                  size_40_c: 0,
+                  size_41_c: 0,
+                  size_42_c: 0,
+                  search: 1 });
+              } },
+            _react2.default.createElement(
+              _reactNative.Text,
+              null,
+              'BACK'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: [styles.box, styles.box1] },
+          this.props.spinner ? _react2.default.createElement(
+            _reactNative.View,
+            { style: styles.spinner },
+            _react2.default.createElement(_reactNativeLoader.DoubleBounce, { size: 30, color: '#1CAFF6' })
+          ) : _react2.default.createElement(_reactNative.View, null),
+          this.props.error ? _react2.default.createElement(
+            _reactNative.Text,
+            null,
+            ' Could not fetch products  !'
+          ) : _react2.default.createElement(_reactNative.View, null),
+          this.props.products ? _react2.default.createElement(
+            _reactNative.ScrollView,
+            null,
+            this.handleOrder()
+          ) : _react2.default.createElement(_reactNative.View, null)
+        )
+      );
+    }
+  }]);
+  return MainScreen;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    spinner: state.productReducer.spinner,
+    products: state.productReducer.products,
+    error: state.productReducer.error
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+  fetchProducts: _actions.fetchProducts, fetchData: _actions.fetchData, batchDone: _actions.batchDone, logIn: _actions.logIn, SavedProducts: _actions.SavedProducts, SyncWithCrm: _actions.SyncWithCrm
+})(MainScreen);
+
+var styles = _reactNative.StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#eff6f7'
+
+  },
+  box: {
+    height: box_height },
+
+  box1: {
+    flex: 12,
+    backgroundColor: '#eff6f7'
+
+  },
+  spinner: {
+    flex: 1,
+    alignItems: 'center'
+  }
+});

@@ -1,0 +1,116 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/examples/components/Typography.js';
+exports.Typography = Typography;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('../../components/View');
+
+var _Stage = require('./Stage');
+
+var _Text = require('../../components/Text');
+
+function Typography() {
+  return _react2.default.createElement(
+    _View.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Heading', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17
+        }
+      },
+      _react2.default.createElement(
+        _Text.Heading,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 18
+          }
+        },
+        'Mobile App Creator'
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Title', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21
+        }
+      },
+      _react2.default.createElement(
+        _Text.Title,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 22
+          }
+        },
+        'MOBILE APP CREATOR'
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Subtitle', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25
+        }
+      },
+      _react2.default.createElement(
+        _Text.Subtitle,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          }
+        },
+        'Mobile App Creator'
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Text', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29
+        }
+      },
+      _react2.default.createElement(
+        _Text.Text,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 30
+          }
+        },
+        'Mobile App Creator'
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Caption', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 33
+        }
+      },
+      _react2.default.createElement(
+        _Text.Caption,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 34
+          }
+        },
+        'Mobile App Creator'
+      )
+    )
+  );
+}

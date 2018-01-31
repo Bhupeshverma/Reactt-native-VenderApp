@@ -1,0 +1,13 @@
+Object.defineProperty(exports,"__esModule",{value:true});
+var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNativeTabNavigator=require("react-native-tab-navigator");var _reactNativeTabNavigator2=babelHelpers.interopRequireDefault(_reactNativeTabNavigator);/*eslint-disable no-console */
+
+var Tabs=function Tabs(props){
+console.warn("Warning: Tabs has been deprecated and will be removed in a future version of React Native Elements. For a complete navigation solution that includes Tabs as well as many other features, be sure to check out react-navigation (https://reactnavigation.org) and it's TabRouter.");
+
+
+
+return _react2.default.createElement(_reactNativeTabNavigator2.default,props);
+};exports.default=
+
+Tabs;

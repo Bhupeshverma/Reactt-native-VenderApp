@@ -1,0 +1,73 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.A=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+var _theme=require("@shoutem/theme");
+var _lodash=require("lodash");var _lodash2=babelHelpers.interopRequireDefault(_lodash);
+
+var _Html=require("../Html");
+var _Img=require("../elements/Img");
+var _Inline=require("./Inline");var
+
+A=(_temp=_class=function(_React$Component){babelHelpers.inherits(A,_React$Component);
+
+
+
+
+
+
+function A(props,context){babelHelpers.classCallCheck(this,A);var _this=babelHelpers.possibleConstructorReturn(this,(A.__proto__||Object.getPrototypeOf(A)).call(this,
+props,context));
+_this.onPress=_this.onPress.bind(_this);
+_this.renderElement=_this.renderElement.bind(_this);return _this;
+}babelHelpers.createClass(A,[{key:"onPress",value:function onPress()
+
+{var _props=
+this.props,href=_props.href,handleLinkPress=_props.handleLinkPress;
+
+if(!handleLinkPress){
+console.log('No "handleLinkPress" handle defined on the anchor element.');
+return;
+}
+
+handleLinkPress(href);
+}},{key:"renderElement",value:function renderElement(
+
+element,style){var
+renderElement=this.props.renderElement;
+
+if((0,_Img.isImg)(element)){
+// In the A element image can not be previewed because it opens a link.
+var inlineImage=_lodash2.default.merge({},element,{attributes:{lightbox:false}});
+return renderElement(inlineImage,style,renderElement);
+}
+
+return renderElement(element,style,renderElement);
+}},{key:"render",value:function render()
+
+{
+// Because the anchor has dynamic display nature
+// it can not use the TouchableOpacity component to wrap the children.
+// The TouchableOpacity component can not be nested within the "Text" component.
+return _react2.default.createElement(_Inline.Inline,babelHelpers.extends({},this.props,{onPress:this.onPress,renderElement:this.renderElement}));
+}}]);return A;}(_react2.default.Component),_class.propTypes=babelHelpers.extends({},_Html.ElementPropTypes,{handleLinkPress:_react2.default.PropTypes.func,href:_react2.default.PropTypes.string}),_temp);
+
+
+function openLinkPress(Component){
+return function(props){
+function handleLinkPress(href){
+_reactNative.Linking.openURL(href).
+catch(function(err){return console.log('An error occurred',err);});
+}
+
+return _react2.default.createElement(Component,babelHelpers.extends({},props,{handleLinkPress:handleLinkPress}));
+};
+}
+
+// Named export to customize Anchor
+var Anchor=(0,_Html.combineMappers)(_Html.mapElementProps)(A);exports.
+
+A=Anchor;
+
+
+// Default export with added link press handle
+var EnhancedA=openLinkPress(A);exports.default=
+(0,_theme.connectStyle)('shoutem.ui.Html.a')((0,_Html.combineMappers)(_Html.mapElementProps)(EnhancedA));

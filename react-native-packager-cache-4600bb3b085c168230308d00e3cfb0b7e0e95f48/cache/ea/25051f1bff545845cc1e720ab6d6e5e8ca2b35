@@ -1,0 +1,144 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DropDownMenu = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/DropDownMenu/DropDownMenu.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _theme = require('@shoutem/theme');
+
+var _index = require('../../index');
+
+var _DropDownModal = require('./DropDownModal');
+
+var modalSpecificProps = ['visible', 'onClose'];
+var dropDownMenuPropTypes = babelHelpers.extends({}, _lodash2.default.omit(_DropDownModal.DropDownModal.propTypes, modalSpecificProps));
+
+var DropDownMenu = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(DropDownMenu, _Component);
+
+  function DropDownMenu(props) {
+    babelHelpers.classCallCheck(this, DropDownMenu);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (DropDownMenu.__proto__ || Object.getPrototypeOf(DropDownMenu)).call(this, props));
+
+    _this.state = {
+      collapsed: false
+    };
+    _this.collapse = _this.collapse.bind(_this);
+    _this.close = _this.close.bind(_this);
+    return _this;
+  }
+
+  babelHelpers.createClass(DropDownMenu, [{
+    key: 'getSelectedOption',
+    value: function getSelectedOption() {
+      var _props = this.props,
+          options = _props.options,
+          selectedOption = _props.selectedOption;
+
+      if (_lodash2.default.indexOf(options, selectedOption) === -1) {
+        console.warn('Invalid `selectedOption` ' + JSON.stringify(selectedOption) + ', ' + 'DropDownMenu `selectedOption` must be a member of `options`.' + 'Check that you are using the same reference in both `options` and `selectedOption`.');
+        return;
+      }
+      return selectedOption;
+    }
+  }, {
+    key: 'collapse',
+    value: function collapse() {
+      this.setState({ collapsed: true });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.setState({ collapsed: false });
+    }
+  }, {
+    key: 'renderSelectedOption',
+    value: function renderSelectedOption() {
+      var _props2 = this.props,
+          style = _props2.style,
+          titleProperty = _props2.titleProperty;
+
+
+      var selectedOption = this.getSelectedOption();
+      return selectedOption ? _react2.default.createElement(
+        _index.View,
+        { style: style.horizontalContainer, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 61
+          }
+        },
+        _react2.default.createElement(
+          _index.Button,
+          { onPress: this.collapse, style: style.selectedOption, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 62
+            }
+          },
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 63
+              }
+            },
+            selectedOption[titleProperty]
+          ),
+          _react2.default.createElement(_index.Icon, { name: 'drop-down', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 64
+            }
+          })
+        )
+      ) : null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var collapsed = this.state.collapsed;
+      var options = this.props.options;
+
+
+      var button = this.renderSelectedOption();
+      if (_lodash2.default.size(options) === 0 || !button) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        _index.View,
+        { renderToHardwareTextureAndroid: true, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 80
+          }
+        },
+        button,
+        _react2.default.createElement(_DropDownModal.DropDownModal, babelHelpers.extends({}, _lodash2.default.omit(this.props, 'style'), {
+          visible: collapsed,
+          onClose: this.close,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 82
+          }
+        }))
+      );
+    }
+  }]);
+  return DropDownMenu;
+}(_react.Component), _class.propTypes = babelHelpers.extends({}, dropDownMenuPropTypes), _temp);
+
+
+var StyledDropDownMenu = (0, _theme.connectStyle)('shoutem.ui.DropDownMenu')(DropDownMenu);
+
+exports.DropDownMenu = StyledDropDownMenu;

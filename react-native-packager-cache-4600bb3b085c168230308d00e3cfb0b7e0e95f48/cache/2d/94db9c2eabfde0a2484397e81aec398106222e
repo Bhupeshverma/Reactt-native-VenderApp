@@ -1,0 +1,63 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.Examples=undefined;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+
+var _index=require("../../index");
+
+var _Typography=require("./Typography");
+var _Dividers=require("./Dividers");
+var _Rows=require("./Rows");
+var _Cards=require("./Cards");
+var _Tiles=require("./Tiles");
+var _Spinners=require("./Spinners");
+var _Buttons=require("./Buttons");
+var _Images=require("./Images");
+var _DropDownMenus=require("./DropDownMenus");
+var _FormComponents=require("./FormComponents");
+var _Headers=require("./Headers");
+var _NavigationBars=require("./NavigationBars");
+var _Videos=require("./Videos");
+
+var examples=[
+{title:'Typography',component:_Typography.Typography},
+{title:'Navigation Bars',component:_NavigationBars.NavigationBars},
+{title:'Dropdown Menus',component:_DropDownMenus.DropDownMenus},
+{title:'Dividers',component:_Dividers.Dividers},
+{title:'Cards',component:_Cards.Cards},
+{title:'Rows',component:_Rows.Rows},
+{title:'Tiles',component:_Tiles.Tiles},
+{title:'Headers',component:_Headers.Headers},
+{title:'Spinners',component:_Spinners.Spinners},
+{title:'Buttons',component:_Buttons.Buttons},
+{title:'Images',component:_Images.Images},
+{title:'Video',component:_Videos.Videos},
+{title:'Form Components',component:_FormComponents.FormComponents}];var
+
+
+Examples=exports.Examples=function(_Component){babelHelpers.inherits(Examples,_Component);
+function Examples(){babelHelpers.classCallCheck(this,Examples);var _this=babelHelpers.possibleConstructorReturn(this,(Examples.__proto__||Object.getPrototypeOf(Examples)).call(this));
+
+_this.state={
+selectedExample:examples[0]};return _this;
+
+}babelHelpers.createClass(Examples,[{key:"render",value:function render()
+
+{var _this2=this;var
+selectedExample=this.state.selectedExample;
+var SelectedComponent=selectedExample.component;
+return(
+_react2.default.createElement(_index.Screen,null,
+_react2.default.createElement(_index.Divider,null),
+_react2.default.createElement(_index.DropDownMenu,{
+styleName:"horizontal",
+options:examples,
+selectedOption:this.state.selectedExample,
+onOptionSelected:function onOptionSelected(example){return _this2.setState({selectedExample:example});},
+titleProperty:"title",
+valueProperty:"component"}),
+
+
+_react2.default.createElement(_index.ScrollView,{key:selectedExample.title},
+_react2.default.createElement(SelectedComponent,null))));
+
+
+
+}}]);return Examples;}(_react.Component);

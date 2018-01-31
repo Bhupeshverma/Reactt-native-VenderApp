@@ -1,0 +1,25 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=
+
+
+
+
+
+function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:INITIAL_STATE;var action=arguments[1];
+switch(action.type){
+
+case _types.IS_LOGGING_IN:
+return babelHelpers.extends({},state,{spinner:true});
+case _types.IS_LOGGED_IN:
+return babelHelpers.extends({},state,{spinner:false,sessionID:action.payload.data.id,user:action.payload.data,loggedOut:false});
+case _types.UNAUTHORIZED:
+return babelHelpers.extends({},state,{spinner:false,unauthorized:true});
+case _types.RECIEVED_ERROR:
+return babelHelpers.extends({},state,{spinner:false,error:true,user:null});
+case _types.LOGGED_OUT:
+return babelHelpers.extends({},state,{sessionID:null,user:null,error:false,unauthorized:false});
+case _constants.REHYDRATE:
+return action.payload.auth||[];
+default:
+return state;}
+
+};var _types=require("../actions/types");var _constants=require("redux-persist/constants");var INITIAL_STATE={user:null,sessionID:null,spinner:false,unauthorized:false,error:false};

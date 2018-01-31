@@ -1,0 +1,22 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.DriverBase=undefined;var _reactNative=require("react-native");
+
+/**
+ * The base animation driver that all animations
+ * drivers should extend. This class defines the
+ * common interface of all animation drivers.
+ */var
+DriverBase=exports.DriverBase=function(){
+function DriverBase(){babelHelpers.classCallCheck(this,DriverBase);
+this.value=new _reactNative.Animated.Value(0);
+}
+
+/**
+   * Creates an interpolation using the underlying animated
+   * value.
+   *
+   * @param config The animated interpolation config.
+   * @returns {*} The animated interpolation.
+   */babelHelpers.createClass(DriverBase,[{key:"interpolate",value:function interpolate(
+config){
+return this.value.interpolate(config);
+}}]);return DriverBase;}();

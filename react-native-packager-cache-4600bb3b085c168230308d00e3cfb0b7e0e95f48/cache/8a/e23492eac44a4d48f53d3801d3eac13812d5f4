@@ -1,0 +1,349 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DropDownModal = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/DropDownMenu/DropDownModal.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _Button = require('../Button');
+
+var _Icon = require('../Icon');
+
+var _Text = require('../Text');
+
+var _View = require('../View');
+
+var _LinearGradient = require('../LinearGradient');
+
+var _TouchableOpacity = require('../TouchableOpacity');
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var window = _reactNative.Dimensions.get('window');
+
+var DropDownModal = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(DropDownModal, _Component);
+
+  function DropDownModal(props) {
+    babelHelpers.classCallCheck(this, DropDownModal);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (DropDownModal.__proto__ || Object.getPrototypeOf(DropDownModal)).call(this, props));
+
+    _this.state = {
+      optionHeight: 0,
+      shouldRenderModalContent: false
+    };
+    _this.close = _this.close.bind(_this);
+    _this.emitOnOptionSelectedEvent = _this.emitOnOptionSelectedEvent.bind(_this);
+    _this.renderGradient = _this.renderGradient.bind(_this);
+    _this.renderRow = _this.renderRow.bind(_this);
+    _this.selectOption = _this.selectOption.bind(_this);
+    _this.onOptionLayout = _this.onOptionLayout.bind(_this);
+    _this.ds = new _reactNative.ListView.DataSource({ rowHasChanged: function rowHasChanged(r1, r2) {
+        return r1 !== r2;
+      } });
+    return _this;
+  }
+
+  babelHelpers.createClass(DropDownModal, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.timingDriver = new _animation.TimingDriver();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      var wasVisible = this.props.visible;
+      var isVisible = nextProps.visible;
+
+
+      if (!wasVisible && isVisible) {
+        this.timingDriver.toValue(1, function () {
+          _reactNative.LayoutAnimation.easeInEaseOut();
+          _this2.setState({ shouldRenderModalContent: true });
+        });
+      }
+    }
+  }, {
+    key: 'onOptionLayout',
+    value: function onOptionLayout(event) {
+      var height = event.nativeEvent.layout.height;
+
+      this.setState({ optionHeight: height });
+    }
+  }, {
+    key: 'getVisibleOptions',
+    value: function getVisibleOptions() {
+      var _props = this.props,
+          visibleOptions = _props.visibleOptions,
+          style = _props.style;
+
+      return visibleOptions || style.visibleOptions || DropDownModal.DEFAULT_VISIBLE_OPTIONS;
+    }
+  }, {
+    key: 'selectOption',
+    value: function selectOption(option) {
+      this.close();
+      if (option !== this.props.selectedOption) {
+        this.emitOnOptionSelectedEvent(option);
+      }
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      var _this3 = this;
+
+      if (this.props.onClose) {
+        this.timingDriver.toValue(0, function () {
+          _this3.props.onClose();
+          _this3.setState({ shouldRenderModalContent: false });
+        });
+      }
+    }
+  }, {
+    key: 'emitOnOptionSelectedEvent',
+    value: function emitOnOptionSelectedEvent(option) {
+      if (this.props.onOptionSelected) {
+        this.props.onOptionSelected(option);
+      }
+    }
+  }, {
+    key: 'resolveListViewStyle',
+    value: function resolveListViewStyle() {
+      var listViewHeight = this.calculateListViewHeight();
+      return { flex: 0, maxHeight: listViewHeight };
+    }
+  }, {
+    key: 'calculateListViewHeight',
+    value: function calculateListViewHeight() {
+      var optionHeight = this.state.optionHeight;
+      var options = this.props.options;
+
+      var visibleOptions = this.getVisibleOptions();
+      var optionsSize = _lodash2.default.size(options);
+
+      return optionsSize > visibleOptions ? visibleOptions * optionHeight : optionsSize * optionHeight;
+    }
+  }, {
+    key: 'renderFooter',
+    value: function renderFooter() {
+      return _react2.default.createElement(_View.View, { styleName: 'md-gutter-top', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 162
+        }
+      });
+    }
+  }, {
+    key: 'renderGradient',
+    value: function renderGradient() {
+      var style = this.props.style;
+      var backgroundColor = style.modal.backgroundColor;
+      var optionHeight = this.state.optionHeight;
+
+
+      var listViewHeight = this.calculateListViewHeight();
+      var screenHeight = window.height;
+      var gradientHeight = optionHeight;
+      var transparencyHeight = listViewHeight - optionHeight * 2;
+      var bufferHeight = (screenHeight - listViewHeight) / 2;
+
+      var bufferColor = backgroundColor;
+      var invertedColor = (0, _theme.changeColorAlpha)(backgroundColor, 0);
+
+      var gradientConfig = [{
+        location: 0,
+        color: bufferColor
+      }, {
+        location: bufferHeight / screenHeight,
+        color: backgroundColor
+      }, {
+        location: (bufferHeight + gradientHeight) / screenHeight,
+        color: invertedColor
+      }, {
+        location: (bufferHeight + gradientHeight + transparencyHeight) / screenHeight,
+        color: invertedColor
+      }, {
+        location: (bufferHeight + listViewHeight) / screenHeight,
+        color: backgroundColor
+      }, {
+        location: 1,
+        color: bufferColor
+      }];
+
+      return _react2.default.createElement(_LinearGradient.LinearGradient, {
+        pointerEvents: 'none',
+        styleName: 'fill-parent',
+        locations: _lodash2.default.map(gradientConfig, function (breakpoint) {
+          return breakpoint.location;
+        }),
+        colors: _lodash2.default.map(gradientConfig, function (breakpoint) {
+          return breakpoint.color;
+        }),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 215
+        }
+      });
+    }
+  }, {
+    key: 'renderRow',
+    value: function renderRow(option) {
+      var _this4 = this;
+
+      var _props2 = this.props,
+          style = _props2.style,
+          titleProperty = _props2.titleProperty,
+          renderOption = _props2.renderOption;
+
+
+      var optionItem = renderOption(option, titleProperty);
+      var onPress = function onPress() {
+        return _this4.selectOption(option);
+      };
+
+      return _react2.default.createElement(
+        _TouchableOpacity.TouchableOpacity,
+        { onPress: onPress, style: style.modalItem, onLayout: this.onOptionLayout, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 235
+          }
+        },
+        optionItem
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props3 = this.props,
+          titleProperty = _props3.titleProperty,
+          options = _props3.options,
+          style = _props3.style;
+      var shouldRenderModalContent = this.state.shouldRenderModalContent;
+
+      if (_lodash2.default.size(options) === 0) {
+        return null;
+      }
+
+      var listViewStyle = this.resolveListViewStyle();
+      var dataSource = this.ds.cloneWithRows(options.filter(function (option) {
+        return option[titleProperty];
+      }));
+
+      return _react2.default.createElement(
+        _reactNative.Modal,
+        {
+          visible: this.props.visible,
+          onRequestClose: this.close,
+          transparent: true,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 252
+          }
+        },
+        _react2.default.createElement(
+          _animation.ZoomOut,
+          { driver: this.timingDriver, maxFactor: 1.1, style: { flex: 1 }, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 257
+            }
+          },
+          _react2.default.createElement(
+            _animation.FadeIn,
+            { driver: this.timingDriver, style: { flex: 1 }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 258
+              }
+            },
+            _react2.default.createElement(
+              _View.View,
+              { style: style.modal, styleName: 'vertical', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 259
+                }
+              },
+              shouldRenderModalContent ? _react2.default.createElement(_reactNative.ListView, {
+                scrollRenderAheadDistance: 50,
+                dataSource: dataSource,
+                renderRow: this.renderRow,
+                style: listViewStyle,
+                renderFooter: this.renderFooter,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 261
+                }
+              }) : null,
+              this.renderGradient(),
+              _react2.default.createElement(
+                _Button.Button,
+                { onPress: this.close, styleName: 'clear close', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 269
+                  }
+                },
+                _react2.default.createElement(_Icon.Icon, { name: 'close', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 270
+                  }
+                })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+  return DropDownModal;
+}(_react.Component), _class.propTypes = {
+  onOptionSelected: _react2.default.PropTypes.func,
+
+  options: _react2.default.PropTypes.array.isRequired,
+
+  selectedOption: _react2.default.PropTypes.any.isRequired,
+
+  titleProperty: _react2.default.PropTypes.string.isRequired,
+
+  valueProperty: _react2.default.PropTypes.string.isRequired,
+
+  visibleOptions: _react2.default.PropTypes.number,
+
+  renderOption: _react2.default.PropTypes.func,
+
+  visible: _react2.default.PropTypes.bool,
+
+  onClose: _react2.default.PropTypes.func,
+  style: _react2.default.PropTypes.object
+}, _class.defaultProps = {
+  renderOption: function renderOption(option, titleProperty) {
+    return _react2.default.createElement(
+      _Text.Text,
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 77
+        }
+      },
+      option[titleProperty].toUpperCase()
+    );
+  }
+}, _class.DEFAULT_VISIBLE_OPTIONS = 8, _temp);
+
+
+var StyledModal = (0, _theme.connectStyle)('shoutem.ui.DropDownModal')(DropDownModal);
+
+exports.DropDownModal = StyledModal;

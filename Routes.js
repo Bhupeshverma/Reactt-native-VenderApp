@@ -29,7 +29,7 @@ const RouterComponent = ({needSignIn}) => {
                 <Scene key="Home" component={MainScreen}
                   title="Home" initial
                 />
-                <Scene key="Details" component={DetailScreen} title="Sync"/>
+                <Scene key="Details" component={DetailScreen} title="Sync" />
                 <Scene key="nextScreen" component={SyncScreen} hideNavBar />
               </Drawer>
 

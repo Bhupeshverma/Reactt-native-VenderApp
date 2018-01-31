@@ -1,0 +1,8 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=
+
+
+function(_ref){var element=_ref.element,style=_ref.style;var
+index=element.attributes.index;
+
+return _react2.default.createElement(_ui.Text,{style:style},index,". ");
+};var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);var _ui=require("@shoutem/ui");;

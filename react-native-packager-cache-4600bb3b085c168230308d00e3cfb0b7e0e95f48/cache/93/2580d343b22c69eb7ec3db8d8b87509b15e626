@@ -1,0 +1,106 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.Image=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+
+
+
+var _lodash=require("lodash");var _lodash2=babelHelpers.interopRequireDefault(_lodash);
+
+var _theme=require("@shoutem/theme");
+var _animation=require("@shoutem/animation");
+
+// A valid source is either an object with an uri key or a number (from a `require` call)
+var isValidSource=function isValidSource(source){return _lodash2.default.isNumber(source)||_lodash2.default.isObject(source)&&source.uri;};
+
+/**
+ * A function to transform props that will be used by
+ * all instances of the Image component.
+ */
+var externalPropsTransformer=null;var
+
+Image=(_temp=_class=function(_PureComponent){babelHelpers.inherits(Image,_PureComponent);babelHelpers.createClass(Image,null,[{key:"setPropsTransformer",
+
+
+
+
+/**
+   * Set a shared props transformer. The transformer will
+   * be called on each props change, and it should return
+   * the transformed props.
+   *
+   * @param {function(props)} transformer The props transformer.
+   */value:function setPropsTransformer(
+transformer){
+externalPropsTransformer=transformer;
+}
+
+/**
+   * Gets the shared props transformer. This can be useful in
+   * cases when you wish to register a new transformer and
+   * preserve the existing one.
+   * @returns {*} The currently registered props transformer.
+   */},{key:"getPropsTransformer",value:function getPropsTransformer()
+{
+return externalPropsTransformer;
+}}]);
+
+function Image(props){babelHelpers.classCallCheck(this,Image);var _this=babelHelpers.possibleConstructorReturn(this,(Image.__proto__||Object.getPrototypeOf(Image)).call(this,
+props));
+
+_this.captureNativeComponentRef=_this.captureNativeComponentRef.bind(_this);
+_this.state={
+transformedProps:_this.createTransformedProps(props)};return _this;
+
+}babelHelpers.createClass(Image,[{key:"componentWillReceiveProps",value:function componentWillReceiveProps(
+
+nextProps){
+if(nextProps!==this.props){
+this.setState({
+transformedProps:this.createTransformedProps(nextProps)});
+
+}
+}},{key:"setNativeProps",value:function setNativeProps(
+
+nativeProps){
+this.nativeComponent.setNativeProps(nativeProps);
+}},{key:"createTransformedProps",value:function createTransformedProps(
+
+props){
+var transformedProps=babelHelpers.extends({},props);var
+source=props.source,defaultSource=props.defaultSource;
+
+// defaultSource is not supported on Android, so we manually
+// reassign the defaultSource prop to source if source is not defined
+if(_reactNative.Platform.OS==='android'&&!isValidSource(source)){
+// Image views are not rendered on Android if there is no image to display,
+// so we fallback to a transparent image to be compatible with iOS
+transformedProps.source=defaultSource||require('../assets/images/transparent.png');
+// Fixes a bug with local image resizing on Android:
+// https://github.com/facebook/react-native/issues/4598#issuecomment-162328501
+transformedProps.style=babelHelpers.extends({width:null,height:null},props.style);
+}
+
+transformedProps.ref=this.captureNativeComponentRef;
+if(externalPropsTransformer){
+transformedProps=externalPropsTransformer(transformedProps);
+}
+
+return transformedProps;
+}},{key:"captureNativeComponentRef",value:function captureNativeComponentRef(
+
+component){
+this.nativeComponent=component;
+}},{key:"render",value:function render()
+
+{var
+transformedProps=this.state.transformedProps;
+
+return(
+_react2.default.createElement(_reactNative.Image,transformedProps));
+
+}}]);return Image;}(_react.PureComponent),_class.propTypes=babelHelpers.extends({},_reactNative.Image.propTypes),_temp);
+
+
+var AnimatedImage=(0,_animation.connectAnimation)(Image);
+var StyledImage=(0,_theme.connectStyle)('shoutem.ui.Image')(AnimatedImage);exports.
+
+Image=StyledImage;

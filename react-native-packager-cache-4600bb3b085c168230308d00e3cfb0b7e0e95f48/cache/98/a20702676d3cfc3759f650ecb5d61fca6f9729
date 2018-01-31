@@ -1,0 +1,593 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/src/screens/DetailScreen.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions');
+
+var _reactNativeRouterFlux = require('react-native-router-flux');
+
+var _ui = require('@shoutem/ui');
+
+var _Dimensions$get = _reactNative.Dimensions.get('window'),
+    height = _Dimensions$get.height,
+    width = _Dimensions$get.width;
+
+var box_count = 1;
+var box_height = height / box_count;
+
+var DetailScreen = function (_Component) {
+  babelHelpers.inherits(DetailScreen, _Component);
+
+  function DetailScreen(props) {
+    babelHelpers.classCallCheck(this, DetailScreen);
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (DetailScreen.__proto__ || Object.getPrototypeOf(DetailScreen)).call(this, props));
+
+    _this.state = {
+      data: [],
+      total_count: 0,
+      visible: true
+    };
+
+    return _this;
+  }
+
+  babelHelpers.createClass(DetailScreen, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var dataArray,
+          count = 0;
+      console.log("data", this.props.data);
+      console.log("syncData", this.props.syncData);
+      this.props.data.map(function (item, index) {
+        return item.map(function (item, index) {
+          return item.map(function (item, index) {
+            count += item.total;
+          });
+        });
+      });
+      console.log(count);
+      this.setState({ total_count: count });
+    }
+  }, {
+    key: '_handleSync',
+    value: function _handleSync() {
+      var syncArray;
+      var date = new Date();
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1;
+      var yyyy = date.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var today = yyyy + '-' + mm + '-' + dd;
+      console.log("today", today);
+      this.props.syncData.map(function (item, index) {
+        syncArray = item.map(function (item, index) {
+          return item.map(function (item, index) {
+            return item;
+          });
+        });
+      });
+      console.log("syncArray", syncArray);
+      this.props.Sync(syncArray, today, this.state.total_count);
+      _reactNativeRouterFlux.Actions.nextScreen();
+    }
+  }, {
+    key: '_handleClear',
+    value: function _handleClear() {
+      this.props.ClearProducts();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        _reactNative.View,
+        { style: styles.container, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 71
+          }
+        },
+        _react2.default.createElement(
+          _reactNative.View,
+          { style: [styles.box, styles.box1], __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            }
+          },
+          this.props.data.length == 0 ? _react2.default.createElement(
+            _reactNative.View,
+            { style: { flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center'
+              }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 76
+              }
+            },
+            _react2.default.createElement(
+              _reactNative.Text,
+              { style: { fontSize: 20, fontWeight: "bold", color: "#555" }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 80
+                }
+              },
+              'The Tray is Empty !!'
+            )
+          ) : _react2.default.createElement(
+            _reactNative.ScrollView,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 85
+              }
+            },
+            this.props.data.map(function (itemss, index) {
+
+              return itemss.map(function (items, value) {
+
+                return items.map(function (item, index) {
+
+                  return _react2.default.createElement(
+                    _reactNative.View,
+                    { styleName: 'vertical', key: item.product_id, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 95
+                      }
+                    },
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 96
+                        }
+                      },
+                      item.product_image === null ? _react2.default.createElement(_ui.Image, {
+                        styleName: 'medium rounded-corners',
+                        source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png' },
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 98
+                        }
+                      }) : _react2.default.createElement(_ui.Image, {
+                        styleName: 'medium rounded-corners',
+                        source: { uri: item.product_image },
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 102
+                        }
+                      }),
+                      _react2.default.createElement(
+                        _reactNative.View,
+                        { styleName: 'vertical stretch space-between', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 106
+                          }
+                        },
+                        _react2.default.createElement(
+                          _ui.Subtitle,
+                          {
+                            __source: {
+                              fileName: _jsxFileName,
+                              lineNumber: 107
+                            }
+                          },
+                          item.name
+                        ),
+                        _react2.default.createElement(
+                          _reactNative.View,
+                          { style: { flexDirection: 'row', justifyContent: 'space-around' }, __source: {
+                              fileName: _jsxFileName,
+                              lineNumber: 108
+                            }
+                          },
+                          _react2.default.createElement(
+                            _ui.Subtitle,
+                            {
+                              __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 109
+                              }
+                            },
+                            item.product_id
+                          ),
+                          _react2.default.createElement(
+                            _ui.Subtitle,
+                            {
+                              __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 110
+                              }
+                            },
+                            item.total
+                          )
+                        )
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 114
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Title,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 115
+                          }
+                        },
+                        'SIZES'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Title,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 116
+                          }
+                        },
+                        'SCAN-COUNT'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 118
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 119
+                          }
+                        },
+                        'Size_34'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 120
+                          }
+                        },
+                        item.size_34
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 123
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 124
+                          }
+                        },
+                        'Size_35'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 125
+                          }
+                        },
+                        item.size_35
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 128
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 129
+                          }
+                        },
+                        'Size_36'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 130
+                          }
+                        },
+                        item.size_36
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 133
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 134
+                          }
+                        },
+                        'Size_37'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 135
+                          }
+                        },
+                        item.size_37
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 138
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 139
+                          }
+                        },
+                        'Size_38'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 140
+                          }
+                        },
+                        item.size_38
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 143
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 144
+                          }
+                        },
+                        'Size_39'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 145
+                          }
+                        },
+                        item.size_39
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 148
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 149
+                          }
+                        },
+                        'Size_40'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 150
+                          }
+                        },
+                        item.size_40
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 153
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 154
+                          }
+                        },
+                        'Size_41'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 155
+                          }
+                        },
+                        item.size_41
+                      )
+                    ),
+                    _react2.default.createElement(
+                      _ui.Row,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 158
+                        }
+                      },
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        {
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 159
+                          }
+                        },
+                        'Size_42'
+                      ),
+                      _react2.default.createElement(
+                        _ui.Subtitle,
+                        { styleName: 'h-center', __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 160
+                          }
+                        },
+                        item.size_42
+                      )
+                    )
+                  );
+                });
+              });
+            })
+          ),
+          this.props.data.length != 0 ? _react2.default.createElement(
+            _reactNative.View,
+            { style: { flexDirection: "row" }, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 175
+              }
+            },
+            _react2.default.createElement(
+              _ui.Button,
+              {
+                style: { backgroundColor: "#f2f2f2", height: 40, width: "50%" },
+                onPress: function onPress() {
+                  return _this2._handleClear();
+                }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 176
+                }
+              },
+              _react2.default.createElement(
+                _reactNative.Text,
+                { style: { color: '#000', fontWeight: '400' }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 179
+                  }
+                },
+                'CLEAR'
+              )
+            ),
+            _react2.default.createElement(
+              _ui.Button,
+              {
+                style: { backgroundColor: "#000", height: 40, width: "50%" },
+                onPress: function onPress() {
+                  return _this2._handleSync();
+                }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 181
+                }
+              },
+              _react2.default.createElement(
+                _reactNative.Text,
+                { style: { color: '#fff', fontWeight: '400' }, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 184
+                  }
+                },
+                'SYNC WITH CRM'
+              )
+            )
+          ) : null
+        )
+      );
+    }
+  }]);
+  return DetailScreen;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+
+    data: state.savedDataReducer,
+    syncData: state.SaveSyncFormatReducer
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { Sync: _actions.Sync, SavedProducts: _actions.SavedProducts, ClearProducts: _actions.ClearProducts, SyncWithCrm: _actions.SyncWithCrm })(DetailScreen);
+
+var styles = _reactNative.StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#eff6f7'
+
+  },
+  box: {
+    height: box_height },
+
+  box1: {
+    flex: 12,
+    backgroundColor: '#eff6f7'
+
+  },
+  spinner: {
+    flex: 1,
+    alignItems: 'center'
+  }
+});

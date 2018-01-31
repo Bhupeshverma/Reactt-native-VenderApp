@@ -1,0 +1,56 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.FormComponents=undefined;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+
+
+
+var _Stage=require("./Stage");
+var _index=require("../../index");var
+
+
+
+
+
+
+
+FormComponents=exports.FormComponents=function(_Component){babelHelpers.inherits(FormComponents,_Component);
+function FormComponents(){babelHelpers.classCallCheck(this,FormComponents);var _this=babelHelpers.possibleConstructorReturn(this,(FormComponents.__proto__||Object.getPrototypeOf(FormComponents)).call(this));
+
+_this.state={
+switchOn:false};return _this;
+
+}babelHelpers.createClass(FormComponents,[{key:"render",value:function render()
+
+{var _this2=this;var
+switchOn=this.state.switchOn;
+
+return(
+_react2.default.createElement(_index.View,{styleName:"vertical collapsed"},
+_react2.default.createElement(_Stage.Stage,{title:"TextInput / Full width"},
+_react2.default.createElement(_index.TextInput,{
+styleName:"stretch",
+placeholder:"Username or Email"})),
+
+
+_react2.default.createElement(_Stage.Stage,{title:"TextInput  / Full width secure entry"},
+_react2.default.createElement(_index.TextInput,{
+styleName:"stretch",
+placeholder:"Password",
+secureTextEntry:true})),
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Input with label"},
+_react2.default.createElement(_index.FormGroup,{styleName:"stretch"},
+_react2.default.createElement(_index.Caption,null,"NAME"),
+_react2.default.createElement(_index.TextInput,{
+placeholder:"Username or Emaill"}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Switch"},
+_react2.default.createElement(_index.Switch,{
+onValueChange:function onValueChange(value){return _this2.setState({switchOn:value});},
+value:switchOn}))));
+
+
+
+
+}}]);return FormComponents;}(_react.Component);

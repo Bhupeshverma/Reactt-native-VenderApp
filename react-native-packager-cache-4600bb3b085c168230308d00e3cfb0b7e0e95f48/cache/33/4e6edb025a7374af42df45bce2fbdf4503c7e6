@@ -1,0 +1,117 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=exports._createPositionStyle=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+var _propTypes=require("prop-types");var _propTypes2=babelHelpers.interopRequireDefault(_propTypes);
+
+// _createPositionStyle :: Number -> Object
+var _createPositionStyle=exports._createPositionStyle=function _createPositionStyle(){var zIndex=arguments.length>0&&arguments[0]!==undefined?arguments[0]:1;return{
+top:0,
+zIndex:zIndex};};
+
+
+// updateWidthState :: Component, Window -> _
+var updateWidthState=function updateWidthState(component,window){
+if(!component)return;
+component.setState({
+width:window.width});
+
+};var
+
+Hero=(_temp=_class=function(_Component){babelHelpers.inherits(Hero,_Component);
+
+
+
+
+
+
+
+
+
+
+
+
+function Hero(props){babelHelpers.classCallCheck(this,Hero);var _this=babelHelpers.possibleConstructorReturn(this,(Hero.__proto__||Object.getPrototypeOf(Hero)).call(this,
+props));
+
+_this.state={
+source:_this.props.source,
+opacity:0,
+height:_this.props.minHeight||undefined,
+resizeMode:_this.props.resizeMode||'cover'};return _this;
+
+}babelHelpers.createClass(Hero,[{key:"componentWillReceiveProps",value:function componentWillReceiveProps(
+
+nextProps){
+if(nextProps.source!==this.props.source){
+this.setState({
+source:this.props.source});
+
+}
+}},{key:"componentDidMount",value:function componentDidMount()
+
+{
+this.setState({
+opacity:1});
+
+}},{key:"renderColorOverlay",value:function renderColorOverlay()
+
+{
+var overlayStyles=[{
+height:this.state.height,
+width:'100%',
+backgroundColor:this.props.colorOverlay||'transparent',
+opacity:this.props.colorOpacity||.30},
+_createPositionStyle(1),{position:'absolute'}];
+
+return this.props.colorOverlay?
+_react2.default.createElement(_reactNative.View,{style:overlayStyles}):
+null;
+}},{key:"renderHeroOverlay",value:function renderHeroOverlay()
+
+{var _this2=this;
+var self=this;
+var transparentBg={backgroundColor:'transparent'};
+var contentStyles=this.props.colorOverlay?
+[transparentBg,_createPositionStyle(2)]:
+transparentBg;
+
+var updateViewHeight=function updateViewHeight(event){
+var overlayHeight=event.nativeEvent.layout.height;
+var overlayWidth=event.nativeEvent.layout.width;
+if(self.props.minHeight)return;
+if(overlayHeight!==self.state.height){
+self.setState({
+height:overlayHeight});
+
+}
+
+// Initial width state set
+if(_this2.props.fullWidth===true&&!self.state.width){
+updateWidthState(self,_reactNative.Dimensions.get('window'));
+// This requires RN ^0.43 + React ^16, may consider alternative updating method for better
+// backwards compatability
+_reactNative.Dimensions.addEventListener('change',function(window){return updateWidthState(self,window);});
+}
+};
+
+return(
+_react2.default.createElement(_reactNative.View,{
+onLayout:function onLayout(event){return updateViewHeight(event);},
+style:contentStyles},
+this.props.renderOverlay()));
+
+
+}},{key:"render",value:function render()
+
+{
+return(
+_react2.default.createElement(_reactNative.View,{style:{opacity:this.state.opacity}},
+_react2.default.createElement(_reactNative.Image,{
+source:this.state.source,
+resizeMode:this.state.resizeMode,
+style:{height:this.state.height,width:this.state.width||'100%'}},
+this.renderHeroOverlay(),
+this.renderColorOverlay())));
+
+
+
+}}]);return Hero;}(_react.Component),_class.propTypes={renderOverlay:_propTypes2.default.func,resizeMode:_propTypes2.default.string,colorOpacity:_propTypes2.default.number,minHeight:_propTypes2.default.number,fullWidth:_propTypes2.default.bool},_class.defaultProps={fullWidth:true},_temp);exports.default=Hero;

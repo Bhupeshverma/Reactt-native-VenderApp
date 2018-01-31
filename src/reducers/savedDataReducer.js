@@ -12,7 +12,7 @@ export default function(state = [], action) {
     case REHYDRATE:
       return action.payload.savedDataReducer || [];
     case CLEAR_SAVED_PRODUCTS:
-      return []
+      return [];
     case SAVED_PRODUCTS:
       return _.uniqBy([
         action.payload, ...state

@@ -1,0 +1,99 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.Image=exports.Gallery=exports.Virtual=exports.Li=exports.Ol=exports.Ul=exports.A=exports.Img=exports.Block=exports.Inline=exports.getElement=exports.getElementProperty=exports.getElementDisplay=exports.registerElement=exports.Display=exports.renderChildren=exports.renderChildElements=exports.mapElementProps=exports.combineMappers=exports.hasBlockElement=exports.ElementPropTypes=exports.customizeRenderElement=exports.Html=undefined;var _ElementRegistry=require("./services/ElementRegistry");
+
+
+
+
+
+
+var _Html=require("./Html");var _Html2=babelHelpers.interopRequireDefault(_Html);
+
+
+
+
+
+
+
+
+var _Gallery=require("./components/Gallery");var _Gallery2=babelHelpers.interopRequireDefault(_Gallery);
+var _Image=require("./components/Image");var _Image2=babelHelpers.interopRequireDefault(_Image);
+var _Inline=require("./elements/Inline");var _Inline2=babelHelpers.interopRequireDefault(_Inline);
+var _Virtual=require("./elements/Virtual");var _Virtual2=babelHelpers.interopRequireDefault(_Virtual);
+var _Block=require("./elements/Block");var _Block2=babelHelpers.interopRequireDefault(_Block);
+var _Text=require("./elements/Text");var _Text2=babelHelpers.interopRequireDefault(_Text);
+var _list=require("./elements/list");
+var _Img=require("./elements/Img");var _Img2=babelHelpers.interopRequireDefault(_Img);
+var _A=require("./elements/A");var _A2=babelHelpers.interopRequireDefault(_A);
+var _Br=require("./elements/Br");var _Br2=babelHelpers.interopRequireDefault(_Br);
+var _Video=require("./elements/Video");var _Video2=babelHelpers.interopRequireDefault(_Video);
+
+// Text elements with primary inline display
+_Html2.default.registerElement('em',_Inline2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('i',_Inline2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('strong',_Inline2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('b',_Inline2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('span',_Inline2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('blockquote',_Inline2.default,_Inline.InlineSettings);
+
+// Functional
+_Html2.default.registerElement('a',_A2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('img',_Img2.default);
+_Html2.default.registerElement('br',_Br2.default,_Inline.InlineSettings);
+_Html2.default.registerElement('video',_Video2.default);
+
+// Containers
+_Html2.default.registerElement('header',_Virtual2.default);
+_Html2.default.registerElement('content',_Virtual2.default);
+_Html2.default.registerElement('article',_Virtual2.default);
+_Html2.default.registerElement('footer',_Virtual2.default);
+_Html2.default.registerElement('section',_Virtual2.default);
+
+// List
+_Html2.default.registerElement('ul',_list.Ul);
+_Html2.default.registerElement('ol',_list.Ol);
+_Html2.default.registerElement('li',_list.Li);
+_Html2.default.registerElement('bullet',_list.Bullet,{display:_ElementRegistry.Display.INLINE});
+_Html2.default.registerElement('number',_list.Number,{display:_ElementRegistry.Display.INLINE});
+
+// Text base
+_Html2.default.registerElement('text',_Text2.default,{display:_ElementRegistry.Display.INLINE});
+
+// Text elements with block display
+_Html2.default.registerElement('h1',_Block2.default);
+_Html2.default.registerElement('h2',_Block2.default);
+_Html2.default.registerElement('h3',_Block2.default);
+_Html2.default.registerElement('h4',_Block2.default);
+_Html2.default.registerElement('h5',_Block2.default);
+_Html2.default.registerElement('h6',_Block2.default);
+_Html2.default.registerElement('p',_Block2.default);
+_Html2.default.registerElement('div',_Block2.default);exports.
+
+
+Html=_Html2.default;exports.
+customizeRenderElement=_Html.customizeRenderElement;exports.
+ElementPropTypes=_Html.ElementPropTypes;exports.
+hasBlockElement=_Html.hasBlockElement;exports.
+combineMappers=_Html.combineMappers;exports.
+mapElementProps=_Html.mapElementProps;exports.
+renderChildElements=_Html.renderChildElements;exports.
+renderChildren=_Html.renderChildren;exports.
+
+
+Display=_ElementRegistry.Display;exports.
+registerElement=_ElementRegistry.registerElement;exports.
+getElementDisplay=_ElementRegistry.getElementDisplay;exports.
+getElementProperty=_ElementRegistry.getElementProperty;exports.
+getElement=_ElementRegistry.getElement;exports.
+
+
+Inline=_Inline2.default;exports.
+Block=_Block2.default;exports.
+Img=_Img2.default;exports.
+A=_A2.default;exports.
+Ul=_list.Ul;exports.
+Ol=_list.Ol;exports.
+Li=_list.Li;exports.
+Virtual=_Virtual2.default;exports.
+
+
+Gallery=_Gallery2.default;exports.
+Image=_Image2.default;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {View, Text,StyleSheet, BackHandler, Alert, ScrollView, ActivityIndicator, Dimensions,ListView, AsyncStorage, StatusBar} from 'react-native';
+import {View, Text,StyleSheet,Keyboard, BackHandler, Alert, ScrollView, ActivityIndicator,
+   Dimensions,ListView, AsyncStorage, StatusBar, TouchableOpacity} from 'react-native';
 import {SearchBar } from 'react-native-elements';
-import { Card, CardContent, CardImage } from 'react-native-material-cards'
 import { connect } from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import { Font } from 'expo';
@@ -51,6 +51,7 @@ class MainScreen extends Component {
         this.props.fetchData()
         this.props.fetchProducts()
       }
+
     }
 
 
@@ -79,13 +80,7 @@ class MainScreen extends Component {
     }
     updateScanText(scanText){
         this.setState({scanText})
-        console.log(scanText)
-
-        console.log(this.state.scanText)
-        var dataText =scanText.split("-")
-        console.log(dataText);
-        var formattedSize = dataText[0]
-        console.log(formattedSize)
+        var formattedSize =scanText.substr(0,2);
 
          return this.state.newdata.forEach((item, index)=>{
 
@@ -320,7 +315,7 @@ class MainScreen extends Component {
       })
 }
 
-handle34Minus(){
+handle34Minus(total){
 
   if(this.state.size_34_c === 0){
     Alert.alert('Scan count is already 0')
@@ -330,6 +325,7 @@ handle34Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_34+=1
+          item.total+=1
     })
   }
 }
@@ -342,6 +338,7 @@ handle35Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_35+=1
+          item.total+=1
     })
   }
 }
@@ -351,9 +348,11 @@ handle36Minus(){
   }else{
     this.setState({
       size_34_c: this.state.size_36_c - 1
+
     })
     this.state.newdata.map((item,index)=>{
           item.size_36+=1
+          item.total+=1
     })
   }
 }
@@ -366,6 +365,7 @@ handle37Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_37+=1
+          item.total+=1
     })
   }
 }
@@ -378,6 +378,7 @@ handle38Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_38+=1
+          item.total+=1
     })
   }
 }
@@ -390,6 +391,7 @@ handle39Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_39+=1
+          item.total+=1
     })
   }
 }
@@ -402,6 +404,7 @@ handle40Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_40+=1
+          item.total+=1
     })
   }
 }
@@ -414,6 +417,7 @@ handle41Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_41+=1
+          item.total+=1
     })
   }
 }
@@ -426,10 +430,12 @@ handle42Minus(){
     })
     this.state.newdata.map((item,index)=>{
           item.size_42+=1
+          item.total+=1
     })
   }
 }
     handleOrder(){
+
         return this.state.newdata.map((item,index)=>{
              return(
                <View styleName="vertical" key={item.product_id}>
@@ -519,12 +525,13 @@ handle42Minus(){
                    <Icon.Button name="minus" backgroundColor="#fff" color ="#000" onPress={()=>this.handle42Minus()}>
                    </Icon.Button>
                  </Row>
-                 <Button
+                 {/* <Button
                    styleName="dark"
                     style={{backgroundColor: "#000", height: 30}}
                     onPress={()=>this.updateItem()}>
-                   <Text style={{color: '#fff', fontWeight: '400'}} >DONE THE BATCH</Text>
-                 </Button>
+                   <Text style={{color: '#fff', fontWeight: '400'}} >DONE</Text>
+                 </Button> */}
+
              </View>
 
              )
@@ -536,24 +543,32 @@ handle42Minus(){
 handleFocus(){
   console.log("inside");
   this.setState({loading: true})
+  //this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
 }
 handleClearText(){
   this.setState({focus: true})
+
 }
-handleSubmit(){
-  this.setState({focus: true})
+_keyboardDidShow(){
+
 }
+
 handleBackButton(){
   this.setState({
     search:1,
   })
 }
+handleBlur(){
+  this.setState({scanText: ''})
+  this.search.focus();
+}
   render() {
 
     return (
         <View style={styles.container}>
-          <View style={{flexDirection:'row'}}>
+          <View style={{flexDirection:'row', backgroundColor: '#fff'}}>
           {this.state.search == 1?
+
           <SearchBar
             lightTheme
             // onChange={()=>this.setState({scanText: ''})}
@@ -561,6 +576,7 @@ handleBackButton(){
             placeholder='Search Product ID Here...'
             onFocus={()=>this.handleFocus()}
             keyboardType='numeric'
+            autoFocus={true}
             value={this.state.text}
             showLoadingIcon={this.state.loading}
             containerStyle={{backgroundColor: "#db993d", width: width-100}}
@@ -569,22 +585,40 @@ handleBackButton(){
           <SearchBar
             lightTheme
             // onChange={()=>this.setState({scanText: ''})}
+            ref={search => this.search = search}
             onChangeText={(scanText) =>this.updateScanText(scanText)}
             placeholder='Search Here...'
-            autoFocus={this.state.focus}
-            onBlur={()=>this.setState({scanText: '', focus:true})}
+            autoFocus={true}
+            onBlur={()=>this.handleBlur()}
             value={this.state.scanText}
             onClearText={()=>this.handleClearText()}
-            onSubmit={()=>this.handleSubmit()}
+            //onSubmit={()=>this.handleSubmit()}
             containerStyle={{backgroundColor: "#db993d", width: width-100}}
             inputStyle={{backgroundColor:"#fff"}}
-          />}
+          />
+        }
           {this.state.search == 1?
+
             <Button styleName="full-width"
               onPress={()=>this.setState({text:''})} >
               <Text>CLEAR</Text>
             </Button>:
-            <Button styleName="full-width"
+            <View style={{flexDirection: 'row', backgroundColor: '#fff', justifyContent: 'space-around'}}>
+              <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
+              <Icon.Button name="backward" backgroundColor="#fff" color ="#000" borderRadius={0} onPress={()=>this.setState({
+              size_34_c:0,
+              size_35_c:0,
+              size_36_c:0,
+              size_37_c:0,
+              size_38_c:0,
+              size_39_c:0,
+              size_40_c:0,
+              size_41_c:0,
+              size_42_c:0,
+              search: 1})} >
+              </Icon.Button>
+              </View>
+            {/* <Button
               onPress={()=>this.setState({
               size_34_c:0,
               size_35_c:0,
@@ -597,7 +631,12 @@ handleBackButton(){
               size_42_c:0,
               search: 1})} >
               <Text>BACK</Text>
-            </Button>
+            </Button> */}
+            <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
+            <Icon.Button name="send" backgroundColor="#fff" color ="#000" borderRadius={0} onPress={()=>this.updateItem()}>
+            </Icon.Button>
+            </View>
+            </View>
                 }
             </View>
             <View style={[styles.box, styles.box1]}>

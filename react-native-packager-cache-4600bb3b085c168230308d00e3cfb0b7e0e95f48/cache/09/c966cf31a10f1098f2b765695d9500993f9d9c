@@ -1,0 +1,67 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.FadeOut=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _View=require("./View");
+var _DriverShape=require("../drivers/DriverShape");
+/*
+ * FadeOut Component adds fade out effect to its children components.
+ * Connect it to driver and pass the input range to animate it.
+ * e.g.:
+ * ...
+ * const driver = new ScrollDriver();
+ *
+ * return (
+ *  <ScrollView
+ *    {...driver.scrollViewProps}
+ *  >
+ *    <FadeOut
+ *      driver={driver}
+ *      inputRange={[100,150]}
+ *    >
+ *      <Image />
+ *    </FadeOut>
+ *  </ScrollView>
+ * );
+ *
+ * ...
+ * Above code will create scroll dependent fade out animation over Image component
+ * from scroll 100, to scroll 150 where image is opaque at scroll 100,
+ * and fully transparent at scroll 150
+ */var
+FadeOut=exports.FadeOut=(_temp=_class=function(_Component){babelHelpers.inherits(FadeOut,_Component);function FadeOut(){babelHelpers.classCallCheck(this,FadeOut);return babelHelpers.possibleConstructorReturn(this,(FadeOut.__proto__||Object.getPrototypeOf(FadeOut)).apply(this,arguments));}babelHelpers.createClass(FadeOut,[{key:"render",value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _props=
+this.props,driver=_props.driver,children=_props.children,_props$inputRange=_props.inputRange,inputRange=_props$inputRange===undefined?[0,1]:_props$inputRange,style=_props.style;
+
+return(
+_react2.default.createElement(_View.View,{
+driver:driver,
+animationName:"fadeOut",
+animationOptions:{inputRange:inputRange},
+style:style},
+
+children));
+
+
+}}]);return FadeOut;}(_react.Component),_class.propTypes={/**
+     * An instance of animation driver, usually ScrollDriver
+     */driver:_DriverShape.DriverShape.isRequired,/**
+     * Components to which an effect will be applied
+     */children:_react2.default.PropTypes.node,/**
+     * pair of [start, end] values from animation driver, how
+     * children would fade out
+     */inputRange:_react2.default.PropTypes.array,style:_react2.default.PropTypes.object},_temp);

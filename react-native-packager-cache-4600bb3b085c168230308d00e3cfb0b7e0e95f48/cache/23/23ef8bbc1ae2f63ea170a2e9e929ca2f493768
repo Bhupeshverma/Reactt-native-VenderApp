@@ -1,0 +1,183 @@
+'use strict';Object.defineProperty(exports,"__esModule",{value:true});exports.default=undefined;var _class,_temp;
+
+var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+
+var _reactNativeViewTransformer=require("react-native-view-transformer");var _reactNativeViewTransformer2=babelHelpers.interopRequireDefault(_reactNativeViewTransformer);
+
+var DEV=false;var
+
+TransformableImage=(_temp=_class=function(_Component){babelHelpers.inherits(TransformableImage,_Component);babelHelpers.createClass(TransformableImage,null,[{key:"enableDebug",value:function enableDebug()
+
+{
+DEV=true;
+}}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function TransformableImage(props){babelHelpers.classCallCheck(this,TransformableImage);var _this=babelHelpers.possibleConstructorReturn(this,(TransformableImage.__proto__||Object.getPrototypeOf(TransformableImage)).call(this,
+props));
+
+_this.state={
+width:0,
+height:0,
+
+imageLoaded:false,
+pixels:undefined,
+keyAcumulator:1};return _this;
+
+}babelHelpers.createClass(TransformableImage,[{key:"componentWillMount",value:function componentWillMount()
+
+{
+if(!this.props.pixels){
+this.getImageSize(this.props.source);
+}
+}},{key:"componentWillReceiveProps",value:function componentWillReceiveProps(
+
+nextProps){
+if(!sameSource(this.props.source,nextProps.source)){
+//image source changed, clear last image's pixels info if any
+this.setState({pixels:undefined,keyAcumulator:this.state.keyAcumulator+1});
+this.getImageSize(nextProps.source);
+}
+}},{key:"render",value:function render()
+
+{
+var maxScale=1;
+var contentAspectRatio=undefined;
+var width=void 0,height=void 0;//pixels
+
+if(this.props.pixels){
+//if provided via props
+width=this.props.pixels.width;
+height=this.props.pixels.height;
+}else if(this.state.pixels){
+//if got using Image.getSize()
+width=this.state.pixels.width;
+height=this.state.pixels.height;
+}
+
+if(width&&height){
+contentAspectRatio=width/height;
+if(this.state.width&&this.state.height){
+maxScale=Math.max(width/this.state.width,height/this.state.height);
+maxScale=Math.max(1,maxScale);
+}
+}
+
+
+return(
+_react2.default.createElement(_reactNativeViewTransformer2.default,{
+ref:"viewTransformer",
+key:'viewTransformer#'+this.state.keyAccumulator//when image source changes, we should use a different node to avoid reusing previous transform state
+,enableTransform:this.props.enableTransform&&this.state.imageLoaded//disable transform until image is loaded
+,enableScale:this.props.enableScale,
+enableTranslate:this.props.enableTranslate,
+enableResistance:true,
+onTransformGestureReleased:this.props.onTransformGestureReleased,
+onViewTransformed:this.props.onViewTransformed,
+onSingleTapConfirmed:this.props.onSingleTapConfirmed,
+maxScale:maxScale,
+contentAspectRatio:contentAspectRatio,
+onLayout:this.onLayout.bind(this),
+style:this.props.style},
+_react2.default.createElement(_reactNative.Image,babelHelpers.extends({},
+this.props,{
+style:[this.props.style,{backgroundColor:'transparent'}],
+resizeMode:'contain',
+onLoadStart:this.onLoadStart.bind(this),
+onLoad:this.onLoad.bind(this),
+capInsets:{left:0.1,top:0.1,right:0.1,bottom:0.1}//on iOS, use capInsets to avoid image downsampling
+}))));
+
+
+}},{key:"onLoadStart",value:function onLoadStart(
+
+e){
+this.props.onLoadStart&&this.props.onLoadStart(e);
+this.setState({
+imageLoaded:false});
+
+}},{key:"onLoad",value:function onLoad(
+
+e){
+this.props.onLoad&&this.props.onLoad(e);
+this.setState({
+imageLoaded:true});
+
+}},{key:"onLayout",value:function onLayout(
+
+e){var _e$nativeEvent$layout=
+e.nativeEvent.layout,width=_e$nativeEvent$layout.width,height=_e$nativeEvent$layout.height;
+if(this.state.width!==width||this.state.height!==height){
+this.setState({
+width:width,
+height:height});
+
+}
+}},{key:"getImageSize",value:function getImageSize(
+
+source){var _this2=this;
+if(!source)return;
+
+DEV&&console.log('getImageSize...'+JSON.stringify(source));
+
+if(typeof _reactNative.Image.getSize==='function'){
+if(source&&source.uri){
+_reactNative.Image.getSize(
+source.uri,
+function(width,height){
+DEV&&console.log('getImageSize...width='+width+', height='+height);
+if(width&&height){
+if(_this2.state.pixels&&_this2.state.pixels.width===width&&_this2.state.pixels.height===height){
+//no need to update state
+}else{
+_this2.setState({pixels:{width:width,height:height}});
+}
+}
+},
+function(error){
+console.error('getImageSize...error='+JSON.stringify(error)+', source='+JSON.stringify(source));
+});
+}else{
+console.warn('getImageSize...please provide pixels prop for local images');
+}
+}else{
+console.warn('getImageSize...Image.getSize function not available before react-native v0.28');
+}
+}},{key:"getViewTransformerInstance",value:function getViewTransformerInstance()
+
+{
+return this.refs['viewTransformer'];
+}}]);return TransformableImage;}(_react.Component),_class.propTypes={pixels:_react.PropTypes.shape({width:_react.PropTypes.number,height:_react.PropTypes.number}),enableTransform:_react.PropTypes.bool,enableScale:_react.PropTypes.bool,enableTranslate:_react.PropTypes.bool,onSingleTapConfirmed:_react.PropTypes.func,onTransformGestureReleased:_react.PropTypes.func,onViewTransformed:_react.PropTypes.func},_class.defaultProps={enableTransform:true,enableScale:true,enableTranslate:true},_temp);exports.default=TransformableImage;
+
+
+function sameSource(source,nextSource){
+if(source===nextSource){
+return true;
+}
+if(source&&nextSource){
+if(source.uri&&nextSource.uri){
+return source.uri===nextSource.uri;
+}
+}
+return false;
+}

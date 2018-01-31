@@ -1,0 +1,65 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.TouchableDriver=undefined;var _reactNative=require("react-native");
+
+
+
+
+var _DriverBase2=require("./DriverBase");
+
+/**
+ * Returns the default animation callback to use.
+ *
+ * @param {Animated.Value} value
+ * @param {double} toValue
+ * @param {Object} animationOptions
+ * @returns {CompositeAnimation}
+ */
+function defaultAnimation(value,toValue,animationOptions){
+return _reactNative.Animated.timing(
+value,babelHelpers.extends({
+
+toValue:toValue},
+animationOptions));
+
+
+}
+
+/**
+ * Animation driver that creates an animated value changed on press events.
+ *
+ * Assign onPressIn and onPressOut props of React Native Touchable*, and
+ * pass instance to any @shoutem/animation animation to run it
+ * e.g.:
+ * driver = new TouchableDriver();
+ * ...
+ * <TouchableOpacity {...driver.touchableViewProps}>
+ * ...
+ * <ZoomIn driver={driver}>
+ */var
+TouchableDriver=exports.TouchableDriver=function(_DriverBase){babelHelpers.inherits(TouchableDriver,_DriverBase);
+
+/**
+   * @param {Object} options Animation options.
+   */
+function TouchableDriver(options){babelHelpers.classCallCheck(this,TouchableDriver);var _this=babelHelpers.possibleConstructorReturn(this,(TouchableDriver.__proto__||Object.getPrototypeOf(TouchableDriver)).call(this));
+
+
+_this.animationOptions=babelHelpers.extends({
+easing:_reactNative.Easing.elastic(1),
+duration:150},
+options);
+
+_this.onPressIn=_this.onPressIn.bind(_this);
+_this.onPressOut=_this.onPressOut.bind(_this);
+_this.touchableViewProps={
+onPressIn:_this.onPressIn,
+onPressOut:_this.onPressOut};return _this;
+
+}babelHelpers.createClass(TouchableDriver,[{key:"onPressIn",value:function onPressIn()
+
+{
+defaultAnimation(this.value,1,this.animationOptions).start();
+}},{key:"onPressOut",value:function onPressOut()
+
+{
+defaultAnimation(this.value,0,this.animationOptions).start();
+}}]);return TouchableDriver;}(_DriverBase2.DriverBase);

@@ -1,0 +1,197 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.InlineSettings = exports.Inline = exports.blockDisplayIfAnyChildIsBlock = undefined;
+
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/html/elements/Inline.js',
+    _class,
+    _temp;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _View = require('../../components/View');
+
+var _Text = require('../../components/Text');
+
+var _Text2 = require('./Text');
+
+var _Img = require('./Img');
+
+var _TouchableOpacity = require('../../components/TouchableOpacity');
+
+var _ElementRegistry = require('../services/ElementRegistry');
+
+var _Html = require('../Html');
+
+var blockDisplayIfAnyChildIsBlock = exports.blockDisplayIfAnyChildIsBlock = function blockDisplayIfAnyChildIsBlock(element) {
+  return (0, _Html.hasBlockElement)(element.childElements) ? _ElementRegistry.Display.BLOCK : _ElementRegistry.Display.INLINE;
+};
+
+function onlyInlineChildren(groupedChildren) {
+  var last = _lodash2.default.last(groupedChildren);
+  return groupedChildren.length === 1 && _lodash2.default.isArray(last);
+}
+
+function getRightmostLeafChild(element) {
+  if (!element) {
+    return;
+  }
+  if (_lodash2.default.isString(element) || _lodash2.default.size(element.childElements) === 0) {
+    return element;
+  }
+  return getRightmostLeafChild(_lodash2.default.last(element.childElements));
+}
+
+function handleLineBreak(elements) {
+  var inlineElements = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var nextBlockElement = arguments[2];
+
+  var lastElement = getRightmostLeafChild(_lodash2.default.last(inlineElements));
+
+  if ((0, _Img.isImg)(nextBlockElement) && (0, _Text2.isText)(lastElement)) {
+    inlineElements.push({ tag: 'br' });
+  }
+
+  elements.push(nextBlockElement);
+}
+
+function groupInlineNodes(childElements, onLineBreak) {
+  return childElements.reduce(function (result, elem) {
+    var last = _lodash2.default.last(result);
+
+    if (!(0, _Html.isBlockElement)(elem)) {
+      if (!_lodash2.default.isArray(last)) {
+        last = [];
+        result.push(last);
+      }
+      last.push(elem);
+    } else {
+      onLineBreak(result, last, elem);
+    }
+
+    return result;
+  }, []);
+}
+
+function renderGroupedChildren(groupedChildren, renderElement, style) {
+  var renderedChildren = groupedChildren.map(function (child) {
+    if (_lodash2.default.isArray(child)) {
+      var renderedChild = (0, _Html.renderChildElements)(child, renderElement);
+      return _lodash2.default.isEmpty(renderedChild) ? null : _react2.default.createElement(
+        _Text.Text,
+        { style: style.text, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 109
+          }
+        },
+        renderedChild
+      );
+    }
+    return renderElement(child);
+  });
+
+  return _react2.default.Children.toArray(renderedChildren);
+}
+
+var Inline = exports.Inline = (_temp = _class = function (_React$Component) {
+  babelHelpers.inherits(Inline, _React$Component);
+
+  function Inline() {
+    babelHelpers.classCallCheck(this, Inline);
+    return babelHelpers.possibleConstructorReturn(this, (Inline.__proto__ || Object.getPrototypeOf(Inline)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(Inline, [{
+    key: 'renderGroupedChildren',
+    value: function renderGroupedChildren(groupedChildren) {
+      var _props = this.props,
+          style = _props.style,
+          renderElement = _props.renderElement;
+
+      var renderedChildren = groupedChildren.map(function (child) {
+        if (_lodash2.default.isArray(child)) {
+          var renderedChild = (0, _Html.renderChildElements)(child, renderElement);
+
+          return _lodash2.default.isEmpty(renderedChild) ? null : _react2.default.createElement(
+            _Text.Text,
+            { style: style.text, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 155
+              }
+            },
+            renderedChild
+          );
+        }
+        return renderElement(child);
+      });
+
+      return _react2.default.Children.toArray(renderedChildren);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          childElements = _props2.childElements,
+          style = _props2.style,
+          onPress = _props2.onPress,
+          onLineBreak = _props2.onLineBreak,
+          styleName = _props2.styleName,
+          block = _props2.block;
+
+
+      if (_lodash2.default.isEmpty(childElements)) {
+        return null;
+      }
+
+      var trimmedChildren = (0, _Text2.removeWhiteSpace)(childElements);
+
+      var children = groupInlineNodes(trimmedChildren, onLineBreak);
+
+      var content = this.renderGroupedChildren(children);
+
+      if (onlyInlineChildren(children)) {
+        content = _react2.default.createElement(
+          _Text.Text,
+          { onPress: onPress, styleName: styleName, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 186
+            }
+          },
+          content
+        );
+
+        if (!block) {
+          return content;
+        }
+      }
+
+      var Container = onPress ? _TouchableOpacity.TouchableOpacity : _View.View;
+      return _react2.default.createElement(
+        Container,
+        { style: style.container, onPress: onPress, styleName: 'block ' + styleName, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 199
+          }
+        },
+        content
+      );
+    }
+  }]);
+  return Inline;
+}(_react2.default.Component), _class.defaultProps = {
+  style: {}
+}, _class.propTypes = babelHelpers.extends({}, _Html.ElementPropTypes, {
+  onPress: _react2.default.PropTypes.func,
+  onLineBreak: _react2.default.PropTypes.func
+}), _class.defaultProps = {
+  onLineBreak: handleLineBreak
+}, _temp);
+var InlineSettings = exports.InlineSettings = { display: blockDisplayIfAnyChildIsBlock };
+
+exports.default = (0, _Html.combineMappers)(_Html.mapElementProps)(Inline);

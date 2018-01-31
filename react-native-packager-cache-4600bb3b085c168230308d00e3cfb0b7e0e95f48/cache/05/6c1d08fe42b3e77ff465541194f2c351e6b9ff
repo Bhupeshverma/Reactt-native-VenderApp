@@ -1,0 +1,10 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.Lightbox=undefined;var _reactNativeLightbox=require("react-native-lightbox");var _reactNativeLightbox2=babelHelpers.interopRequireDefault(_reactNativeLightbox);
+
+var _theme=require("@shoutem/theme");
+var _animation=require("@shoutem/animation");
+
+var AnimatedLightbox=(0,_animation.connectAnimation)(_reactNativeLightbox2.default);
+var StyledLightbox=(0,_theme.connectStyle)('shoutem.ui.Lightbox')(AnimatedLightbox);exports.
+
+
+Lightbox=StyledLightbox;

@@ -43,6 +43,7 @@ class LoginScreen extends Component {
       'Poiret One':require('../../assets/fonts/PoiretOne-Regular.ttf')
     });
     this.setState({ fontLoaded: true });
+  
   }
   _onPressButton(){
     const {email, Password} = this.state
@@ -53,7 +54,7 @@ class LoginScreen extends Component {
   handleUser(){
   Actions.drawer({type: ActionConst.RESET})
   }
-  
+
 
   render() {
 

@@ -1,0 +1,81 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.SlideOut=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _Slide=require("./Slide");
+var _DriverShape=require("../../drivers/DriverShape");
+
+/*
+ * SlideOut Component adds slide out effect to its children components.
+ * Connect it to driver and pass the input range to animate it.
+ * e.g.:
+ * ...
+ * const driver = new ScrollDriver();
+ *
+ * return (
+ *  <ScrollView
+ *    {...driver.scrollViewProps}
+ *  >
+ *    <SlideOut
+ *      driver={driver}
+ *      inputRange={[100,150]}
+ *      to="top left"
+ *    >
+ *      <Image />
+ *    </SlideOut>
+ *  </ScrollView>
+ * );
+ *
+ * ...
+ * Above code will create scroll dependent slide out of an Image to
+ * the top left corner of the screen between scroll position of 100 and 150
+ */var
+SlideOut=exports.SlideOut=(_temp=_class=function(_Component){babelHelpers.inherits(SlideOut,_Component);function SlideOut(){babelHelpers.classCallCheck(this,SlideOut);return babelHelpers.possibleConstructorReturn(this,(SlideOut.__proto__||Object.getPrototypeOf(SlideOut)).apply(this,arguments));}babelHelpers.createClass(SlideOut,[{key:"render",value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _props=
+
+
+
+
+
+
+this.props,driver=_props.driver,children=_props.children,_props$inputRange=_props.inputRange,inputRange=_props$inputRange===undefined?[0,1]:_props$inputRange,style=_props.style,to=_props.to;
+
+return(
+_react2.default.createElement(_Slide.Slide,{
+driver:driver,
+animationName:"slideOut",
+inputRange:inputRange,
+direction:to,
+style:style},
+
+children));
+
+
+}}]);return SlideOut;}(_react.Component),_class.propTypes={/**
+     * An instance of animation driver, usually ScrollDriver
+     */driver:_DriverShape.DriverShape.isRequired,/**
+     * Components to which an effect will be applied
+     */children:_react2.default.PropTypes.node,/**
+     * pair of [start, end] values from animation driver, how
+     * children would slide out
+     */inputRange:_react2.default.PropTypes.array,/**
+     * position to where wrapped components should slide out
+     */to:_react2.default.PropTypes.string,style:_react2.default.PropTypes.object},_temp);

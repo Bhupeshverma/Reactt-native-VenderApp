@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import {View,StyleSheet,Text, Dimensions, ScrollView, ActivityIndicator,ToastAndroid} from 'react-native';
 import { connect } from 'react-redux';
 import { Sync, SavedProducts, ClearProducts, SyncWithCrm} from '../actions';
-import {SearchBar } from 'react-native-elements';
-import { Card, CardContent, CardImage } from 'react-native-material-cards'
 import {Actions} from 'react-native-router-flux'
 import {  Image ,Button, Row ,Subtitle,Caption, Heading, Title} from '@shoutem/ui';
-import { MaterialDialog } from 'react-native-material-dialog';
+
 
 var { height, width } = Dimensions.get('window');
 var box_count = 1;
@@ -49,7 +47,7 @@ class DetailScreen extends Component {
       if(mm<10){
           mm='0'+mm;
     }
-     var today = yyyy+'-'+dd+'-'+mm
+     var today = yyyy+'-'+mm+'-'+dd
      console.log("today", today);
      this.props.syncData.map((item,index)=>{
        syncArray =item.map((item,index)=>{
@@ -63,6 +61,9 @@ class DetailScreen extends Component {
      console.log("syncArray",syncArray);
      this.props.Sync(syncArray,today, this.state.total_count)
      Actions.nextScreen()
+}
+_handleClear(){
+  this.props.ClearProducts()
 }
 
   render(){
@@ -171,12 +172,18 @@ class DetailScreen extends Component {
 
 
             {this.props.data.length != 0 ?
-              <Button
-                styleName="dark"
-                 style={{backgroundColor: "#000", height: 40}}
-                 onPress={()=>this._handleSync()}>
-                <Text style={{color: '#fff', fontWeight: '400'}} >SYNC WITH CRM</Text>
-              </Button>:null}
+              <View style={{flexDirection: "row"}}>
+                <Button
+                   style={{backgroundColor: "#f2f2f2", height: 40, width: "50%"}}
+                   onPress={()=>this._handleClear()}>
+                  <Text style={{color: '#000', fontWeight: '400'}} >CLEAR</Text>
+                </Button>
+                <Button
+                   style={{backgroundColor: "#000", height: 40, width: "50%"}}
+                   onPress={()=>this._handleSync()}>
+                  <Text style={{color: '#fff', fontWeight: '400'}} >SYNC WITH CRM</Text>
+                </Button>
+              </View>:null}
           </View>
 
         </View>

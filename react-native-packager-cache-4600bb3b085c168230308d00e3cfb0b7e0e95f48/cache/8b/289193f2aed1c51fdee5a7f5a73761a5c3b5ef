@@ -1,0 +1,53 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNativeRouterFlux=require("react-native-router-flux");
+var _login=require("./src/screens/Auth/login");var _login2=babelHelpers.interopRequireDefault(_login);
+var _MainScreen=require("./src/screens/MainScreen");var _MainScreen2=babelHelpers.interopRequireDefault(_MainScreen);
+var _DetailScreen=require("./src/screens/DetailScreen");var _DetailScreen2=babelHelpers.interopRequireDefault(_DetailScreen);
+var _SyncScreen=require("./src/screens/SyncScreen");var _SyncScreen2=babelHelpers.interopRequireDefault(_SyncScreen);
+var _logout=require("./src/screens/Auth/logout");var _logout2=babelHelpers.interopRequireDefault(_logout);
+var _DrawerContent=require("./src/screens/drawer/DrawerContent");var _DrawerContent2=babelHelpers.interopRequireDefault(_DrawerContent);
+var _ham=require("./src/screens/drawer/ham2.png");var _ham2=babelHelpers.interopRequireDefault(_ham);
+var _reactRedux=require("react-redux");
+var _expo=require("expo");
+var _reactNative=require("react-native");
+
+
+var reducerCreate=function reducerCreate(params){return function(state,action){return(0,_reactNativeRouterFlux.Reducer)(params)(state,action);};};
+
+var RouterComponent=function RouterComponent(_ref){var needSignIn=_ref.needSignIn;
+return(
+_react2.default.createElement(_reactNativeRouterFlux.Router,{createReducer:reducerCreate,navigationBarStyle:{backgroundColor:'#262727'},titleStyle:{color:"#fff"}},
+_react2.default.createElement(_reactNativeRouterFlux.Lightbox,null,
+_react2.default.createElement(_reactNativeRouterFlux.Stack,{key:"root",hideNavBar:true},
+_react2.default.createElement(_reactNativeRouterFlux.Drawer,{
+initial:needSignIn,
+hideNavBar:true,
+key:"drawer",
+contentComponent:_DrawerContent2.default,
+drawerImage:_ham2.default,
+drawerWidth:300},
+_react2.default.createElement(_reactNativeRouterFlux.Scene,{key:"Home",component:_MainScreen2.default,
+title:"Home",initial:true}),
+
+_react2.default.createElement(_reactNativeRouterFlux.Scene,{key:"Details",component:_DetailScreen2.default,title:"Sync"}),
+_react2.default.createElement(_reactNativeRouterFlux.Scene,{key:"nextScreen",component:_SyncScreen2.default,hideNavBar:true})),
+
+
+_react2.default.createElement(_reactNativeRouterFlux.Stack,{key:"Main",initial:!needSignIn,hideNavBar:true},
+_react2.default.createElement(_reactNativeRouterFlux.Scene,{key:"login",component:_login2.default,hideNavBar:true}))),
+
+
+
+_react2.default.createElement(_reactNativeRouterFlux.Scene,{key:"Logout",component:_logout2.default}))));
+
+
+
+};
+
+function mapStateToProps(state){
+return{
+needSignIn:state.auth.sessionID};
+
+}exports.default=
+
+(0,_reactRedux.connect)(mapStateToProps)(RouterComponent);

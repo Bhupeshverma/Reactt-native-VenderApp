@@ -1,0 +1,97 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.ThemeShape=exports.default=undefined;var _react=require("react");
+var _resolveIncludes=require("./resolveIncludes");var _resolveIncludes2=babelHelpers.interopRequireDefault(_resolveIncludes);
+var _mergeComponentAndThemeStyles=require("./mergeComponentAndThemeStyles");var _mergeComponentAndThemeStyles2=babelHelpers.interopRequireDefault(_mergeComponentAndThemeStyles);
+var _normalizeStyle=require("./StyleNormalizer/normalizeStyle");var _normalizeStyle2=babelHelpers.interopRequireDefault(_normalizeStyle);
+
+// Privates, ideally those should be symbols
+var THEME_STYLE='@@shoutem.theme/themeStyle';
+var THEME_STYLE_CACHE='@@shoutem.theme/themeCachedStyle';
+
+var defaultTheme=void 0;
+
+var resolveStyle=function resolveStyle(style,baseStyle){return(0,_normalizeStyle2.default)((0,_resolveIncludes2.default)(style,baseStyle));};
+
+/**
+ * The theme defines the application style, and provides methods to
+ * resolve the style for a specific component.
+ *
+ * A theme style is a JavaScript object that contains the
+ * React Native style rules, with several additional features:
+ * 1. Style rules may be nested arbitrarily
+ * 2. Top level keys may target specific components by using their fully qualified name
+ * 3. INCLUDE keyword may be used to include any top level style key rules in any other style key
+ *
+ * Top level keys in a theme are usually some shared styles and component styles, e.g.:
+ * {
+ *   // Shared style
+ *   baseFont: {
+ *     fontFamily: '...'
+ *   },
+ *
+ *   // Style that will be applied to shoutem.ui.Text component
+ *   'shoutem.ui.Text': {
+ *     [INCLUDE]: ['baseFont'],
+ *     color: 'black'
+ *   }
+ * }
+ */var
+Theme=function(){
+function Theme(themeStyle){babelHelpers.classCallCheck(this,Theme);
+this[THEME_STYLE]=resolveStyle(themeStyle);
+this[THEME_STYLE_CACHE]={};
+}
+
+/**
+   * Sets the given style as a default theme style.
+   */babelHelpers.createClass(Theme,[{key:"createComponentStyle",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+   * Creates a component style by merging the theme style on top of the
+   * provided default component style. Any rules in the theme style will
+   * override the rules from the base component style.
+   *
+   * This method will also resolve any INCLUDE keywords in the theme or
+   * component styles before returning the final style.
+   *
+   * @param componentName fully qualified component name.
+   * @param defaultStyle - default component style that will be used as base style.
+   */value:function createComponentStyle(
+componentName,defaultStyle){
+if(this[THEME_STYLE_CACHE][componentName]){
+return this[THEME_STYLE_CACHE][componentName];
+}
+
+var componentIncludedStyle=resolveStyle(defaultStyle,this[THEME_STYLE]);
+
+/**
+     * This is static component style (static per componentName). This style can only
+     * change if the theme changes during runtime, so it is safe to reuse it within a
+     * scope of a theme once it is resolved for the first time.
+     */
+this[THEME_STYLE_CACHE][componentName]=(0,_mergeComponentAndThemeStyles2.default)(
+componentIncludedStyle,
+this[THEME_STYLE][componentName],
+this[THEME_STYLE]);
+
+
+return this[THEME_STYLE_CACHE][componentName];
+}}],[{key:"setDefaultThemeStyle",value:function setDefaultThemeStyle(style){defaultTheme=new Theme(style);}/**
+   * Returns the default theme that will be used as fallback
+   * if the StyleProvider is not configured in the app.
+   */},{key:"getDefaultTheme",value:function getDefaultTheme(){if(!defaultTheme){defaultTheme=new Theme({});}return defaultTheme;}}]);return Theme;}();exports.default=Theme;var ThemeShape=exports.ThemeShape=_react.PropTypes.shape({
+createComponentStyle:_react.PropTypes.func.isRequired});

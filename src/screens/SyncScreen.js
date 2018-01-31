@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, Text, ActivityIndicator, ToastAndroid} from 'react-native';
-import { MaterialDialog } from 'react-native-material-dialog';
 import { connect } from 'react-redux';
 import {  ClearProducts} from '../actions';
 import {Actions} from 'react-native-router-flux'

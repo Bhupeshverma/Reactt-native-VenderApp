@@ -70,7 +70,7 @@ export function Sync(dataArray, date, count){
 
 
 
-        return axios.post(`http://crm-dev.streetstylestore.com/webservice/setShoefromvendor.php`, data)
+        return axios.post(`http://crm.streetstylestore.com/webservice/setShoefromvendor.php`, data)
             .then((response) => {
                 console.log(response.data)
                 dispatch(syncedProducts(response));

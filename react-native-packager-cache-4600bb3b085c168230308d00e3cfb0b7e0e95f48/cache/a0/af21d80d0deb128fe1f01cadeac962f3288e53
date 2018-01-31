@@ -1,0 +1,249 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/examples/components/Headers.js';
+exports.Headers = Headers;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+function Headers() {
+  return _react2.default.createElement(
+    _index.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Article', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        }
+      },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 21
+          }
+        },
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'sm-gutter-bottom', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 22
+            }
+          },
+          'MIKE PATTON TEAMING WITH JOHN KAADA FOR COLLAB ALBUM BACTERIA CULT'
+        ),
+        _react2.default.createElement(
+          _index.Caption,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 23
+            }
+          },
+          'Sophia Jackson        21 hours ago'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Shop item', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 27
+        }
+      },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          }
+        },
+        _react2.default.createElement(
+          _index.Overlay,
+          { styleName: 'image-overlay', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 29
+            }
+          },
+          _react2.default.createElement(
+            _index.Heading,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 29
+              }
+            },
+            '-20%'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'md-gutter-top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 30
+            }
+          },
+          'COOL BLACK AND WHITE STYLISH WATCHES'
+        ),
+        _react2.default.createElement(
+          _index.Subtitle,
+          { styleName: 'line-through sm-gutter-top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 31
+            }
+          },
+          '$280.00'
+        ),
+        _react2.default.createElement(
+          _index.Heading,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 32
+            }
+          },
+          '$250.00'
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'secondary md-gutter-top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 33
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'cart', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 33
+            }
+          }),
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 33
+              }
+            },
+            'ADD TO BASKET'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Deals item', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 37
+        }
+      },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 38
+          }
+        },
+        _react2.default.createElement(
+          _index.Title,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39
+            }
+          },
+          'MIKE PATTON TEAMING WITH JOHN KAADA'
+        ),
+        _react2.default.createElement(
+          _index.Subtitle,
+          { styleName: 'line-through sm-gutter-top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 40
+            }
+          },
+          '150.00'
+        ),
+        _react2.default.createElement(
+          _index.Heading,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 41
+            }
+          },
+          '99.99'
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'secondary md-gutter-top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 42
+            }
+          },
+          _react2.default.createElement(
+            _index.Text,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 42
+              }
+            },
+            'CLAIM COUPON'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Header / Products item', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 46
+        }
+      },
+      _react2.default.createElement(
+        _index.Tile,
+        { styleName: 'text-centric', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 47
+          }
+        },
+        _react2.default.createElement(
+          _index.Title,
+          { styleName: 'md-gutter-bottom', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            }
+          },
+          'SMOKED SALMON, CLASSIC CONDIMENTS, BRIOCHE'
+        ),
+        _react2.default.createElement(
+          _index.Overlay,
+          { styleName: 'image-overlay', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 49
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            { styleName: 'sm-gutter-horizontal', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 50
+              }
+            },
+            '$18.30'
+          )
+        )
+      )
+    )
+  );
+}

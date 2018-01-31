@@ -1,0 +1,90 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Slide = undefined;
+
+var _class,
+    _temp,
+    _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/animation/src/animations/Slide/Slide.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _View = require('./../View');
+
+var _DriverShape = require('../../drivers/DriverShape');
+
+var _measure = require('../../components/measure');
+
+var Slide = (_temp = _class = function (_Component) {
+  babelHelpers.inherits(Slide, _Component);
+
+  function Slide() {
+    babelHelpers.classCallCheck(this, Slide);
+    return babelHelpers.possibleConstructorReturn(this, (Slide.__proto__ || Object.getPrototypeOf(Slide)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(Slide, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          driver = _props.driver,
+          children = _props.children,
+          _props$inputRange = _props.inputRange,
+          inputRange = _props$inputRange === undefined ? [0, 1] : _props$inputRange,
+          style = _props.style,
+          direction = _props.direction,
+          animationName = _props.animationName;
+      var layout = this.state.layout;
+
+
+      var offset = direction.split(' ').reduce(function () {
+        var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var position = arguments[1];
+
+        if (position.toLowerCase() === "top") {
+          offset['y'] = -(layout.pageY + layout.height);
+        } else if (position.toLowerCase() === "left") {
+          offset['x'] = -(layout.pageX + layout.width);
+        } else if (position.toLowerCase() === "bottom") {
+          offset['y'] = layout.pageY + layout.height;
+        } else if (position.toLowerCase() === "right") {
+          offset['x'] = layout.pageX + layout.width;
+        }
+        return offset;
+      }, {});
+
+      return _react2.default.createElement(
+        _View.View,
+        {
+          driver: driver,
+          animationName: animationName,
+          animationOptions: { inputRange: inputRange, offset: offset },
+          style: style,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 57
+          }
+        },
+        children
+      );
+    }
+  }]);
+  return Slide;
+}(_react.Component), _class.propTypes = {
+  driver: _DriverShape.DriverShape.isRequired,
+
+  children: _react2.default.PropTypes.node,
+
+  inputRange: _react2.default.PropTypes.array,
+
+  direction: _react2.default.PropTypes.string,
+  animationName: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object
+}, _temp);
+
+
+var measuredSlide = (0, _measure.measure)(Slide);
+
+exports.Slide = measuredSlide;

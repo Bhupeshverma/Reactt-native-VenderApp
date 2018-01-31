@@ -1,0 +1,637 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/examples/components/Rows.js';
+exports.Rows = Rows;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _Stage = require('./Stage');
+
+var _index = require('../../index');
+
+function Rows() {
+  return _react2.default.createElement(
+    _index.View,
+    { styleName: 'vertical collapsed', __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17
+      }
+    },
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 19
+          }
+        },
+        _react2.default.createElement(
+          _index.Text,
+          { numberOfLines: 1, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 20
+            }
+          },
+          'Portland ugh fashion axe Helvetica, YOLO Echo Park Austin gastropub roof party.'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item + Avatar thumbnail', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        { styleName: 'small', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 25
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small-avatar',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-9.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 30
+            }
+          },
+          'Add comment'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item + Icon', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 34
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        { styleName: 'small', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 35
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'add-to-favorites-off', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 36
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 37
+            }
+          },
+          'Add to favorites'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item + Icon + Right Arrow', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 41
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        { styleName: 'small', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 42
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'web', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 43
+          }
+        }),
+        _react2.default.createElement(
+          _index.Text,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 44
+            }
+          },
+          'About'
+        ),
+        _react2.default.createElement(_index.Icon, { styleName: 'disclosure', name: 'right-arrow', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 45
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item + Icon + Description', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        { styleName: 'small', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 50
+          }
+        },
+        _react2.default.createElement(_index.Icon, { name: 'laptop', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 51
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 52
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 53
+              }
+            },
+            'Bridges Rock Gym'
+          ),
+          _react2.default.createElement(
+            _index.Text,
+            { numberOfLines: 1, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 54
+              }
+            },
+            'www.example.com/deal/link/that-is-really-long'
+          )
+        ),
+        _react2.default.createElement(_index.Icon, { styleName: 'disclosure', name: 'right-arrow', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 56
+          }
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Small list item + Avatar + Description + Caption', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 61
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small-avatar top',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-11.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 66
+            }
+          },
+          _react2.default.createElement(
+            _index.View,
+            { styleName: 'horizontal space-between', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 67
+              }
+            },
+            _react2.default.createElement(
+              _index.Subtitle,
+              { styleName: '', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 68
+                }
+              },
+              'Dustin Malone'
+            ),
+            _react2.default.createElement(
+              _index.Caption,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 69
+                }
+              },
+              '20 minutes ago'
+            )
+          ),
+          _react2.default.createElement(
+            _index.Text,
+            { styleName: 'multiline', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 71
+              }
+            },
+            'Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap. Hashtag typewriter banh mi, squid keffiyeh High.'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 76
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 77
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-10.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 78
+          }
+        }),
+        _react2.default.createElement(
+          _index.Subtitle,
+          { styleName: 'top', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 82
+            }
+          },
+          'Portland ugh fashion axe Helvetica, YOLO Echo Park Austin gastropub roof party.'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item + Description', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 86
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 87
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-6.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 88
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical stretch space-between', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 92
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 93
+              }
+            },
+            'Fact Check: Wisconsin Music, Film & Photography Debate'
+          ),
+          _react2.default.createElement(
+            _index.Caption,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 94
+              }
+            },
+            '20 hours ago'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item + Description + Icon', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 99
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 100
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 101
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical stretch space-between', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 105
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 106
+              }
+            },
+            'Wilco Cover David Bowie\'s "Space Oddity"'
+          ),
+          _react2.default.createElement(
+            _index.Caption,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 107
+              }
+            },
+            'June 21  \xB7  20:00'
+          )
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'right-icon', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 109
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'add-event', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 109
+            }
+          })
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item + Description + Icon + Label', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 113
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-11.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 115
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical stretch space-between', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 119
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 120
+              }
+            },
+            'Family Safari Vacation To The Home Of The Gods'
+          ),
+          _react2.default.createElement(
+            _index.View,
+            { styleName: 'horizontal', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 121
+              }
+            },
+            _react2.default.createElement(
+              _index.Subtitle,
+              { styleName: 'md-gutter-right', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 122
+                }
+              },
+              '$120.00'
+            ),
+            _react2.default.createElement(
+              _index.Caption,
+              { styleName: 'line-through', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 123
+                }
+              },
+              '$150.00'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _index.Button,
+          { styleName: 'right-icon', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 126
+            }
+          },
+          _react2.default.createElement(_index.Icon, { name: 'add-to-cart', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 126
+            }
+          })
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item + Notification dot', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 130
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 131
+          }
+        },
+        _react2.default.createElement(_index.View, { styleName: 'notification-dot', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 132
+          }
+        }),
+        _react2.default.createElement(_index.Image, {
+          styleName: 'small rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-2.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 133
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical stretch space-between', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 137
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 138
+              }
+            },
+            'Fact Check: Wisconsin Music, Film & Photography Debate'
+          ),
+          _react2.default.createElement(
+            _index.Caption,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 139
+              }
+            },
+            '20 hours ago'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _Stage.Stage,
+      { title: 'Medium list item + Description + Label', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 144
+        }
+      },
+      _react2.default.createElement(
+        _index.Row,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 145
+          }
+        },
+        _react2.default.createElement(_index.Image, {
+          styleName: 'medium rounded-corners',
+          source: { uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png' },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 146
+          }
+        }),
+        _react2.default.createElement(
+          _index.View,
+          { styleName: 'vertical stretch space-between', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 150
+            }
+          },
+          _react2.default.createElement(
+            _index.Subtitle,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 151
+              }
+            },
+            'Take A Romantic Break In A Boutique Hotel'
+          ),
+          _react2.default.createElement(
+            _index.View,
+            { styleName: 'horizontal space-between', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 152
+              }
+            },
+            _react2.default.createElement(
+              _index.Caption,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 153
+                }
+              },
+              '3 days ago'
+            ),
+            _react2.default.createElement(
+              _index.Caption,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 154
+                }
+              },
+              '12:16'
+            )
+          )
+        )
+      )
+    )
+  );
+}

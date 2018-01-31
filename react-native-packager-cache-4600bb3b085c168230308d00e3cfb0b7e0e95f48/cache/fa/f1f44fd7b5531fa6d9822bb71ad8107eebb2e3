@@ -1,0 +1,26 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=
+
+
+
+
+
+
+
+
+function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:INITIAL_STATE;var action=arguments[1];
+switch(action.type){
+case _types.FETCH_PRODUCTS:
+return babelHelpers.extends({},state,{spinner:true,error:false});
+case _types.FETCHED_PRODUCTS:
+return babelHelpers.extends({},state,{spinner:false,products:action.payload.data,error:false});
+case _types.ERROR_RECIEVING_PRODUCTS:
+return babelHelpers.extends({},state,{spinner:false,error:true,products:null});
+case _types.CHANGE_PRODUCT_STATUS:
+return babelHelpers.extends({},state,{products:null,error:false});
+case _constants.REHYDRATE:
+return action.payload.productReducer||[];
+
+default:
+return state;}
+
+};var _types=require("../actions/types");var _constants=require("redux-persist/constants");var INITIAL_STATE={spinner:false,products:null,error:false};

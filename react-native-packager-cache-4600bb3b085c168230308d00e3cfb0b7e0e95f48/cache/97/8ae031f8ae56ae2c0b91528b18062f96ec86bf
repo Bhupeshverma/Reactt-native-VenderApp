@@ -1,0 +1,83 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.PageIndicators=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+
+
+
+
+var _theme=require("@shoutem/theme");
+var _View=require("./View");
+
+/**
+ * Renders Page indicators (dots)
+ */var
+PageIndicators=(_temp=_class=function(_Component){babelHelpers.inherits(PageIndicators,_Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function PageIndicators(props){babelHelpers.classCallCheck(this,PageIndicators);var _this=babelHelpers.possibleConstructorReturn(this,(PageIndicators.__proto__||Object.getPrototypeOf(PageIndicators)).call(this,
+props));
+_this.renderPageIndicator=_this.renderPageIndicator.bind(_this);return _this;
+}babelHelpers.createClass(PageIndicators,[{key:"renderPageIndicator",value:function renderPageIndicator(
+
+index,count,activeIndex,indicatorStyle){var
+style=this.props.style;
+return(
+_react2.default.createElement(_View.View,{
+style:style.indicatorContainer,
+key:"pageIndicator"+index},
+
+_react2.default.createElement(_View.View,{styleName:indicatorStyle})));
+
+
+}},{key:"render",value:function render()
+
+{var _props=
+this.props,style=_props.style,count=_props.count,maxCount=_props.maxCount,activeIndex=_props.activeIndex;
+
+var pageIndicators=[];
+var maxIndicatorsCount=Math.min(count,maxCount);
+
+for(var i=0;i<maxIndicatorsCount;i+=1){
+var indicatorStyle='';
+
+if(activeIndex===i){
+// If currently selected index matches index of page indicator that is rendered
+// then we should apply different styling
+indicatorStyle='selected';
+}else if(activeIndex>=i&&maxIndicatorsCount-1===i){
+// If currently selected index exceeds over number of indicators,
+// we should treat last indicator as selected one
+indicatorStyle='selected';
+}
+
+pageIndicators.push(
+this.renderPageIndicator(i,maxIndicatorsCount,activeIndex,indicatorStyle));
+
+}
+
+return(
+_react2.default.createElement(_View.View,{style:style.container},
+pageIndicators));
+
+
+}}]);return PageIndicators;}(_react.Component),_class.propTypes={// ActiveIndex: number defining which page indicator will be rendered as active (selected)
+activeIndex:_react.PropTypes.number,// Count: number defining how many page indicators will be rendered
+count:_react.PropTypes.number,// maxCount defining highest number of page indicators that can be rendered
+// If `count` is higher than `maxCount`, then `maxCount` number of indicators
+// will be rendered. Defaults to 10
+maxCount:_react.PropTypes.number,// Style prop used to override default (theme) styling
+style:_react.PropTypes.object},_class.defaultProps={maxCount:10},_temp);var StyledPageIndicators=(0,_theme.connectStyle)('shoutem.ui.PageIndicators')(PageIndicators);exports.
+PageIndicators=StyledPageIndicators;

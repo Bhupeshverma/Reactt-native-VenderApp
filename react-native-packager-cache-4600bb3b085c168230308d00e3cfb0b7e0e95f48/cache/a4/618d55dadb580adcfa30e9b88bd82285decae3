@@ -1,0 +1,161 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rows=Rows;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);var _Stage=require("./Stage");var _index=require("../../index");function Rows(){
+return(
+_react2.default.createElement(_index.View,{styleName:"vertical collapsed"},
+_react2.default.createElement(_Stage.Stage,{title:"Small list item"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Text,{numberOfLines:1},"Portland ugh fashion axe Helvetica, YOLO Echo Park Austin gastropub roof party."))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Small list item + Avatar thumbnail"},
+_react2.default.createElement(_index.Row,{styleName:"small"},
+_react2.default.createElement(_index.Image,{
+styleName:"small-avatar",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-9.png'}}),
+
+_react2.default.createElement(_index.Text,null,"Add comment"))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Small list item + Icon"},
+_react2.default.createElement(_index.Row,{styleName:"small"},
+_react2.default.createElement(_index.Icon,{name:"add-to-favorites-off"}),
+_react2.default.createElement(_index.Text,null,"Add to favorites"))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Small list item + Icon + Right Arrow"},
+_react2.default.createElement(_index.Row,{styleName:"small"},
+_react2.default.createElement(_index.Icon,{name:"web"}),
+_react2.default.createElement(_index.Text,null,"About"),
+_react2.default.createElement(_index.Icon,{styleName:"disclosure",name:"right-arrow"}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Small list item + Icon + Description"},
+_react2.default.createElement(_index.Row,{styleName:"small"},
+_react2.default.createElement(_index.Icon,{name:"laptop"}),
+_react2.default.createElement(_index.View,{styleName:"vertical"},
+_react2.default.createElement(_index.Subtitle,null,"Bridges Rock Gym"),
+_react2.default.createElement(_index.Text,{numberOfLines:1},"www.example.com/deal/link/that-is-really-long")),
+
+_react2.default.createElement(_index.Icon,{styleName:"disclosure",name:"right-arrow"}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Small list item + Avatar + Description + Caption"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"small-avatar top",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-11.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical"},
+_react2.default.createElement(_index.View,{styleName:"horizontal space-between"},
+_react2.default.createElement(_index.Subtitle,{styleName:""},"Dustin Malone"),
+_react2.default.createElement(_index.Caption,null,"20 minutes ago")),
+
+_react2.default.createElement(_index.Text,{styleName:"multiline"},"Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap. Hashtag typewriter banh mi, squid keffiyeh High.")))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"small rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-10.png'}}),
+
+_react2.default.createElement(_index.Subtitle,{styleName:"top"},"Portland ugh fashion axe Helvetica, YOLO Echo Park Austin gastropub roof party."))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item + Description"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"small rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-6.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical stretch space-between"},
+_react2.default.createElement(_index.Subtitle,null,"Fact Check: Wisconsin Music, Film & Photography Debate"),
+_react2.default.createElement(_index.Caption,null,"20 hours ago")))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item + Description + Icon"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"small rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical stretch space-between"},
+_react2.default.createElement(_index.Subtitle,null,"Wilco Cover David Bowie's \"Space Oddity\""),
+_react2.default.createElement(_index.Caption,null,"June 21  \xB7  20:00")),
+
+_react2.default.createElement(_index.Button,{styleName:"right-icon"},_react2.default.createElement(_index.Icon,{name:"add-event"})))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item + Description + Icon + Label"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"small rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-11.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical stretch space-between"},
+_react2.default.createElement(_index.Subtitle,null,"Family Safari Vacation To The Home Of The Gods"),
+_react2.default.createElement(_index.View,{styleName:"horizontal"},
+_react2.default.createElement(_index.Subtitle,{styleName:"md-gutter-right"},"$120.00"),
+_react2.default.createElement(_index.Caption,{styleName:"line-through"},"$150.00"))),
+
+
+_react2.default.createElement(_index.Button,{styleName:"right-icon"},_react2.default.createElement(_index.Icon,{name:"add-to-cart"})))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item + Notification dot"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.View,{styleName:"notification-dot"}),
+_react2.default.createElement(_index.Image,{
+styleName:"small rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-2.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical stretch space-between"},
+_react2.default.createElement(_index.Subtitle,null,"Fact Check: Wisconsin Music, Film & Photography Debate"),
+_react2.default.createElement(_index.Caption,null,"20 hours ago")))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Medium list item + Description + Label"},
+_react2.default.createElement(_index.Row,null,
+_react2.default.createElement(_index.Image,{
+styleName:"medium rounded-corners",
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-1.png'}}),
+
+_react2.default.createElement(_index.View,{styleName:"vertical stretch space-between"},
+_react2.default.createElement(_index.Subtitle,null,"Take A Romantic Break In A Boutique Hotel"),
+_react2.default.createElement(_index.View,{styleName:"horizontal space-between"},
+_react2.default.createElement(_index.Caption,null,"3 days ago"),
+_react2.default.createElement(_index.Caption,null,"12:16")))))));
+
+
+
+
+
+
+}

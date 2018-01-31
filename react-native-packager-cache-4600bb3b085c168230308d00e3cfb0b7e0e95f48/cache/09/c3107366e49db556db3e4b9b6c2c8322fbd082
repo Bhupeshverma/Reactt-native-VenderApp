@@ -1,0 +1,18 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=
+
+
+
+function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:INITIAL_STATE;var action=arguments[1];
+switch(action.type){
+case _types.IS_LOGGING_OUT:
+return babelHelpers.extends({},state,{spinner:true,error:false});
+case _types.LOGGED_OUT:
+return babelHelpers.extends({},state,{spinner:false,loggedOut:true,error:false});
+case _types.LOGGING_OUT_ERROR:
+return babelHelpers.extends({},state,{spinner:false,error:true});
+case _types.CHANGE_LOG_OUT_STATUS:
+return babelHelpers.extends({},state,{loggedOut:false});
+default:
+return state;}
+
+};var _types=require("../actions/types");var INITIAL_STATE={spinner:false,loggedOut:false,error:false};

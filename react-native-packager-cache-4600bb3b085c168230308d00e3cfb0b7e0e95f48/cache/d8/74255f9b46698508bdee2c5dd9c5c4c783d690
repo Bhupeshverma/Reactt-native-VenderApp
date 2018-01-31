@@ -1,0 +1,111 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.ImageGallery=undefined;var _class,_temp;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+var _reactNativeTransformableImage=require("react-native-transformable-image");var _reactNativeTransformableImage2=babelHelpers.interopRequireDefault(_reactNativeTransformableImage);
+
+var _theme=require("@shoutem/theme");
+
+var _ImageGalleryBase2=require("./ImageGalleryBase");var
+
+ImageGallery=(_temp=_class=function(_ImageGalleryBase){babelHelpers.inherits(ImageGallery,_ImageGalleryBase);
+
+
+
+function ImageGallery(props){babelHelpers.classCallCheck(this,ImageGallery);var _this=babelHelpers.possibleConstructorReturn(this,(ImageGallery.__proto__||Object.getPrototypeOf(ImageGallery)).call(this,
+props));
+
+_this.onViewTransformed=_this.onViewTransformed.bind(_this);
+_this.imageRefs=new Map();return _this;
+}babelHelpers.createClass(ImageGallery,[{key:"getImageTransformer",value:function getImageTransformer(
+
+index){var
+data=this.props.data;
+if(index>=0&&index<data.length){
+var ref=this.imageRefs.get(index);
+if(ref){
+return ref.getViewTransformerInstance();
+}
+}
+return null;
+}},{key:"resetImageTransformer",value:function resetImageTransformer(
+
+transformer){
+if(!transformer){
+return;
+}
+
+transformer.updateTransform({
+scale:1,
+translateX:0,
+translateY:0});
+
+}},{key:"resetSurroundingImageTransformations",value:function resetSurroundingImageTransformations(
+
+index){
+this.resetImageTransformer(this.getImageTransformer(index-1));
+this.resetImageTransformer(this.getImageTransformer(index+1));
+}},{key:"updateImageSwitchingStatus",value:function updateImageSwitchingStatus()
+
+{var _state=
+this.state,imageSwitchingEnabled=_state.imageSwitchingEnabled,selectedIndex=_state.selectedIndex;
+
+var imageTransformer=this.getImageTransformer(selectedIndex);
+if(!imageTransformer){
+return;
+}
+
+var translationSpace=imageTransformer.getAvailableTranslateSpace();
+if(!translationSpace){
+return;
+}
+
+var imageBoundaryReached=translationSpace.right<=0||translationSpace.left<=0;
+
+if(imageSwitchingEnabled!==imageBoundaryReached){
+// We want to allow switching between gallery images only if
+// the image is at its left or right boundary. This happens if the
+// image is fully zoomed out, or if the image is zoomed in but the
+// user moved it to one of its boundaries.
+this.setState({
+imageSwitchingEnabled:imageBoundaryReached});
+
+}
+}},{key:"onViewTransformed",value:function onViewTransformed()
+
+{
+this.updateImageSwitchingStatus();
+}},{key:"onIndexSelected",value:function onIndexSelected(
+
+newIndex){var _this2=this;
+babelHelpers.get(ImageGallery.prototype.__proto__||Object.getPrototypeOf(ImageGallery.prototype),"onIndexSelected",this).call(this,newIndex);
+
+_reactNative.InteractionManager.runAfterInteractions(function(){
+// After swipe interaction finishes, we'll have new selected index in state
+// And we're resetting surrounding image transformations,
+// So that images aren't left zoomed in when user swipes to next/prev image
+_this2.resetSurroundingImageTransformations(newIndex);
+});
+}},{key:"renderImage",value:function renderImage(
+
+imageProps,imageData,imageIndex){var _this3=this;var
+imageSwitchingEnabled=this.state.imageSwitchingEnabled;
+
+var iosProps=babelHelpers.extends({},
+imageProps,{
+onSingleTapConfirmed:this.onImageTap,
+onViewTransformed:this.onViewTransformed,
+enableTranslate:!imageSwitchingEnabled,
+ref:function ref(transformer){
+_this3.imageRefs.set(imageIndex,transformer);
+}});
+
+
+return(
+_react2.default.createElement(_reactNativeTransformableImage2.default,iosProps));
+
+}}]);return ImageGallery;}(_ImageGalleryBase2.ImageGalleryBase),_class.IMAGE_PREVIEW_MODE=_ImageGalleryBase2.ImageGalleryBase.IMAGE_PREVIEW_MODE,_class.IMAGE_GALLERY_MODE=_ImageGalleryBase2.ImageGalleryBase.IMAGE_GALLERY_MODE,_temp);
+
+
+var StyledImageGallery=(0,_theme.connectStyle)('shoutem.ui.ImageGallery')(ImageGallery);exports.
+
+
+ImageGallery=StyledImageGallery;

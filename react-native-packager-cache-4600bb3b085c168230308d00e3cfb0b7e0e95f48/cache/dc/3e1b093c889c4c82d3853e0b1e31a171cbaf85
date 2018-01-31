@@ -1,0 +1,314 @@
+Object.defineProperty(exports,"__esModule",{value:true});
+
+var _fbemitter=require("fbemitter");
+
+var _invariant=require("invariant");var _invariant2=babelHelpers.interopRequireDefault(_invariant);
+var _warning=require("fbjs/lib/warning");var _warning2=babelHelpers.interopRequireDefault(_warning);
+
+var _reactNative=require("react-native");var
+
+ExponentNotifications=_reactNative.NativeModules.ExponentNotifications;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Android assigns unique number to each notification natively.
+// Since that's not supported on iOS, we generate an unique string.
+
+
+var _emitter=void 0;
+var _initialNotification=void 0;
+var _warnedAboutDeprecatedPushTokenMethod=false;
+
+function _maybeInitEmitter(){
+if(!_emitter){
+_emitter=new _fbemitter.EventEmitter();
+_reactNative.DeviceEventEmitter.addListener('Exponent.notification',_emitNotification);
+}
+}
+
+function _emitNotification(notification){
+if(typeof notification==='string'){
+notification=JSON.parse(notification);
+}
+
+/* Don't mutate the original notification */
+notification=babelHelpers.extends({},notification);
+
+if(typeof notification.data==='string'){
+try{
+notification.data=JSON.parse(notification.data);
+}catch(e){
+// It's actually just a string, that's fine
+}
+}
+
+_emitter.emit('notification',notification);
+}
+
+function _processNotification(notification){
+notification=babelHelpers.extends({},notification);
+
+if(!notification.data){
+notification.data={};
+}
+
+if(notification.hasOwnProperty('count')){
+delete notification.count;
+}
+
+// Delete any Android properties on iOS and merge the iOS properties on root
+// notification object
+if(_reactNative.Platform.OS==='ios'){
+if(notification.android){
+delete notification.android;
+}
+
+if(notification.ios){
+notification=babelHelpers.extends(notification,notification.ios);
+delete notification.ios;
+}
+}
+
+// Delete any iOS properties on Android and merge the Android properties on
+// root notification object
+if(_reactNative.Platform.OS==='android'){
+if(notification.ios){
+delete notification.ios;
+}
+
+if(notification.android){
+notification=babelHelpers.extends(notification,notification.android);
+delete notification.android;
+}
+}
+
+return notification;
+}
+
+function _validateNotification(notification){
+if(_reactNative.Platform.OS==='ios'){
+(0,_invariant2.default)(
+!!notification.title&&!!notification.body,
+'Local notifications on iOS require both a title and a body');
+
+}else if(_reactNative.Platform.OS==='android'){
+(0,_invariant2.default)(
+!!notification.title,
+'Local notifications on Android require a title');
+
+}
+}exports.default=
+
+{
+/* Only used internally to initialize the notification from top level props */
+_setInitialNotification:function _setInitialNotification(notification){
+_initialNotification=notification;
+},
+
+/* Re-export, we can add flow here if we want as well */
+getExpoPushTokenAsync:ExponentNotifications.getExponentPushTokenAsync,
+getExponentPushTokenAsync:function getExponentPushTokenAsync(){
+if(!_warnedAboutDeprecatedPushTokenMethod){
+console.warn("Notifications.getExponentPushTokenAsync is deprecated and will be removed in SDK 21. Call Notifications.getExpoPushTokenAsync (which has the exact same behavior) instead.");
+
+
+_warnedAboutDeprecatedPushTokenMethod=true;
+}
+return ExponentNotifications.getExponentPushTokenAsync.apply(ExponentNotifications,arguments);
+},
+
+/* Re-export, we can add flow here if we want as well */
+getDevicePushTokenAsync:ExponentNotifications.getDevicePushTokenAsync,
+
+/* Shows a notification instantly */
+presentLocalNotificationAsync:function presentLocalNotificationAsync(
+notification)
+{
+_validateNotification(notification);
+notification=_processNotification(notification);
+
+return ExponentNotifications.presentLocalNotification(notification);
+},
+
+/* Schedule a notification at a later date */
+scheduleLocalNotificationAsync:function scheduleLocalNotificationAsync(
+notification){var
+options=arguments.length>1&&arguments[1]!==undefined?arguments[1]:
+
+
+
+{};var now,timeAsDateObj,validOptions;return regeneratorRuntime.async(function scheduleLocalNotificationAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:
+
+// set now at the beginning of the method, to prevent potential
+// weird warnings when we validate options.time later on
+now=Date.now();
+
+// Validate and process the notification data
+_validateNotification(notification);
+notification=_processNotification(notification);
+
+// Validate `options.time`
+if(!options.time){_context.next=10;break;}
+timeAsDateObj=null;
+if(options.time&&typeof options.time==='number'){
+timeAsDateObj=new Date(options.time);
+// god, JS is the worst
+if(timeAsDateObj==='Invalid Date'){
+timeAsDateObj=null;
+}
+}else if(options.time&&options.time instanceof Date){
+timeAsDateObj=options.time;
+}
+
+// If we couldn't convert properly, throw an error
+if(timeAsDateObj){_context.next=8;break;}throw(
+new Error("Provided value for \"time\" is invalid. Please verify that it's either a number representing Unix Epoch time in milliseconds, or a valid date object."));case 8:
+
+
+
+
+// If someone passes in a value that is too small, say, by an order of 1000
+// (it's common to accidently pass seconds instead of ms), display a warning.
+(0,_warning2.default)(
+timeAsDateObj>=now,"Provided value for \"time\" is before the current date. Did you possibly pass number of seconds since Unix Epoch instead of number of milliseconds?");
+
+
+
+// If iOS, pass time as milliseconds
+if(_reactNative.Platform.OS==='ios'){
+options=babelHelpers.extends({},
+options,{
+time:timeAsDateObj.getTime()});
+
+}else{
+options=babelHelpers.extends({},
+options,{
+time:timeAsDateObj});
+
+}case 10:if(!(
+
+
+options.intervalMs!=null&&options.repeat!=null)){_context.next=12;break;}throw(
+new Error("Pass either the \"repeat\" option or \"intervalMs\" option, not both"));case 12:if(!(
+
+
+
+
+
+options.repeat!=null)){_context.next=16;break;}
+validOptions=new Set([
+'minute',
+'hour',
+'day',
+'week',
+'month',
+'year']);if(
+
+validOptions.has(options.repeat)){_context.next=16;break;}throw(
+new Error("Pass one of ['minute', 'hour', 'day', 'week', 'month', 'year'] as the value for the \"repeat\" option"));case 16:if(!(
+
+
+
+
+
+options.intervalMs!=null)){_context.next=21;break;}if(!(
+_reactNative.Platform.OS==='ios')){_context.next=19;break;}throw(
+new Error("The \"intervalMs\" option is not supported on iOS"));case 19:if(!(
+
+
+options.intervalMs<=0||!Number.isInteger(options.intervalMs))){_context.next=21;break;}throw(
+new Error("Pass an integer greater than zero as the value for the \"intervalMs\" option"));case 21:return _context.abrupt("return",
+
+
+
+
+
+ExponentNotifications.scheduleLocalNotification(
+notification,
+options));case 22:case"end":return _context.stop();}}},null,this);},
+
+
+
+/* Dismiss currently shown notification with ID (Android only) */
+dismissNotificationAsync:function dismissNotificationAsync(
+notificationId){return regeneratorRuntime.async(function dismissNotificationAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:if(!(
+
+_reactNative.Platform.OS==='android')){_context2.next=4;break;}return _context2.abrupt("return",
+ExponentNotifications.dismissNotification(notificationId));case 4:throw(
+
+new Error('Dismissing notifications is not supported on iOS'));case 5:case"end":return _context2.stop();}}},null,this);},
+
+
+
+/* Dismiss all currently shown notifications (Android only) */
+dismissAllNotificationsAsync:function dismissAllNotificationsAsync(){return regeneratorRuntime.async(function dismissAllNotificationsAsync$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:if(!(
+_reactNative.Platform.OS==='android')){_context3.next=4;break;}return _context3.abrupt("return",
+ExponentNotifications.dismissAllNotifications());case 4:throw(
+
+new Error('Dismissing notifications is not supported on iOS'));case 5:case"end":return _context3.stop();}}},null,this);},
+
+
+
+/* Cancel scheduled notification notification with ID */
+cancelScheduledNotificationAsync:function cancelScheduledNotificationAsync(
+notificationId)
+{
+return ExponentNotifications.cancelScheduledNotification(notificationId);
+},
+
+/* Cancel all scheduled notifications */
+cancelAllScheduledNotificationsAsync:function cancelAllScheduledNotificationsAsync(){
+return ExponentNotifications.cancelAllScheduledNotifications();
+},
+
+/* Primary public api */
+addListener:function addListener(listener){
+_maybeInitEmitter();
+
+if(_initialNotification){
+var initialNotification=_initialNotification;
+_initialNotification=null;
+setTimeout(function(){
+_emitNotification(initialNotification);
+},0);
+}
+
+return _emitter.addListener('notification',listener);
+},
+
+getBadgeNumberAsync:function getBadgeNumberAsync(){return regeneratorRuntime.async(function getBadgeNumberAsync$(_context4){while(1){switch(_context4.prev=_context4.next){case 0:if(
+ExponentNotifications.getBadgeNumberAsync){_context4.next=2;break;}return _context4.abrupt("return",
+0);case 2:return _context4.abrupt("return",
+
+ExponentNotifications.getBadgeNumberAsync());case 3:case"end":return _context4.stop();}}},null,this);},
+
+
+setBadgeNumberAsync:function setBadgeNumberAsync(number){return regeneratorRuntime.async(function setBadgeNumberAsync$(_context5){while(1){switch(_context5.prev=_context5.next){case 0:if(
+ExponentNotifications.setBadgeNumberAsync){_context5.next=2;break;}return _context5.abrupt("return");case 2:return _context5.abrupt("return",
+
+
+ExponentNotifications.setBadgeNumberAsync(number));case 3:case"end":return _context5.stop();}}},null,this);}};

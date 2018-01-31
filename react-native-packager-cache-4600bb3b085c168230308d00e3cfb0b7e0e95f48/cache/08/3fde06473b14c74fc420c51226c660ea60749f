@@ -1,0 +1,90 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+
+var _Button=require("../Button");
+var _Text=require("../Text");
+var _Icon=require("../Icon");
+var _ShareButton=require("../ShareButton");
+
+var _lodash=require("lodash");var _=babelHelpers.interopRequireWildcard(_lodash);
+
+var composers={
+title:function title(value,props){return{
+centerComponent:
+_react2.default.createElement(_Text.Title,{animationName:props.animationName,numberOfLines:1},
+value||'')};},
+
+
+
+share:function share(value,props){
+if(!value.link){
+return;
+}var
+
+title=value.title,text=value.text,link=value.link;
+
+return{
+rightComponent:
+_react2.default.createElement(_ShareButton.ShareButton,{
+animationName:props.animationName,
+title:title||props.title,
+message:text,
+url:link})};
+
+
+
+},
+hasHistory:function hasHistory(value,props){var
+navigateBack=props.navigateBack;
+
+/**
+     * onPress sets `event` as first param, which leads to ignoring default navigateBack
+     * first argument (navigator) so we have to wrap navigateBack into function to leave first
+     * argument empty, default
+     */
+function navigateBackWithoutEventParameter(){
+navigateBack();
+}
+
+var leftComponent=value?
+_react2.default.createElement(_Button.Button,{
+styleName:"clear",
+onPress:navigateBackWithoutEventParameter},
+
+_react2.default.createElement(_Icon.Icon,{
+name:"back",
+animationName:props.animationName})):
+
+
+
+null;
+
+return{leftComponent:leftComponent};
+}};
+
+
+/**
+ * If source (usually state set by component) has undefined
+ * property values, ignore those properties.
+ * @param objValue
+ * @param srcValue
+ * @returns {*}
+ */
+function skipUndefined(objValue,srcValue){
+return _.isUndefined(srcValue)?objValue:srcValue;
+}
+
+// eslint-disable-next-line react/prefer-stateless-function
+var composeChildren=function composeChildren(NavigationBarComponent){return function(_Component){babelHelpers.inherits(_class,_Component);function _class(){babelHelpers.classCallCheck(this,_class);return babelHelpers.possibleConstructorReturn(this,(_class.__proto__||Object.getPrototypeOf(_class)).apply(this,arguments));}babelHelpers.createClass(_class,[{key:"render",value:function render()
+{var _this2=this;
+var newProps={};
+_.forEach(this.props,function(value,key){
+if(_.isFunction(composers[key])){
+_.assign(newProps,composers[key](value,_this2.props));
+}
+});
+
+return _react2.default.createElement(NavigationBarComponent,_.assignWith(newProps,this.props,skipUndefined));
+}}]);return _class;}(_react.Component);};exports.default=
+
+
+composeChildren;

@@ -1,0 +1,57 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TextInput = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/TextInput.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+var TextInput = function (_Component) {
+  babelHelpers.inherits(TextInput, _Component);
+
+  function TextInput() {
+    babelHelpers.classCallCheck(this, TextInput);
+    return babelHelpers.possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(TextInput, [{
+    key: 'render',
+    value: function render() {
+      var props = this.props;
+
+      var style = babelHelpers.extends({}, props.style);
+      delete style.placeholderTextColor;
+      delete style.selectionColor;
+      delete style.underlineColorAndroid;
+
+      return _react2.default.createElement(_reactNative.TextInput, babelHelpers.extends({}, props, {
+        style: style,
+        placeholderTextColor: props.style.placeholderTextColor,
+        selectionColor: props.style.selectionColor,
+        underlineColorAndroid: props.style.underlineColorAndroid,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        }
+      }));
+    }
+  }]);
+  return TextInput;
+}(_react.Component);
+
+TextInput.propTypes = babelHelpers.extends({}, _reactNative.TextInput.propTypes, {
+  style: _react2.default.PropTypes.object
+});
+
+var AnimatedTextInput = (0, _animation.connectAnimation)(TextInput);
+var StyledTextInput = (0, _theme.connectStyle)('shoutem.ui.TextInput')(AnimatedTextInput);
+
+exports.TextInput = StyledTextInput;

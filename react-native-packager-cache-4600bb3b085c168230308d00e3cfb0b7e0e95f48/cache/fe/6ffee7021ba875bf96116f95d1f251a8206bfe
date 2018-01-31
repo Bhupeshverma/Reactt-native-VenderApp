@@ -1,0 +1,94 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GridRow = undefined;
+var _jsxFileName = '/home/ziddi/Desktop/Bhupesh/venders/node_modules/@shoutem/ui/components/GridRow.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _lodash = require('lodash');
+
+var _lodash2 = babelHelpers.interopRequireDefault(_lodash);
+
+var _View = require('./View');
+
+var _theme = require('@shoutem/theme');
+
+var _animation = require('@shoutem/animation');
+
+function renderPlaceholderViews(count) {
+  return _lodash2.default.times(count, function (index) {
+    return _react2.default.createElement(_View.View, { key: 'placeholder-' + index, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18
+      }
+    });
+  });
+}
+
+var GridRow = function (_React$Component) {
+  babelHelpers.inherits(GridRow, _React$Component);
+
+  function GridRow() {
+    babelHelpers.classCallCheck(this, GridRow);
+    return babelHelpers.possibleConstructorReturn(this, (GridRow.__proto__ || Object.getPrototypeOf(GridRow)).apply(this, arguments));
+  }
+
+  babelHelpers.createClass(GridRow, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          columns = _props.columns;
+
+      var missingElementsCount = columns - _react.Children.count(children);
+
+      return _react2.default.createElement(
+        _reactNative.View,
+        babelHelpers.extends({}, this.props, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 29
+          }
+        }),
+        children,
+        renderPlaceholderViews(missingElementsCount)
+      );
+    }
+  }]);
+  return GridRow;
+}(_react2.default.Component);
+
+GridRow.propTypes = babelHelpers.extends({
+  columns: _react2.default.PropTypes.number.isRequired
+}, _reactNative.View.propTypes);
+
+GridRow.groupByRows = function (data, columns) {
+  var getColumnSpan = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _lodash2.default.constant(1);
+
+  var groupedData = _lodash2.default.reduce(data, function (result, element) {
+    var currentRow = _lodash2.default.last(result.rows);
+    var elementSpan = getColumnSpan(element);
+
+    if (!currentRow || result.currentRowSize + elementSpan > columns) {
+      currentRow = [];
+      result.currentRowSize = 0;
+      result.rows.push(currentRow);
+    }
+
+    result.currentRowSize += elementSpan;
+    currentRow.push(element);
+    return result;
+  }, { currentRowSize: 0, rows: [] });
+
+  return groupedData.rows;
+};
+
+var AnimatedGridRow = (0, _animation.connectAnimation)(GridRow);
+var StyledGridRow = (0, _theme.connectStyle)('shoutem.ui.GridRow')(AnimatedGridRow);
+
+exports.GridRow = StyledGridRow;

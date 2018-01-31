@@ -1,0 +1,13 @@
+Object.defineProperty(exports,"__esModule",{value:true});
+
+var _reactNative=require("react-native");var
+
+CTKInterstitialAdManager=_reactNative.NativeModules.CTKInterstitialAdManager;exports.default=
+
+{
+/**
+   * Shows interstitial ad for a given placementId
+   */
+showAd:function showAd(placementId){
+return CTKInterstitialAdManager.showAd(placementId);
+}};

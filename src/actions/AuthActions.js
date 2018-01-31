@@ -53,7 +53,7 @@ export function logIn(email , password) {
 
     dispatch(isLoggingIn());
 
-    return axios.post('http://crm-dev.streetstylestore.com/webservice/login.php',data)
+    return axios.post('http://crm.streetstylestore.com/webservice/login.php',data)
             .then((response) => {
               dispatch(loggedIn(response));
               dispatch(changeLogOutStatus());

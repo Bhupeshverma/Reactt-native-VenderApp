@@ -1,0 +1,306 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NavigationBars=NavigationBars;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);var _reactNative=require("react-native");var _View=require("../../components/View");var _Stage=require("./Stage");var _index=require("../../index");var window=_reactNative.Dimensions.get('window');function NavBarStageContainer(props){return _react2.default.createElement(_View.View,babelHelpers.extends({},props,{style:babelHelpers.extends({width:window.width,height:70},props.style)}));}var navBarDropDownOptions=[{name:'All',value:1},{name:'Sport',value:1},{name:'World',value:1},{name:'Lifestyle',value:1},{name:'Food',value:1},{name:'Music',value:1},{name:'Movies',value:1},{name:'Tech',value:1},{name:'Fun',value:1},{name:'Fashion',value:1}];var navBarDropDownSelectedOption=navBarDropDownOptions[0];function NavigationBars(){
+return(
+_react2.default.createElement(_View.View,{styleName:"vertical collapsed"},
+_react2.default.createElement(_Stage.Stage,{title:"Navbar / Solid"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar / Clear (Solid color)"},
+_react2.default.createElement(NavBarStageContainer,{style:{backgroundColor:'#1a70d5'}},
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"clear",
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar / Clear (Image)"},
+_react2.default.createElement(_index.Image,{
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png'},
+style:{
+width:window.width,
+height:70}},
+
+
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"clear",
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar/ Fade (Gradient overlay + Solid color)"},
+_react2.default.createElement(NavBarStageContainer,{style:{backgroundColor:'#1a70d5'}},
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"fade clear",
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar/ Fade (Gradient overlay + Image)"},
+_react2.default.createElement(_index.Image,{
+source:{uri:'https://shoutem.github.io/img/ui-toolkit/examples/image-3.png'},
+style:{
+width:window.width,
+height:70}},
+
+
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"fade clear",
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_index.Heading,{styleName:"sm-gutter"},"Navigation bar variations"),
+_react2.default.createElement(_Stage.Stage,{title:"Navbar + Drawer"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"close"})),
+
+
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE")}))),
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar + Picker"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"sidebar"})),
+
+
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE"),
+rightComponent:_react2.default.createElement(_index.DropDownMenu,{
+options:navBarDropDownOptions,
+selectedOption:navBarDropDownSelectedOption,
+titleProperty:"name",
+valueProperty:"value"})}))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar + Action"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"sidebar"})),
+
+
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE"),
+rightComponent:
+_react2.default.createElement(_index.Button,{styleName:"clear"},
+_react2.default.createElement(_index.Text,null,"List"))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar + Icon"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"sidebar"})),
+
+
+centerComponent:_react2.default.createElement(_index.Title,null,"TITLE"),
+rightComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"cart"}))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Sublevel) + Icon"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"back"})),
+
+
+title:"TITLE",
+share:{
+link:'http://shoutem.github.io',
+text:'This is the best',
+title:'Super cool UI Toolkit'}}))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Sublevel) + Action (no border)"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"no-border",
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"back"})),
+
+
+title:"TITLE",
+share:{
+link:'http://shoutem.github.io',
+text:'This is the best',
+title:'Super cool UI Toolkit'}}))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Sublevel) + Action"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"back"})),
+
+
+title:"TITLE",
+rightComponent:
+_react2.default.createElement(_index.Button,{styleName:"clear"},
+_react2.default.createElement(_index.Text,null,"Report"))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Modal) + Icon"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"close"})),
+
+
+title:"TITLE",
+share:{
+link:'http://shoutem.github.io',
+text:'This is the best',
+title:'Super cool UI Toolkit'}}))),
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Modal) + Action"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"close"})),
+
+
+title:"TITLE",
+rightComponent:
+_react2.default.createElement(_index.Button,{styleName:"clear"},
+_react2.default.createElement(_index.Text,null,"Post"))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Modal) + Action 2"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Text,null,"Cancel")),
+
+
+title:"TITLE",
+rightComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Text,null,"Done"))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar (Modal) + Action 2 (disabled)"},
+_react2.default.createElement(NavBarStageContainer,null,
+_react2.default.createElement(_index.NavigationBar,{
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Text,null,"Cancel")),
+
+
+title:"TITLE",
+rightComponent:
+_react2.default.createElement(_index.Button,{styleName:"muted"},
+_react2.default.createElement(_index.Text,null,"Done"))}))),
+
+
+
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Navbar / On primary color / back + share"},
+_react2.default.createElement(NavBarStageContainer,{style:{backgroundColor:'#1a70d5'}},
+_react2.default.createElement(_index.NavigationBar,{
+styleName:"clear",
+leftComponent:
+_react2.default.createElement(_index.Button,null,
+_react2.default.createElement(_index.Icon,{name:"back"})),
+
+
+title:"TITLE",
+share:{
+link:'http://shoutem.github.io',
+text:'This is the best',
+title:'Super cool UI Toolkit'}})))));
+
+
+
+
+
+
+}

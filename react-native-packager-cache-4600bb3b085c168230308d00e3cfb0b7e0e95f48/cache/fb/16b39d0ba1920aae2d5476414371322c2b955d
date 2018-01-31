@@ -1,0 +1,17 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+
+
+
+
+SavedProducts=SavedProducts;var _types=require("./types");function savingData(data){return{payload:data,type:_types.SAVED_PRODUCTS};}function SavedProducts(data){
+return function(dispatch){
+dispatch(savingData(data));
+};
+}

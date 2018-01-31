@@ -1,0 +1,91 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=undefined;var _class,_temp2;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require("react-native");
+
+
+var _Bar=require("./animated/Bar");var _Bar2=babelHelpers.interopRequireDefault(_Bar);var Surface=_reactNative.ART.Surface;var
+
+Bubbles=(_temp2=_class=function(_Component){babelHelpers.inherits(Bubbles,_Component);function Bubbles(){var _ref;var _temp,_this,_ret;babelHelpers.classCallCheck(this,Bubbles);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=babelHelpers.possibleConstructorReturn(this,(_ref=Bubbles.__proto__||Object.getPrototypeOf(Bubbles)).call.apply(_ref,[this].concat(args))),_this),_this.
+
+
+
+
+
+
+
+
+
+
+
+
+state={
+bars:[
+new _reactNative.Animated.Value(_this.props.size),
+new _reactNative.Animated.Value(_this.props.size),
+new _reactNative.Animated.Value(_this.props.size),
+new _reactNative.Animated.Value(_this.props.size),
+new _reactNative.Animated.Value(_this.props.size)]},_this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+timers=[],_temp),babelHelpers.possibleConstructorReturn(_this,_ret);}babelHelpers.createClass(Bubbles,[{key:"componentDidMount",value:function componentDidMount(){var _this2=this;this.state.bars.forEach(function(val,index){var timer=setTimeout(function(){return _this2.animate(index);},index*240);_this2.timers.push(timer);});}},{key:"componentWillUnmount",value:function componentWillUnmount(){this.timers.forEach(function(timer){return clearTimeout(timer);});this.unmounted=true;}},{key:"animate",value:function animate(
+
+index){var _this3=this;
+_reactNative.Animated.
+sequence([
+_reactNative.Animated.timing(this.state.bars[index],{
+toValue:this.props.size*2.5,
+duration:600}),
+
+_reactNative.Animated.timing(this.state.bars[index],{
+toValue:this.props.size,
+duration:600})]).
+
+
+start(function(){
+if(!_this3.unmounted){
+_this3.animate(index);
+}
+});
+}},{key:"renderBar",value:function renderBar(
+
+index){var _props=
+this.props,size=_props.size,spaceBetween=_props.spaceBetween,color=_props.color;
+var width=size/3;
+var x=width/2+(width+spaceBetween)*index;
+
+return _react2.default.createElement(_Bar2.default,{
+fill:color,
+width:width,
+height:this.state.bars[index],
+originY:0.5*size,
+originX:0.5,
+y:size*1.5,
+x:x});
+
+}},{key:"render",value:function render()
+
+{var _props2=
+this.props,size=_props2.size,spaceBetween=_props2.spaceBetween;
+var width=size/3*5+spaceBetween*4;
+var height=size*3;
+
+return _react2.default.createElement(Surface,{width:width,height:height},
+this.renderBar(0),
+this.renderBar(1),
+this.renderBar(2),
+this.renderBar(3),
+this.renderBar(4));
+
+}}]);return Bubbles;}(_react.Component),_class.propTypes={size:_react.PropTypes.number,color:_react.PropTypes.string,spaceBetween:_react.PropTypes.number},_class.defaultProps={spaceBetween:4,size:20,color:'#000'},_temp2);exports.default=Bubbles;

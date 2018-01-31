@@ -1,0 +1,16 @@
+Object.defineProperty(exports,"__esModule",{value:true});var _redux=require("redux");
+var _AuthReducer=require("./AuthReducer");var _AuthReducer2=babelHelpers.interopRequireDefault(_AuthReducer);
+var _productReducer=require("./productReducer");var _productReducer2=babelHelpers.interopRequireDefault(_productReducer);
+var _fetchedReducer=require("./fetchedReducer");var _fetchedReducer2=babelHelpers.interopRequireDefault(_fetchedReducer);
+var _syncReducer=require("./syncReducer");var _syncReducer2=babelHelpers.interopRequireDefault(_syncReducer);
+var _LogOutReducer=require("./LogOutReducer");var _LogOutReducer2=babelHelpers.interopRequireDefault(_LogOutReducer);
+var _savedDataReducer=require("./savedDataReducer");var _savedDataReducer2=babelHelpers.interopRequireDefault(_savedDataReducer);
+var _SaveSyncFormatReducer=require("./SaveSyncFormatReducer");var _SaveSyncFormatReducer2=babelHelpers.interopRequireDefault(_SaveSyncFormatReducer);exports.default=
+(0,_redux.combineReducers)({
+auth:_AuthReducer2.default,
+productReducer:_productReducer2.default,
+fetchedReducer:_fetchedReducer2.default,
+syncReducer:_syncReducer2.default,
+LogOutReducer:_LogOutReducer2.default,
+savedDataReducer:_savedDataReducer2.default,
+SaveSyncFormatReducer:_SaveSyncFormatReducer2.default});

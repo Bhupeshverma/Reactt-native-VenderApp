@@ -1,0 +1,47 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.SpringDriver=undefined;var _reactNative=require("react-native");
+
+
+
+
+var _DriverBase2=require("./DriverBase");
+
+/**
+ * Animation driver that creates animated value changed with tension and friction.
+ * Pass instance to any @shoutem/animation animation to run it
+ * e.g.:
+ * driver = new SpringDriver({
+ *   friction: 4 // 7 by default,
+ *   tension: 20 // 40 by default
+ * });
+ * return (
+ *   <FadeIn driver={driver}>
+ *     <Text>I'm fading in</Text>
+ *   </FadeIn>
+ * );
+ * ...
+ * Check
+ * http://facebook.github.io/react-native/releases/0.30/docs/animations.html#core-api
+ * for animation options
+ */var
+SpringDriver=exports.SpringDriver=function(_DriverBase){babelHelpers.inherits(SpringDriver,_DriverBase);
+function SpringDriver(options){babelHelpers.classCallCheck(this,SpringDriver);var _this=babelHelpers.possibleConstructorReturn(this,(SpringDriver.__proto__||Object.getPrototypeOf(SpringDriver)).call(this));
+
+
+_this.animationOptions=babelHelpers.extends({
+friction:7,
+tension:40},
+options);
+
+
+_this.toValue=_this.toValue.bind(_this);return _this;
+}babelHelpers.createClass(SpringDriver,[{key:"toValue",value:function toValue(
+
+endValue,onFinish){
+_reactNative.Animated.spring(
+this.value,babelHelpers.extends({
+
+toValue:endValue},
+this.animationOptions)).
+
+start(onFinish);
+}}]);return SpringDriver;}(_DriverBase2.DriverBase);

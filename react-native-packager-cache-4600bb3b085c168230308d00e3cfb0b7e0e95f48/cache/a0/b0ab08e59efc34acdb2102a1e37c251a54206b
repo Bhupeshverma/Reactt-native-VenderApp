@@ -1,0 +1,333 @@
+/**
+ * @providesModule LightboxOverlay
+ */
+'use strict';
+
+var React=require("react");var
+
+PropTypes=
+React.PropTypes;var _require=
+
+
+
+
+
+
+
+
+
+require("react-native"),Animated=_require.Animated,Dimensions=_require.Dimensions,Modal=_require.Modal,Platform=_require.Platform,StatusBar=_require.StatusBar,StyleSheet=_require.StyleSheet,Text=_require.Text,TouchableOpacity=_require.TouchableOpacity;
+
+var ViewTransformer=require("react-native-view-transformer").default;
+var WINDOW_HEIGHT=Dimensions.get('window').height;
+var WINDOW_WIDTH=Dimensions.get('window').width;
+
+// Translation threshold for closing the image preview
+var CLOSING_THRESHOLD=100;
+
+var LightboxOverlay=React.createClass({displayName:"LightboxOverlay",
+propTypes:{
+origin:PropTypes.shape({
+x:PropTypes.number,
+y:PropTypes.number,
+width:PropTypes.number,
+height:PropTypes.number}),
+
+springConfig:PropTypes.shape({
+tension:PropTypes.number,
+friction:PropTypes.number,
+useNativeDriver:PropTypes.bool}),
+
+animateOpening:PropTypes.bool,
+animateClosing:PropTypes.bool,
+backgroundColor:PropTypes.string,
+isOpen:PropTypes.bool,
+renderHeader:PropTypes.func,
+onOpen:PropTypes.func,
+onClose:PropTypes.func,
+swipeToDismiss:PropTypes.bool,
+pinchToZoom:PropTypes.bool},
+
+
+getInitialState:function getInitialState(){
+return{
+isClosing:false,
+target:{
+x:0,
+y:0,
+width:WINDOW_WIDTH,
+height:WINDOW_HEIGHT},
+
+closingDistance:new Animated.Value(0),
+visibility:new Animated.Value(0)};
+
+},
+
+getDefaultProps:function getDefaultProps(){
+return{
+springConfig:{
+tension:30,
+friction:7,
+// Native animations work better on Android, but
+// sometimes still have issues on iOS
+useNativeDriver:false},
+
+animateOpening:true,
+animateClosing:false,
+backgroundColor:'black',
+renderHeader:function renderHeader(close){return(
+React.createElement(TouchableOpacity,{onPress:close},
+React.createElement(Text,{style:styles.closeButton},"\xD7")));}};
+
+
+
+},
+
+componentDidMount:function componentDidMount(){
+if(this.props.isOpen){
+this.open();
+}
+},
+
+componentWillReceiveProps:function componentWillReceiveProps(props){
+if(this.props.isOpen!=props.isOpen&&props.isOpen){
+this.open();
+}
+},
+
+startClosing:function startClosing(){
+if(this.state.isClosing){
+return;
+}
+
+this.setState({isClosing:true});
+},
+
+stopClosing:function stopClosing(){
+if(!this.state.isClosing){
+return;
+}
+
+this.state.closingDistance.setValue(0);
+this.setState({isClosing:false});
+},
+
+open:function open(){
+{
+StatusBar.setHidden(true,'fade');
+}var
+
+animateOpening=this.props.animateOpening;
+
+if(animateOpening){
+Animated.spring(
+this.state.visibility,babelHelpers.extends({
+toValue:1},this.props.springConfig)).
+start();
+}else{
+this.state.visibility.setValue(1);
+}
+},
+
+close:function close(){var _this=this;
+{
+StatusBar.setHidden(false,'fade');
+}var
+
+animateClosing=this.props.animateClosing;
+if(animateClosing){
+Animated.spring(
+this.state.visibility,babelHelpers.extends({
+toValue:0},this.props.springConfig)).
+start(function(){return _this.onClose();});
+}else{
+this.onClose();
+}
+},
+
+onClose:function onClose(){
+this.props.onClose();
+this.state.closingDistance.setValue(0);
+this.state.visibility.setValue(0);
+this.setState(this.getInitialState());
+},
+
+onViewTransformed:function onViewTransformed(_ref){var translateY=_ref.translateY,scale=_ref.scale;
+if(scale>1){
+this.stopClosing();
+return;
+}
+
+this.state.closingDistance.setValue(translateY);
+if(Math.abs(translateY)>0){
+this.startClosing();
+}else{
+this.stopClosing();
+}
+},
+
+onTransformGestureReleased:function onTransformGestureReleased(_ref2){var _this2=this;var translateX=_ref2.translateX,translateY=_ref2.translateY,scale=_ref2.scale;var
+swipeToDismiss=this.props.swipeToDismiss;
+
+if(swipeToDismiss&&scale===1&&(
+Math.abs(translateY)>CLOSING_THRESHOLD||
+Math.abs(translateX)>CLOSING_THRESHOLD))
+{
+this.setState({
+isClosing:false,
+target:{
+y:translateY,
+x:translateX,
+width:WINDOW_WIDTH,
+height:WINDOW_HEIGHT}},
+
+function(){return _this2.close();});
+}else{
+this.stopClosing();
+}
+},
+
+render:function render(){var _props=
+
+
+
+
+
+
+this.props,isOpen=_props.isOpen,renderHeader=_props.renderHeader,pinchToZoom=_props.pinchToZoom,origin=_props.origin,backgroundColor=_props.backgroundColor;var _state=
+
+
+
+
+
+this.state,isClosing=_state.isClosing,visibility=_state.visibility,target=_state.target;
+
+
+var lightboxOpacityStyle={
+opacity:visibility.interpolate({
+inputRange:[0,0.8,1],
+outputRange:[0,0.4,1]})};
+
+
+
+if(isClosing){
+lightboxOpacityStyle.opacity=this.state.closingDistance.interpolate({
+inputRange:[-CLOSING_THRESHOLD*2,0,CLOSING_THRESHOLD*2],
+outputRange:[0,1,0]});
+
+}
+
+var openStyle=[styles.open,{
+top:target.y,
+left:target.x,
+width:target.width,
+height:target.height,
+transform:[{
+translateX:visibility.interpolate({
+inputRange:[0,1],
+outputRange:[origin.x,target.x]})},
+
+{
+translateY:visibility.interpolate({
+inputRange:[0,1],
+outputRange:[origin.y-origin.height,target.y]})},
+
+{
+scale:visibility.interpolate({
+inputRange:[0,1],
+outputRange:[origin.width/WINDOW_WIDTH,1]})}]}];
+
+
+
+
+var background=
+React.createElement(Animated.View,{
+style:[
+styles.background,
+{backgroundColor:backgroundColor},
+lightboxOpacityStyle]});
+
+
+
+var header=
+React.createElement(Animated.View,{style:[styles.header,lightboxOpacityStyle]},
+renderHeader&&renderHeader(this.close));
+
+
+var content;
+
+if(!pinchToZoom){
+content=this.props.children;
+}else{
+content=
+React.createElement(ViewTransformer,{
+style:{flex:1},
+enableTransform:true,
+enableScale:true,
+enableTranslate:true,
+enableResistance:true,
+contentAspectRatio:origin.width/origin.height,
+maxScale:3,
+onTransformGestureReleased:this.onTransformGestureReleased,
+onViewTransformed:this.onViewTransformed},
+
+this.props.children);
+
+
+}
+
+return(
+React.createElement(Modal,{
+visible:isOpen,
+transparent:true,
+hardwareAccelerated:true,
+onRequestClose:this.close},
+
+background,
+React.createElement(Animated.View,{style:openStyle},
+content),
+
+header));
+
+
+}});
+
+
+var styles=StyleSheet.create({
+background:{
+position:'absolute',
+top:0,
+left:0,
+width:WINDOW_WIDTH,
+height:WINDOW_HEIGHT},
+
+open:{
+position:'absolute',
+justifyContent:'center',
+// Android pan handlers crash without this declaration:
+backgroundColor:'transparent'},
+
+header:{
+position:'absolute',
+top:0,
+left:0,
+width:WINDOW_WIDTH,
+backgroundColor:'transparent'},
+
+closeButton:{
+fontSize:35,
+color:'white',
+lineHeight:40,
+width:40,
+textAlign:'center',
+shadowOffset:{
+width:0,
+height:0},
+
+shadowRadius:1.5,
+shadowColor:'black',
+shadowOpacity:0.8}});
+
+
+
+module.exports=LightboxOverlay;

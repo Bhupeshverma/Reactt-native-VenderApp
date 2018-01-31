@@ -1,0 +1,174 @@
+'use strict';Object.defineProperty(exports,"__esModule",{value:true});exports.Transform=exports.Rect=undefined;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fitCenterRect=fitCenterRect;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+transformedRect=transformedRect;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getTransform=getTransform;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+alignedRect=alignedRect;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+availableTranslateSpace=availableTranslateSpace;var _Rect=require("./Rect");var _Rect2=babelHelpers.interopRequireDefault(_Rect);exports.Rect=_Rect2.default;var Transform=exports.Transform=function Transform(scale,translateX,translateY,pivot){babelHelpers.classCallCheck(this,Transform);this.scale=scale;this.translateX=translateX;this.translateY=translateY;this.pivot=pivot;};function isValidNumber(number){if(typeof number==='number'){if(!isNaN(number)){return true;}}return false;}function isValidRect(rect){if(rect instanceof _Rect2.default&&rect.isValid()){return true;}return false;}function isValidTransform(transform){if(transform&&isValidNumber(transform.scale)&&isValidNumber(transform.translateX)&&isValidNumber(transform.translateY)){return true;}return false;}function fitCenterRect(contentAspectRatio,containerRect){var w=containerRect.width();var h=containerRect.height();var viewAspectRatio=w/h;if(contentAspectRatio>viewAspectRatio){h=w/contentAspectRatio;}else{w=h*contentAspectRatio;}return new _Rect2.default(containerRect.centerX()-w/2,containerRect.centerY()-h/2,containerRect.centerX()+w/2,containerRect.centerY()+h/2);}/**
+ * The React Native transform system use the center of the view as the pivot when scaling.
+ * The translations are applied before scaling.
+ * @param rect
+ * @param transform
+ * @returns {*}
+ */function transformedRect(rect,transform){if(!isValidRect(rect)){throw new Error('transformedRect...invalid rect');}if(!isValidTransform(transform)){throw new Error('transformedRect...invalid transform');}var scale=transform.scale;var translateX=transform.translateX;var translateY=transform.translateY;var pivot=transform.pivot;if(pivot===undefined||pivot===null){var width=rect.width()*scale;var height=rect.height()*scale;var centerX=rect.centerX()+translateX*scale;var centerY=rect.centerY()+translateY*scale;return new _Rect2.default(centerX-width/2,centerY-height/2,centerX+width/2,centerY+height/2);}else{var pivotX=pivot.x;var pivotY=pivot.y;if(!isValidNumber(pivotX)||!isValidNumber(pivotY)){throw new Error('transformedRect...invalid pivot x='+pivot.x+', y='+pivot.y);}//first make the center still
+var resultRect=transformedRect(rect,{scale:scale,translateX:translateX,translateY:translateY});//the pivot moved during scaling, now move it back
+var dx=(scale-1)*(pivotX-resultRect.centerX());var dy=(scale-1)*(pivotY-resultRect.centerY());return resultRect.offset(-dx,-dy);}}/**
+ * Calculate the transform from fromRect to toRect
+ * @param fromRect
+ * @param toRect
+ * @returns {Transform}
+ */function getTransform(fromRect,toRect){var scale=toRect.width()/fromRect.width();var translateX=(toRect.centerX()-fromRect.centerX())/scale;var translateY=(toRect.centerY()-fromRect.centerY())/scale;return new Transform(scale,translateX,translateY);}/**
+ * Align edges of the rect with the viewport to avoid unnecessary blank space. NO scaling is performed here.
+ * @param rect
+ * @param viewPortRect
+ * @returns {*|{line, column}|{column, line}|{x}}
+ */function alignedRect(rect,viewPortRect){var dx=0,dy=0;if(rect.width()>viewPortRect.width()){if(rect.left>viewPortRect.left){dx=viewPortRect.left-rect.left;}else if(rect.right<viewPortRect.right){dx=viewPortRect.right-rect.right;}}else{dx=viewPortRect.centerX()-rect.centerX();}if(rect.height()>viewPortRect.height()){if(rect.top>viewPortRect.top){dy=viewPortRect.top-rect.top;}else if(rect.bottom<viewPortRect.bottom){dy=viewPortRect.bottom-rect.bottom;}}else{dy=viewPortRect.centerY()-rect.centerY();}return rect.copy().offset(dx,dy);}function availableTranslateSpace(rect,viewPortRect){return{left:viewPortRect.left-rect.left,right:rect.right-viewPortRect.right,top:viewPortRect.top-rect.top,bottom:rect.bottom-viewPortRect.bottom};}

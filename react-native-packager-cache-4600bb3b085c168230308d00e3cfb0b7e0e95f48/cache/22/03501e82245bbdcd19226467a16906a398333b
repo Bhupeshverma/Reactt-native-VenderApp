@@ -1,0 +1,35 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+Videos=Videos;var _react=require("react");var _react2=babelHelpers.interopRequireDefault(_react);var _View=require("../../components/View");var _Stage=require("./Stage");var _Image=require("../../components/Image");var _Video=require("../../components/Video");var _reactNative=require("react-native");function Videos(){
+return(
+_react2.default.createElement(_View.View,{styleName:"vertical collapsed"},
+_react2.default.createElement(_Stage.Stage,{title:"YouTube video"},
+_react2.default.createElement(_Video.Video,{
+source:{uri:"https://www.youtube.com/embed/GCSeAiScMfg"},
+width:320,
+height:180})),
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Vimeo video"},
+_react2.default.createElement(_Video.Video,{
+width:320,
+height:180,
+source:{uri:"https://vimeo.com/182267614"}})),
+
+
+_react2.default.createElement(_Stage.Stage,{title:"Stream video"},
+_react2.default.createElement(_Video.Video,{
+source:{uri:"https://archive.org/download/WebmVp8Vorbis/webmvp8_512kb.mp4"},
+width:320,
+height:180}))));
+
+
+
+
+}
